@@ -1,0 +1,433 @@
+version: 2
+simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/bbp_workflow/sscx_calibration_mgfix/5-FullCircuit/5-FullCircuit-2-BetterMinis-Fpr15-StimScan-10x/bb16bd9f-3d21-4a35-8296-d6aec4c55bf7/config.json
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl_output/5-FullCircuit/5-FullCircuit-2-BetterMinis-Fpr15-StimScan-10x
+
+clear_cache: false
+analysis:
+  hex0_spikes:
+    extraction:
+
+      report: {type: spikes}
+      limit: null
+      target: hex0
+
+      neuron_classes:
+        L1_EXC: { layer: [1], synapse_class: [EXC] }
+        L23_EXC: { layer: [2, 3], synapse_class: [EXC] }
+        L4_EXC: { layer: [4], synapse_class: [EXC] }
+        L5_EXC: { layer: [5], synapse_class: [EXC] }
+        L6_EXC: { layer: [6], synapse_class: [EXC] }
+        L1_INH: { layer: [1], synapse_class: [INH] }
+        L23_INH: { layer: [2, 3], synapse_class: [INH] }
+        L4_INH: { layer: [4], synapse_class: [INH] }
+        L5_INH: { layer: [5], synapse_class: [INH] }
+        L6_INH: { layer: [6], synapse_class: [INH] }
+        L23_PV: { layer: [2, 3], mtype: [L23_LBC, L23_NBC, L23_CHC] }
+        L4_PV: { layer: [4], mtype: [L4_CHC, L4_NBC, L4_LBC] }
+        L5_PV: { layer: [5], mtype: [L5_CHC, L5_LBC, L5_NBC] }
+        L6_PV: { layer: [6], mtype: [L6_LBC, L6_CHC, L6_NBC] }
+        L23_SST: { layer: [2, 3], mtype: [L23_BTC, L23_NGC, L23_SBC, L23_MC, L23_DBC] }
+        L4_SST: { layer: [4], mtype: [L4_NGC, L4_DBC, L4_SBC, L4_BTC, L4_MC] }
+        L5_SST: { layer: [5], mtype: [L5_SBC, L5_BTC, L5_DBC, L5_NGC, L5_MC] }
+        L6_SST: { layer: [6], mtype: [L6_BTC, L6_NGC, L6_MC, L6_SBC, L6_DBC] }
+        L23_Htr3a: { layer: [2, 3], mtype: [L23_BP] }
+        L4_Htr3a: { layer: [4], mtype: [L4_BP] }
+        L5_Htr3a: { layer: [5], mtype: [L5_BP] }
+        L6_Htr3a: { layer: [6], mtype: [L6_BP] }
+        ALL_INH: { synapse_class: [INH], $limit: null }
+        ALL_EXC: { synapse_class: [EXC], $limit: null }
+        ALL: { $limit: null }
+
+      windows:
+        unconn_2nd_half: { bounds: [ 500, 1000 ], window_type: spontaneous }
+        conn_spont: { bounds: [ 1000, 1500 ], window_type: spontaneous }
+        evoked_SOZ_100ms: { bounds: [ 0, 100 ], initial_offset: 1500, n_trials: 10, trial_steps_value: 1000, window_type: evoked_stimulus_onset_zeroed}
+        evoked_SOZ_250ms: { bounds: [-50, 250], initial_offset: 1500, n_trials: 10, trial_steps_value: 500, window_type: evoked_stimulus_onset_zeroed}
+
+    features:
+    - type: multi
+      groupby: [simulation_id, circuit_id, neuron_class, window]
+      function: cortex_etl.calculate_features.calculate_features_multi
+      params:
+        export_all_neurons: true
+        histograms:
+          1ms:
+            bin_size: 1.0
+            smoothing:
+              1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+              3sd: {smoothing_type: Gaussian, kernel_sd: 3.0}
+          3ms:
+            bin_size: 3.0
+            smoothing:
+              1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+
+    - type: multi
+      groupby: [simulation_id, circuit_id, neuron_class, window]
+      function: barreletl.features.calculate_features_by_neuron_class
+      windows: [evoked_SOZ_250ms]
+      params:
+        latency:
+          params: { onset: false }
+        decay:
+          params:
+            ratio: [0.25, 0.5, 0.75, 1.0]
+      params_product:
+        baseline_PSTH:
+          - params: { bin_size: 0.5, sigma: 0, offset: -6 }
+          - params: { bin_size: 0.5, sigma: 2, offset: -6 }
+          - params: { bin_size: 0.5, sigma: 4, offset: -6 }
+          - params: { bin_size: 1, sigma: 0, offset: -6 }
+          - params: { bin_size: 1, sigma: 1, offset: -6 }
+          - params: { bin_size: 1, sigma: 2, offset: -6 }
+          - params: { bin_size: 1, sigma: 3, offset: -6 }
+
+    - type: multi
+      groupby: [simulation_id, circuit_id, neuron_class, window]
+      function: barreletl.features.calculate_features_by_neuron_class
+      windows: [evoked_SOZ_250ms]
+      params:
+        psth_name: smoothed_PSTH
+        smoothed_PSTH:
+          params: { bin_size: 1, sigma: 0, offset: -6 }
+        mean_psth:
+          params: { t_stim: 0 }
+        max_psth:
+          params: { t_stim: 0 }
+
+    custom:
+
+      independent_variables: [ca, desired_connected_proportion_of_invivo_frs, depol_stdev_mean_ratio, vpm_pct]
+      vivo_frs: {L1_INH: 1.5, L23_EXC: 0.07, L23_INH: 0.961, L4_EXC: 0.619, L4_INH: 1.184, L5_EXC: 1.252, L5_INH: 2.357, L6_EXC: 0.47, L6_INH: 1.5}
+      heatmap_dims: {hor_key: ca, ver_key: vpm_pct, x_key: desired_connected_proportion_of_invivo_frs, y_key: depol_stdev_mean_ratio}
+      raster_windows: [{evoked_SOZ_100ms: [1.8, 2.5]}, {conn_spont: 9.8}]
+
+      plot_multi_sim_analysis: false
+      plot_rasters: true
+      create_raster_videos: true
+      evoked_analysis: true
+
+      spike_pair_analysis: false
+      at_plots: false      
+
+
+      fr_comparison_pairs:
+      - [conn_spont, evoked_SOZ_25ms]
+      - [conn_spont, evoked_SOZ_100ms]
+      - [unconn_2nd_half, conn_spont]
+      - [desired_connected_fr, conn_spont]
+      - [desired_unconnected_fr, unconn_2nd_half]
+      - [conn_spont, evoked_SOZ_25ms]
+      - [conn_spont, evoked_SOZ_100ms]
+      ei_corr_r_val_limits: [0.15, 0.4]
+      desired_connected_fr_key: desired_connected_fr
+      desired_unconnected_fr_key: desired_unconnected_fr
+      evoked_window_for_custom_post_analysis: evoked_SOZ_250ms
+
+      evoked_mask_comparison_dataset: ReyesPuerta
+      vivo_ratios_df: /gpfs/bbp.cscs.ch/project/proj100/analysis/vivo_ratios_svoboda_reyes.feather
+      vivo_ratios_dataset: reyesp
+      vivo_df: /gpfs/bbp.cscs.ch/project/proj147/home/isbister/rp/dfs/invivo_psth_means_plot_ready.f
+      
+      theshold_conjunctive_trials_for_spike_pair_analysis: 4
+      depol_bc_key: gExc
+
+
+  hexes_spikes:
+    extraction:
+
+      report: {type: spikes}
+      limit: null
+      target: AllCompartments
+
+
+      neuron_classes:
+        ALL_INH_0: { synapse_class: [ INH ], $limit: null, $target: hex0}
+        ALL_EXC_0: { synapse_class: [ EXC ], $limit: null, $target: hex0}
+
+        ALL_INH_1: { synapse_class: [ INH ], $limit: null, $target: hex1}
+        ALL_EXC_1: { synapse_class: [ EXC ], $limit: null, $target: hex1}
+
+        ALL_INH_2: { synapse_class: [ INH ], $limit: null, $target: hex2}
+        ALL_EXC_2: { synapse_class: [ EXC ], $limit: null, $target: hex2}
+
+        ALL_INH_3: { synapse_class: [ INH ], $limit: null, $target: hex3}
+        ALL_EXC_3: { synapse_class: [ EXC ], $limit: null, $target: hex3}
+
+        ALL_INH_4: { synapse_class: [ INH ], $limit: null, $target: hex4}
+        ALL_EXC_4: { synapse_class: [ EXC ], $limit: null, $target: hex4}
+
+        ALL_INH_5: { synapse_class: [ INH ], $limit: null, $target: hex5}
+        ALL_EXC_5: { synapse_class: [ EXC ], $limit: null, $target: hex5}
+
+        ALL_INH_6: { synapse_class: [ INH ], $limit: null, $target: hex6}
+        ALL_EXC_6: { synapse_class: [ EXC ], $limit: null, $target: hex6}
+
+        ALL_INH_7: { synapse_class: [ INH ], $limit: null, $target: hex7}
+        ALL_EXC_7: { synapse_class: [ EXC ], $limit: null, $target: hex7}
+
+        ALL_INH_8: { synapse_class: [ INH ], $limit: null, $target: hex8}
+        ALL_EXC_8: { synapse_class: [ EXC ], $limit: null, $target: hex8}
+
+        ALL_INH_9: { synapse_class: [ INH ], $limit: null, $target: hex9}
+        ALL_EXC_9: { synapse_class: [ EXC ], $limit: null, $target: hex9}
+
+        ALL_INH_10: { synapse_class: [ INH ], $limit: null, $target: hex10}
+        ALL_EXC_10: { synapse_class: [ EXC ], $limit: null, $target: hex10}
+
+        ALL_INH_11: { synapse_class: [ INH ], $limit: null, $target: hex11}
+        ALL_EXC_11: { synapse_class: [ EXC ], $limit: null, $target: hex11}
+
+        ALL_INH_12: { synapse_class: [ INH ], $limit: null, $target: hex12}
+        ALL_EXC_12: { synapse_class: [ EXC ], $limit: null, $target: hex12}
+
+        ALL_INH_13: { synapse_class: [ INH ], $limit: null, $target: hex13}
+        ALL_EXC_13: { synapse_class: [ EXC ], $limit: null, $target: hex13}
+
+        ALL_INH_14: { synapse_class: [ INH ], $limit: null, $target: hex14}
+        ALL_EXC_14: { synapse_class: [ EXC ], $limit: null, $target: hex14}
+
+        ALL_INH_15: { synapse_class: [ INH ], $limit: null, $target: hex15}
+        ALL_EXC_15: { synapse_class: [ EXC ], $limit: null, $target: hex15}
+
+        ALL_INH_16: { synapse_class: [ INH ], $limit: null, $target: hex16}
+        ALL_EXC_16: { synapse_class: [ EXC ], $limit: null, $target: hex16}
+
+        ALL_INH_17: { synapse_class: [ INH ], $limit: null, $target: hex17}
+        ALL_EXC_17: { synapse_class: [ EXC ], $limit: null, $target: hex17}
+
+        ALL_INH_18: { synapse_class: [ INH ], $limit: null, $target: hex18}
+        ALL_EXC_18: { synapse_class: [ EXC ], $limit: null, $target: hex18}
+
+        ALL_INH_19: { synapse_class: [ INH ], $limit: null, $target: hex19}
+        ALL_EXC_19: { synapse_class: [ EXC ], $limit: null, $target: hex19}
+
+        ALL_INH_20: { synapse_class: [ INH ], $limit: null, $target: hex20}
+        ALL_EXC_20: { synapse_class: [ EXC ], $limit: null, $target: hex20}
+
+        ALL_INH_21: { synapse_class: [ INH ], $limit: null, $target: hex21}
+        ALL_EXC_21: { synapse_class: [ EXC ], $limit: null, $target: hex21}
+
+        ALL_INH_22: { synapse_class: [ INH ], $limit: null, $target: hex22}
+        ALL_EXC_22: { synapse_class: [ EXC ], $limit: null, $target: hex22}
+
+        ALL_INH_23: { synapse_class: [ INH ], $limit: null, $target: hex23}
+        ALL_EXC_23: { synapse_class: [ EXC ], $limit: null, $target: hex23}
+
+        ALL_INH_24: { synapse_class: [ INH ], $limit: null, $target: hex24}
+        ALL_EXC_24: { synapse_class: [ EXC ], $limit: null, $target: hex24}
+
+        ALL_INH_25: { synapse_class: [ INH ], $limit: null, $target: hex25}
+        ALL_EXC_25: { synapse_class: [ EXC ], $limit: null, $target: hex25}
+
+        ALL_INH_26: { synapse_class: [ INH ], $limit: null, $target: hex26}
+        ALL_EXC_26: { synapse_class: [ EXC ], $limit: null, $target: hex26}
+
+        ALL_INH_27: { synapse_class: [ INH ], $limit: null, $target: hex27}
+        ALL_EXC_27: { synapse_class: [ EXC ], $limit: null, $target: hex27}
+
+        ALL_INH_28: { synapse_class: [ INH ], $limit: null, $target: hex28}
+        ALL_EXC_28: { synapse_class: [ EXC ], $limit: null, $target: hex28}
+
+        ALL_INH_29: { synapse_class: [ INH ], $limit: null, $target: hex29}
+        ALL_EXC_29: { synapse_class: [ EXC ], $limit: null, $target: hex29}
+
+        ALL_INH_30: { synapse_class: [ INH ], $limit: null, $target: hex30}
+        ALL_EXC_30: { synapse_class: [ EXC ], $limit: null, $target: hex30}
+
+        ALL_INH_31: { synapse_class: [ INH ], $limit: null, $target: hex31}
+        ALL_EXC_31: { synapse_class: [ EXC ], $limit: null, $target: hex31}
+
+        ALL_INH_32: { synapse_class: [ INH ], $limit: null, $target: hex32}
+        ALL_EXC_32: { synapse_class: [ EXC ], $limit: null, $target: hex32}
+
+        ALL_INH_33: { synapse_class: [ INH ], $limit: null, $target: hex33}
+        ALL_EXC_33: { synapse_class: [ EXC ], $limit: null, $target: hex33}
+
+        ALL_INH_34: { synapse_class: [ INH ], $limit: null, $target: hex34}
+        ALL_EXC_34: { synapse_class: [ EXC ], $limit: null, $target: hex34}
+
+        ALL_INH_35: { synapse_class: [ INH ], $limit: null, $target: hex35}
+        ALL_EXC_35: { synapse_class: [ EXC ], $limit: null, $target: hex35}
+
+        ALL_INH_36: { synapse_class: [ INH ], $limit: null, $target: hex36}
+        ALL_EXC_36: { synapse_class: [ EXC ], $limit: null, $target: hex36}
+
+        ALL_INH_37: { synapse_class: [ INH ], $limit: null, $target: hex37}
+        ALL_EXC_37: { synapse_class: [ EXC ], $limit: null, $target: hex37}
+
+        ALL_INH_38: { synapse_class: [ INH ], $limit: null, $target: hex38}
+        ALL_EXC_38: { synapse_class: [ EXC ], $limit: null, $target: hex38}
+
+        ALL_INH_39: { synapse_class: [ INH ], $limit: null, $target: hex39}
+        ALL_EXC_39: { synapse_class: [ EXC ], $limit: null, $target: hex39}
+
+        ALL_INH_40: { synapse_class: [ INH ], $limit: null, $target: hex40}
+        ALL_EXC_40: { synapse_class: [ EXC ], $limit: null, $target: hex40}
+
+        ALL_INH_41: { synapse_class: [ INH ], $limit: null, $target: hex41}
+        ALL_EXC_41: { synapse_class: [ EXC ], $limit: null, $target: hex41}
+
+        ALL_INH_42: { synapse_class: [ INH ], $limit: null, $target: hex42}
+        ALL_EXC_42: { synapse_class: [ EXC ], $limit: null, $target: hex42}
+
+        ALL_INH_43: { synapse_class: [ INH ], $limit: null, $target: hex43}
+        ALL_EXC_43: { synapse_class: [ EXC ], $limit: null, $target: hex43}
+
+        ALL_INH_44: { synapse_class: [ INH ], $limit: null, $target: hex44}
+        ALL_EXC_44: { synapse_class: [ EXC ], $limit: null, $target: hex44}
+
+        ALL_INH_45: { synapse_class: [ INH ], $limit: null, $target: hex45}
+        ALL_EXC_45: { synapse_class: [ EXC ], $limit: null, $target: hex45}
+
+        ALL_INH_46: { synapse_class: [ INH ], $limit: null, $target: hex46}
+        ALL_EXC_46: { synapse_class: [ EXC ], $limit: null, $target: hex46}
+
+        ALL_INH_47: { synapse_class: [ INH ], $limit: null, $target: hex47}
+        ALL_EXC_47: { synapse_class: [ EXC ], $limit: null, $target: hex47}
+
+        ALL_INH_48: { synapse_class: [ INH ], $limit: null, $target: hex48}
+        ALL_EXC_48: { synapse_class: [ EXC ], $limit: null, $target: hex48}
+
+        ALL_INH_49: { synapse_class: [ INH ], $limit: null, $target: hex49}
+        ALL_EXC_49: { synapse_class: [ EXC ], $limit: null, $target: hex49}
+
+        ALL_INH_50: { synapse_class: [ INH ], $limit: null, $target: hex50}
+        ALL_EXC_50: { synapse_class: [ EXC ], $limit: null, $target: hex50}
+
+        ALL_INH_51: { synapse_class: [ INH ], $limit: null, $target: hex51}
+        ALL_EXC_51: { synapse_class: [ EXC ], $limit: null, $target: hex51}
+
+        ALL_INH_52: { synapse_class: [ INH ], $limit: null, $target: hex52}
+        ALL_EXC_52: { synapse_class: [ EXC ], $limit: null, $target: hex52}
+
+        ALL_INH_53: { synapse_class: [ INH ], $limit: null, $target: hex53}
+        ALL_EXC_53: { synapse_class: [ EXC ], $limit: null, $target: hex53}
+
+        ALL_INH_54: { synapse_class: [ INH ], $limit: null, $target: hex54}
+        ALL_EXC_54: { synapse_class: [ EXC ], $limit: null, $target: hex54}
+
+        ALL_INH_55: { synapse_class: [ INH ], $limit: null, $target: hex55}
+        ALL_EXC_55: { synapse_class: [ EXC ], $limit: null, $target: hex55}
+
+        ALL_INH_56: { synapse_class: [ INH ], $limit: null, $target: hex56}
+        ALL_EXC_56: { synapse_class: [ EXC ], $limit: null, $target: hex56}
+
+        ALL_INH_57: { synapse_class: [ INH ], $limit: null, $target: hex57}
+        ALL_EXC_57: { synapse_class: [ EXC ], $limit: null, $target: hex57}
+
+        ALL_INH_58: { synapse_class: [ INH ], $limit: null, $target: hex58}
+        ALL_EXC_58: { synapse_class: [ EXC ], $limit: null, $target: hex58}
+
+        ALL_INH_59: { synapse_class: [ INH ], $limit: null, $target: hex59}
+        ALL_EXC_59: { synapse_class: [ EXC ], $limit: null, $target: hex59}
+
+        ALL_INH_60: { synapse_class: [ INH ], $limit: null, $target: hex60}
+        ALL_EXC_60: { synapse_class: [ EXC ], $limit: null, $target: hex60}
+
+        ALL_INH_61: { synapse_class: [ INH ], $limit: null, $target: hex61}
+        ALL_EXC_61: { synapse_class: [ EXC ], $limit: null, $target: hex61}
+
+        ALL_INH_62: { synapse_class: [ INH ], $limit: null, $target: hex62}
+        ALL_EXC_62: { synapse_class: [ EXC ], $limit: null, $target: hex62}
+
+        ALL_INH_63: { synapse_class: [ INH ], $limit: null, $target: hex63}
+        ALL_EXC_63: { synapse_class: [ EXC ], $limit: null, $target: hex63}
+
+        ALL_INH_64: { synapse_class: [ INH ], $limit: null, $target: hex64}
+        ALL_EXC_64: { synapse_class: [ EXC ], $limit: null, $target: hex64}
+
+        ALL_INH_65: { synapse_class: [ INH ], $limit: null, $target: hex65}
+        ALL_EXC_65: { synapse_class: [ EXC ], $limit: null, $target: hex65}
+
+        ALL_INH_66: { synapse_class: [ INH ], $limit: null, $target: hex66}
+        ALL_EXC_66: { synapse_class: [ EXC ], $limit: null, $target: hex66}
+
+        ALL_INH_67: { synapse_class: [ INH ], $limit: null, $target: hex67}
+        ALL_EXC_67: { synapse_class: [ EXC ], $limit: null, $target: hex67}
+
+        ALL_INH_68: { synapse_class: [ INH ], $limit: null, $target: hex68}
+        ALL_EXC_68: { synapse_class: [ EXC ], $limit: null, $target: hex68}
+
+        ALL_INH_69: { synapse_class: [ INH ], $limit: null, $target: hex69}
+        ALL_EXC_69: { synapse_class: [ EXC ], $limit: null, $target: hex69}
+
+        ALL_INH_70: { synapse_class: [ INH ], $limit: null, $target: hex70}
+        ALL_EXC_70: { synapse_class: [ EXC ], $limit: null, $target: hex70}
+
+        ALL_INH_71: { synapse_class: [ INH ], $limit: null, $target: hex71}
+        ALL_EXC_71: { synapse_class: [ EXC ], $limit: null, $target: hex71}
+
+        ALL_INH_72: { synapse_class: [ INH ], $limit: null, $target: hex72}
+        ALL_EXC_72: { synapse_class: [ EXC ], $limit: null, $target: hex72}
+
+        ALL_INH_73: { synapse_class: [ INH ], $limit: null, $target: hex73}
+        ALL_EXC_73: { synapse_class: [ EXC ], $limit: null, $target: hex73}
+
+        ALL_INH_74: { synapse_class: [ INH ], $limit: null, $target: hex74}
+        ALL_EXC_74: { synapse_class: [ EXC ], $limit: null, $target: hex74}
+
+        ALL_INH_75: { synapse_class: [ INH ], $limit: null, $target: hex75}
+        ALL_EXC_75: { synapse_class: [ EXC ], $limit: null, $target: hex75}
+
+        ALL_INH_76: { synapse_class: [ INH ], $limit: null, $target: hex76}
+        ALL_EXC_76: { synapse_class: [ EXC ], $limit: null, $target: hex76}
+
+      windows:
+        evoked_SOZ_100ms: { bounds: [ 0, 100 ], initial_offset: 1500, n_trials: 10, trial_steps_value: 1000, window_type: evoked_stimulus_onset_zeroed}
+        unconn_2nd_half: { bounds: [ 500, 1000 ], window_type: spontaneous }
+        conn_spont: { bounds: [ 1500, 6500 ], window_type: spontaneous }
+
+    features:
+    - type: multi
+      groupby: [simulation_id, circuit_id, neuron_class, window]
+      function: cortex_etl.calculate_features.calculate_features_multi
+      params:
+        export_all_neurons: true
+        histograms:
+          1ms:
+            bin_size: 1.0
+            smoothing:
+              1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+              3sd: {smoothing_type: Gaussian, kernel_sd: 3.0}
+          3ms:
+            bin_size: 3.0
+            smoothing:
+              1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+
+    custom:
+
+      multi_hex_analysis: true
+      
+      independent_variables: ["ca", "desired_connected_proportion_of_invivo_frs", "depol_stdev_mean_ratio"]
+      vivo_frs: {L1_INH: 1.5, L23_EXC: 0.07, L23_INH: 0.961, L4_EXC: 0.619, L4_INH: 1.184, L5_EXC: 1.252, L5_INH: 2.357, L6_EXC: 0.47, L6_INH: 1.5}
+      heatmap_dims: {hor_key: "ca", ver_key: "none", x_key: "desired_connected_proportion_of_invivo_frs", y_key: "depol_stdev_mean_ratio"}
+      raster_windows: [{conn_spont: 5.0}]
+      fr_comparison_pairs: [['unconn_2nd_half', 'conn_spont'], ['desired_connected_fr', 'conn_spont'], ['desired_unconnected_fr', 'unconn_2nd_half'], ['connection_fr_increase', 'connection_fr_error']]
+      desired_connected_fr_key: desired_connected_fr
+      desired_unconnected_fr_key: desired_unconnected_fr
+      ei_corr_r_val_limits: [0.15, 0.4]
+      depol_bc_key: gExc
+
+
+  AllCompartments_spikes:
+    extraction:
+      report: {type: spikes}
+      neuron_classes:
+        ALL: {$limit: null}
+      limit: null
+      target: AllCompartments
+      windows:
+        full_sim: { bounds: [ 0, 6500 ], window_type: spontaneous }
+        evoked_SOZ_500ms: { bounds: [ 0, 500 ], initial_offset: 1500, n_trials: 10, trial_steps_value: 500, window_type: evoked_stimulus_onset_zeroed}
+        evoked_SOZ_200ms: { bounds: [ -10, 200 ], initial_offset: 1500, n_trials: 10, trial_steps_value: 500, window_type: evoked_stimulus_onset_zeroed}
+
+    custom:
+      create_flatspace_videos: true
+      independent_variables: [ca, desired_connected_proportion_of_invivo_frs, depol_stdev_mean_ratio]
+      flatmap: /gpfs/bbp.cscs.ch/project/proj83/home/bolanos/BB_Rat_SSCX_flatmap_v2.nrrd
+      flatspace_videos:
+        # fsv_0: {window: full_sim, t_step: 5.0, n_spatial_bins: 20000, temporal_smoothing_sigma: 1.0, delete_images: True, stim_anal: {stim_period: [0, 150.0], spont_period: [150.0, 500.0]}}
+        fsv_0: {window: evoked_SOZ_200ms, t_step: 5.0, n_spatial_bins: 20000, temporal_smoothing_sigma: 1.0, delete_images: False, stim_anal: {stim_period: [0, 150.0], spont_period: [150.0, 200.0]}}
+        # fsv_1: {window: evoked_SOZ_500ms, t_step: 5.0, n_spatial_bins: 20000, temporal_smoothing_sigma: 1.0, delete_images: False, stim_anal: {stim_period: [0, 150.0], spont_period: [150.0, 500.0]}}
+
+        

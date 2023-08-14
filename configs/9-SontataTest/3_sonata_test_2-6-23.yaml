@@ -1,0 +1,92 @@
+version: 2
+simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/sonata_test/sim_data/3_sonata_test_2-6-23/202d8b98-6fdc-46e3-a9ab-ce697246b92a/config.json
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl_output/9-SonataTest/3_sonata_test_2-6-23
+
+clear_cache: false
+analysis:
+  hex0_spikes:
+    extraction:
+
+      report: {type: spikes}
+      limit: null
+      target: hex0
+
+      neuron_classes:
+        L1_EXC: { layer: [1], synapse_class: [EXC] }
+        L23_EXC: { layer: [2, 3], synapse_class: [EXC] }
+        L4_EXC: { layer: [4], synapse_class: [EXC] }
+        L5_EXC: { layer: [5], synapse_class: [EXC] }
+        L6_EXC: { layer: [6], synapse_class: [EXC] }
+        L1_INH: { layer: [1], synapse_class: [INH] }
+        L23_INH: { layer: [2, 3], synapse_class: [INH] }
+        L4_INH: { layer: [4], synapse_class: [INH] }
+        L5_INH: { layer: [5], synapse_class: [INH] }
+        L6_INH: { layer: [6], synapse_class: [INH] }
+        ALL_INH: { synapse_class: [INH], $limit: null }
+        ALL_EXC: { synapse_class: [EXC], $limit: null }
+        ALL: { $limit: null }
+
+      windows:
+        unconn_2nd_half: { bounds: [ 500, 1000 ], window_type: spontaneous }
+        conn_spont: { bounds: [ 1500, 2000 ], window_type: spontaneous }
+
+  #   features:
+  #   - type: multi
+  #     groupby: [simulation_id, circuit_id, neuron_class, window]
+  #     function: cortex_etl.calculate_features.calculate_features_multi
+  #     params:
+  #       export_all_neurons: true
+  #       histograms:
+  #         1ms:
+  #           bin_size: 1.0
+  #           smoothing:
+  #             1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+  #             3sd: {smoothing_type: Gaussian, kernel_sd: 3.0}
+  #         3ms:
+  #           bin_size: 3.0
+  #           smoothing:
+  #             1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+
+  #   custom:
+
+  #     plot_multi_sim_analysis: true
+  #     plot_rasters: false
+  #     create_raster_videos: false
+  #     compare_to_missing_synapses: true
+  #     extract_fr_df: false
+  #     compare_campaigns: false
+  #     plot_multi_sim_analysis_for_comparison_campaigns: false
+  #     create_multi_sim_summary_pdfs: false
+      
+  #     independent_variables: ["ca", "desired_connected_proportion_of_invivo_frs", "depol_stdev_mean_ratio"]
+  #     vivo_frs: {L1_INH: 1.5, L23_EXC: 0.07, L23_INH: 0.961, L4_EXC: 0.619, L4_INH: 1.184, L5_EXC: 1.252, L5_INH: 2.357, L6_EXC: 0.47, L6_INH: 1.5}
+  #     heatmap_dims: {hor_key: "ca", ver_key: "none", x_key: "desired_connected_proportion_of_invivo_frs", y_key: "depol_stdev_mean_ratio"}
+  #     raster_windows: [{conn_spont: 5.0}]
+  #     fr_comparison_pairs: [['unconn_2nd_half', 'conn_spont'], ['desired_connected_fr', 'conn_spont'], ['desired_unconnected_fr', 'unconn_2nd_half'], ['connection_fr_increase', 'connection_fr_error']]
+  #     desired_connected_fr_key: desired_connected_fr
+  #     desired_unconnected_fr_key: desired_unconnected_fr
+  #     ei_corr_r_val_limits: [0.15, 0.4]
+  #     depol_bc_key: gExc
+
+  #     campaign_short_name: "Transfer 3rd conn."
+  #     fr_df_name: "connection_data_from_mgfix_2-PfrTransfer-6-3rdConnectionRemaining_15-11-22.parquet"
+
+      
+  # hex_O1_spikes:
+  #   extraction:
+  #     report: {type: spikes}
+  #     neuron_classes:
+  #       ALL: {$limit: null}
+  #     limit: null
+  #     target: hex_O1
+  #     windows:
+  #       conn_spont: { bounds: [ 1500, 6500 ], window_type: spontaneous }
+
+  #   custom:
+  #     create_flatspace_videos: false
+  #     independent_variables: [ca, desired_connected_proportion_of_invivo_frs, depol_stdev_mean_ratio]
+  #     flatmap: /gpfs/bbp.cscs.ch/project/proj83/home/bolanos/BB_Rat_SSCX_flatmap_v2.nrrd
+  #     flatspace_videos:
+  #       fsv_3: {window: conn_spont, t_step: 100.0, n_spatial_bins: 1500, temporal_smoothing_sigma: 1.0, delete_images: False, stim_anal: null}
+
+        
