@@ -32,6 +32,9 @@ def analysis_initial_processing(analysis_config_file, loglevel="INFO"):
 
 def apply_analyses(a, a_name=''):
 
+	if c_etl.one_option_true(a, ['unconnected_frs_df', 'unconnected_frs_plot']):
+		c_etl.unconnected_analysis(a)
+
 	if c_etl.one_option_true(a, ['extract_fr_df', 'print_coupled_coords_from_mask', 'plot_multi_sim_analysis', 'create_raster_videos', 'spike_pair_analysis', 'compare_campaigns', 'compare_to_missing_synapses']):
 		c_etl.post_analysis(a)
 

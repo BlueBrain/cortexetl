@@ -22,3 +22,5 @@ from .response_comparison import *
 from .compare_campaigns import *
 
 from .missingsynapses import *
+
+from .unconnected import *

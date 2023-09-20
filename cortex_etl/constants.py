@@ -3,6 +3,11 @@ LAYER_EI_NEURON_CLASSES = ['L1_INH', 'L23_EXC', 'L23_INH', 'L4_EXC', 'L4_INH', '
 LAYER_EI_RP_NEURON_CLASSES = ['L23_EXC', 'L23_INH', 'L4_EXC', 'L4_INH', 'L5_EXC', 'L5_INH']
 LAYER_EI_SVO_NEURON_CLASSES = ['L23_EXC', 'L23_INH', 'L4_EXC', 'L4_INH', 'L5_EXC', 'L5_INH', "L6_EXC", "L6_INH"]
 ALL_EI_NEURON_CLASSES = ['ALL_INH', 'ALL_EXC']
+LAYER_E_AND_I_SUB_POP_NEURON_CLASSES = ["L1_5HT3aR",
+                                        "L23_EXC",  "L23_PV", "L23_SST", "L23_5HT3aR", 
+                                        "L4_EXC", "L4_PV", "L4_SST", "L4_5HT3aR", 
+                                        "L5_EXC", "L5_PV", "L5_SST", "L5_5HT3aR", 
+                                        "L6_EXC", "L6_PV", "L6_SST", "L6_5HT3aR"]
 
 # NEURON CLASS GROUPINGS
 LAYER_EI_NEURON_CLASS_GROUPINGS = [['L1_INH'], ['L23_EXC', 'L23_INH'], ['L4_EXC', 'L4_INH'], ['L5_EXC', 'L5_INH'], ['L6_EXC', 'L6_INH'], ['ALL_EXC', 'ALL_INH']]
@@ -12,6 +17,7 @@ ALL_EI_NEURON_CLASS_GROUPINGS = [['ALL_INH', 'ALL_EXC']]
 PYR_AND_IN_PSTH_NC_GROUPINGS_BY_LAYER = [["ALL", "L1_INH", "", ""], ["L23_EXC", "L23_INH", "L23_PV", "L23_SST"], ["L4_EXC", "L4_INH", "L4_PV", "L4_SST"], ["L5_EXC", "L5_INH", "L5_PV", "L5_SST"], ["L6_EXC", "L6_INH", "L6_PV", "L6_SST"]]
 
 E_AND_I_SEPERATE_GROUPINGS = [['L6_INH', 'L5_INH', 'L4_INH', 'L23_INH', 'L1_INH'], ['L6_EXC', 'L5_EXC', 'L4_EXC', 'L23_EXC']]
+E_AND_I_SUB_POP_SEPERATE_GROUPINGS = [['L6_PV', 'L5_PV', 'L4_PV', 'L23_PV'], ['L6_SST', 'L5_SST', 'L4_SST', 'L23_SST'], ['L6_5HT3aR', 'L5_5HT3aR', 'L4_5HT3aR', 'L23_5HT3aR', 'L1_5HT3aR'], ['L6_EXC', 'L5_EXC', 'L4_EXC', 'L23_EXC']]
 
 
 blue_c = 'b'
@@ -91,7 +97,23 @@ bluepy_neuron_class_map = {
 						'L5_INH': 'L5I', 
 						'L6_EXC': 'L6E', 
 						'L6_INH': 'L6I', 
+                        "L1_5HT3aR": "L1_5HT3aR", 
+                        "L23_PV": "L23_PV", 
+                        "L23_SST": "L23_SST", 
+                        "L23_5HT3aR": "L23_5HT3aR", 
+                        "L4_PV": "L4_PV", 
+                        "L4_SST": "L4_SST", 
+                        "L4_5HT3aR": "L4_5HT3aR", 
+                        "L5_PV": "L5_PV", 
+                        "L5_SST": "L5_SST", 
+                        "L5_5HT3aR": "L5_5HT3aR", 
+                        "L6_PV": "L6_PV", 
+                        "L6_SST": "L6_SST", 
+                        "L6_5HT3aR": "L6_5HT3aR"
 						}
+
+                        
+
 
 bluepy_neuron_class_map_2 = {
 						'L1_INH': 'L1', 
@@ -103,6 +125,19 @@ bluepy_neuron_class_map_2 = {
 						'L5_INH': 'L5I', 
 						'L6_EXC': 'L6E', 
 						'L6_INH': 'L6I', 
+                        "L1_5HT3aR": "L1_5HT3aR", 
+                        "L23_PV": "L23_PV", 
+                        "L23_SST": "L23_SST", 
+                        "L23_5HT3aR": "L23_5HT3aR", 
+                        "L4_PV": "L4_PV", 
+                        "L4_SST": "L4_SST", 
+                        "L4_5HT3aR": "L4_5HT3aR", 
+                        "L5_PV": "L5_PV", 
+                        "L5_SST": "L5_SST", 
+                        "L5_5HT3aR": "L5_5HT3aR", 
+                        "L6_PV": "L6_PV", 
+                        "L6_SST": "L6_SST", 
+                        "L6_5HT3aR": "L6_5HT3aR" 
 						}
 
 vivo_neuron_class_map = {

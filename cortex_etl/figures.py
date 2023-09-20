@@ -469,18 +469,22 @@ def lineplot(hms_df, stat_key, file_name, hor_key="none", ver_key="none", x_key=
 ############################################################################ 
 ### Compare two conditons by neuron class
 ############################################################################ 
-def plot_two_conditions_comparison_by_neuron_class(df1, df2, stat_key_1, stat_key_2, colour_key, comparison_pair, fig_path, fit_and_plot_exponential=False):
+import matplotlib.pyplot as plt
+from scipy.stats import linregress
+from matplotlib import cm
+import numpy as np
+def plot_two_conditions_comparison_by_neuron_class(df1, df2, stat_key_1, stat_key_2, colour_key, comparison_pair, fig_path, fit_and_plot_exponential=False, neuron_classes=''):
 
-    df1 = df1.etl.q(depol_stdev_mean_ratio=[0.2, 0.3, 0.4, 0.5])
-    df2 = df2.etl.q(depol_stdev_mean_ratio=[0.2, 0.3, 0.4, 0.5])
+    # df1 = df1.etl.q(depol_stdev_mean_ratio=[0.2, 0.3, 0.4, 0.5])
+    # df2 = df2.etl.q(depol_stdev_mean_ratio=[0.2, 0.3, 0.4, 0.5])
 
-    fig, axes = plt.subplots(1, len(c_etl.LAYER_EI_NEURON_CLASSES), figsize=(24, 2))
+    fig, axes = plt.subplots(1, len(neuron_classes), figsize=(24, 2))
 
     unique_cas = df1[colour_key].unique()
     cmap = cm.get_cmap('viridis', len(unique_cas))    # n discrete colors
 
     slope_dict = {}
-    for ax_i, ax, neuron_class in zip(list(range(len(axes))), axes, c_etl.LAYER_EI_NEURON_CLASSES):
+    for ax_i, ax, neuron_class in zip(list(range(len(axes))), axes, neuron_classes):
         nc_df1 = df1.etl.q(neuron_class=neuron_class)
         nc_df2 = df2.etl.q(neuron_class=neuron_class)
 
@@ -586,8 +590,7 @@ def plot_two_conditions_comparison_by_neuron_class(df1, df2, stat_key_1, stat_ke
 
     return slope_dict
 
-
-def compare_firing_rates_for_condition_pairs_by_neuron_class(a, custom_by_neuron_class_df, stat_filter, fit_and_plot_exponential=False):
+def compare_firing_rates_for_condition_pairs_by_neuron_class(a, custom_by_neuron_class_df, stat_filter, fit_and_plot_exponential=False, neuron_classes=''):
 
     for comparison_pair in a.analysis_config.custom['fr_comparison_pairs']:
 
@@ -599,16 +602,24 @@ def compare_firing_rates_for_condition_pairs_by_neuron_class(a, custom_by_neuron
 
         window_key_placeholder = "conn_spont"
 
-        prespecified_keys = ['predicted_fr', 'adjusted_unconnected_target_fr', 'desired_connected_fr', 'desired_unconnected_fr', 'connection_fr_increase', 'connection_fr_error', 'recorded_proportion_of_in_vivo_FR', 'desired_connected_proportion_of_invivo_frs']
+        prespecified_keys = ['predicted_fr', 
+                             'adjusted_unconnected_target_fr', 
+                             'desired_connected_fr', 
+                             'desired_unconnected_fr', 
+                             'connection_fr_increase', 
+                             'connection_fr_error', 
+                             'recorded_proportion_of_in_vivo_FR', 
+                             'desired_connected_proportion_of_invivo_frs']
+        
         if (comparison_pair[0] in prespecified_keys):
             stat_key_1 = comparison_pair[0]
             window_key_1 = window_key_placeholder
         if (comparison_pair[1] in prespecified_keys):
             stat_key_2 = comparison_pair[1]
             window_key_2 = window_key_placeholder
-
-        df1 = custom_by_neuron_class_df.etl.q(window=window_key_1, neuron_class=c_etl.LAYER_EI_NEURON_CLASSES)
-        df2 = custom_by_neuron_class_df.etl.q(window=window_key_2, neuron_class=c_etl.LAYER_EI_NEURON_CLASSES)
+            
+        df1 = custom_by_neuron_class_df.etl.q(window=window_key_1, neuron_class=neuron_classes)
+        df2 = custom_by_neuron_class_df.etl.q(window=window_key_2, neuron_class=neuron_classes)
 
         label = ''
         if (len(list(stat_filter.keys()))):
@@ -616,7 +627,7 @@ def compare_firing_rates_for_condition_pairs_by_neuron_class(a, custom_by_neuron
             df2 = df2.etl.q(stat_filter)
 
             label = list(stat_filter.keys())[0]
-
+            
         plt.figure()
         plt.scatter(df1[stat_key_1], df2[stat_key_2], c=df1['ca'], s=2.)
         fn = 'frs_' + comparison_pair[0] + '_VS_' + comparison_pair[1] + '_' + label + '.pdf'
@@ -631,7 +642,9 @@ def compare_firing_rates_for_condition_pairs_by_neuron_class(a, custom_by_neuron
                                                     'ca',
                                                     comparison_pair, 
                                                     str(a.figpaths.fr_condition_comparisons) + '/' + 'nc_frs_' + comparison_pair[0] + '_VS_' + comparison_pair[1] + '_' + label + '.pdf',
-                                                    fit_and_plot_exponential=fit_and_plot_exponential)
+                                                    fit_and_plot_exponential=fit_and_plot_exponential,
+                                                    neuron_classes=neuron_classes)
+
 
 
 
@@ -777,7 +790,7 @@ def plot_sim_stat_lines_all_sims(a, stats_df, stat_key, stat_filter, file_name, 
         
         cmap = sns.color_palette(cmap_name, len(unique_desired_conn), as_cmap=True)
         color_vals = cmap(np.linspace(0, 1, len(unique_desired_conn) + 1))
-    
+
         for simulation_id in a.repo.simulations.df['simulation_id']:
             ng_stats = stats_df.etl.q(simulation_id=simulation_id, window="conn_spont", neuron_class=neuron_classes)
             filtered_stats = ng_stats.etl.q(stat_filter)
