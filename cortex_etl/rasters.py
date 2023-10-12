@@ -76,7 +76,7 @@ def plot_rasters(a, custom_file_path=None, simulation_filter={}):
 
             for roc in raster_option_combinations:
                 if (a.repo.windows.df.etl.q(window=window_str).iloc[0]['window_type'] == "spontaneous"):
-                    for mask_key in ['', 'bursting', 'bursting_or_fr_above_threshold_or_ei_corr_r_out_of_range']:
+                    for mask_key in ['', 'bursting', 'bursting_or_fr_gt_threshold_or_ei_corr_r_out_of_range']:
                         roc.create_video(a, mask_key=mask_key)
 
                 elif (a.repo.windows.df.etl.q(window=window_str).iloc[0]['window_type'] == "evoked_stimulus_onset_zeroed"):
@@ -122,7 +122,7 @@ class RasterOptions(object):
         windows_df = a.repo.windows.df.etl.q(window=self.window_str)
         
         if (mask_key != ''):
-            windows_with_stats_df = pd.merge(windows_df, a.custom['custom_simulations_post_analysis'])
+            windows_with_stats_df = pd.merge(windows_df, a.custom['by_simulation'])
             q = {mask_key: invert_mask}
             windows_df = windows_with_stats_df.etl.q(q)
 

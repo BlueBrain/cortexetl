@@ -122,7 +122,7 @@ def spike_pair_analysis(a):
 	for r_dict in results:
 		mean_pairwise_first_spike_r_values.append(r_dict['mean_pairwise_first_spike_r_value'])
 
-	a.custom['custom_simulations_post_analysis']['mean_pairwise_first_spike_r_value'] = mean_pairwise_first_spike_r_values
+	a.custom['by_simulation']['mean_pairwise_first_spike_r_value'] = mean_pairwise_first_spike_r_values
 
 
 

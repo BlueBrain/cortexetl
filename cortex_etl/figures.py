@@ -189,7 +189,6 @@ def set_hor_and_ver_labels_for_axis(ax, ver_i, hor_i, uniq_ver, uniq_hor, x_key,
 
 import matplotlib
 from matplotlib import colors
-from matplotlib import colors
 from matplotlib import cm
 from matplotlib.ticker import MultipleLocator
 from matplotlib.ticker import FixedLocator
@@ -594,6 +593,8 @@ def compare_firing_rates_for_condition_pairs_by_neuron_class(a, custom_by_neuron
 
     for comparison_pair in a.analysis_config.custom['fr_comparison_pairs']:
 
+        print(comparison_pair)
+
         if (len(comparison_pair) == 3):
             fit_and_plot_exponential = comparison_pair[2]
 
@@ -652,20 +653,20 @@ def compare_firing_rates_for_condition_pairs_by_neuron_class(a, custom_by_neuron
 ############################################################################ 
 ### Plot P_FR validations
 ############################################################################ 
-def plot_nc_proportion_of_invivo_for_multiple_sims(a, custom_features_by_neuron_class, stat_filter, file_name):
+def plot_nc_proportion_of_invivo_for_multiple_sims(a, by_neuron_class, stat_filter, file_name):
 
     plt.figure(figsize=(10, 5))
     
     cmap_nc = cm.get_cmap('viridis', len(c_etl.LAYER_EI_NEURON_CLASSES))
 
-    unique_depol_stdev_mean_ratios = custom_features_by_neuron_class['depol_stdev_mean_ratio'].unique()
+    unique_depol_stdev_mean_ratios = by_neuron_class['depol_stdev_mean_ratio'].unique()
     cmap = cm.get_cmap('viridis', len(unique_depol_stdev_mean_ratios))
 
     prev_ca = -1.0
     xtick_positions = []
     xtick_labels = []
 
-    filtered_custom_by_neuron_class_df = custom_features_by_neuron_class.etl.q(window="conn_spont", neuron_class=c_etl.LAYER_EI_NEURON_CLASSES)
+    filtered_custom_by_neuron_class_df = by_neuron_class.etl.q(window="conn_spont", neuron_class=c_etl.LAYER_EI_NEURON_CLASSES)
     filtered_custom_by_neuron_class_df = filtered_custom_by_neuron_class_df.etl.q(stat_filter)
 
     for filtered_sim_index, simulation_id in enumerate(filtered_custom_by_neuron_class_df["simulation_id"].unique()):
@@ -720,11 +721,11 @@ def plot_nc_proportion_of_invivo_for_multiple_sims(a, custom_features_by_neuron_
     plt.close()
 
 
-def plot_nc_proportion_of_invivo_for_single_param_set(a, custom_features_by_neuron_class, stat_filter, file_name):
+def plot_nc_proportion_of_invivo_for_single_param_set(a, by_neuron_class, stat_filter, file_name):
 
     plt.figure(figsize=(10.35*0.35, 10.35*0.35))
 
-    filtered_custom_by_neuron_class_df = custom_features_by_neuron_class.etl.q(window="conn_spont", neuron_class=c_etl.LAYER_EI_NEURON_CLASSES).etl.q(stat_filter)
+    filtered_custom_by_neuron_class_df = by_neuron_class.etl.q(window="conn_spont", neuron_class=c_etl.LAYER_EI_NEURON_CLASSES).etl.q(stat_filter)
 
     for simulation_id in filtered_custom_by_neuron_class_df["simulation_id"].unique():
 

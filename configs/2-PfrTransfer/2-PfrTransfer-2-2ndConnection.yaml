@@ -61,7 +61,9 @@ analysis:
       desired_unconnected_fr_key: desired_unconnected_fr
       ei_corr_r_val_limits: [0.15, 0.4]
       depol_bc_key: gExc
-
+      fr_analysis_neuron_classes_constant: LAYER_EI_NEURON_CLASSES
+      vertical_plot_seperate_groupings: E_AND_I_SEPERATE_GROUPINGS
+      input_conductance_by_neuron_class_parquet: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/reference_data_do_not_delete/input_conductance_by_neuron_class_EI.parquet
       campaign_short_name: "Transfer 2nd conn."
       fr_df_name: "connection_data_from_mgfix_2-PfrTransfer-2-2ndConnection_7-11-22.parquet"
 

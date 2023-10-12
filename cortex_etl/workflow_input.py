@@ -13,7 +13,7 @@ def print_coupled_coords_from_mask(a, mask_key):
 	vpm_l5e_cond_scaling_factors = [4.0] # 0.0, 
 
 	q = {mask_key: False, 'ca':[1.05, 1.1], 'depol_stdev_mean_ratio': [0.2, 0.3], 'desired_connected_proportion_of_invivo_frs': [0.1, 0.3, 0.5, 0.7, 0.9]}  #, "ei_corr_rval": {"ge": 3, "lt": 8}
-	sims_df = a.custom['custom_simulations_post_analysis'].etl.q(q)
+	sims_df = a.custom['by_simulation'].etl.q(q)
 
 
 	cas = sims_df['ca'].tolist()
@@ -45,9 +45,9 @@ def print_coupled_coords_from_mask(a, mask_key):
 import pandas as pd
 def extract_fr_df(a):
 
-	custom_by_neuron_class_df = pd.merge(a.custom['custom_features_by_neuron_class'].reset_index().drop(["index"], axis=1), a.custom['custom_simulations_post_analysis'].reset_index().drop(["index"], axis=1), on=['simulation_id', 'circuit_id'])
+	custom_by_neuron_class_df = pd.merge(a.custom['by_neuron_class'].reset_index().drop(["index"], axis=1), a.custom['by_simulation'].reset_index().drop(["index"], axis=1), on=['simulation_id', 'circuit_id'])
 
-	sim_vars = ['simulation_id', 'window', 'neuron_class', 'bursting', 'bursting_or_fr_above_threshold', 'desired_connected_fr', 'desired_unconnected_fr', 'mean_of_mean_firing_rates_per_second']
+	sim_vars = ['simulation_id', 'window', 'neuron_class', 'bursting', 'bursting_or_fr_gt_threshold', 'desired_connected_fr', 'desired_unconnected_fr', 'mean_of_mean_firing_rates_per_second']
 	sim_vars.extend(a.analysis_config.custom['independent_variables']) 
 
 	fr_df = custom_by_neuron_class_df.loc[:, sim_vars].etl.q(neuron_class=c_etl.LAYER_EI_NEURON_CLASSES, window=a.analysis_config.custom['fr_df_windows']).drop(['simulation_id'], axis=1)

@@ -71,7 +71,7 @@ def missing_synapses_analysis(a):
     print("Compare depol parameters to missing synapses")
     missing_E_synapses_by_neuron_class_df = pd.read_parquet('/gpfs/bbp.cscs.ch/project/proj147/home/isbister/blueetl_ji_1/blueetl_ji_analyses/data/missing_E_synapses_by_neuron_class.parquet')
     input_conductance_by_neuron_class_df = pd.read_parquet('/gpfs/bbp.cscs.ch/project/proj147/home/isbister/blueetl_ji_1/blueetl_ji_analyses/data/input_conductance_by_neuron_class.parquet')
-    mean_depol_by_nc = a.custom['custom_features_by_neuron_class'].etl.q(neuron_class=c_etl.LAYER_EI_NEURON_CLASSES, window=a.custom['custom_features_by_neuron_class'].window.unique()[0]).loc[:,['depol_mean', 'neuron_class']].groupby(a.custom['custom_features_by_neuron_class'].neuron_class.astype(object)).mean().reset_index()  
+    mean_depol_by_nc = a.custom['by_neuron_class'].etl.q(neuron_class=c_etl.LAYER_EI_NEURON_CLASSES, window=a.custom['by_neuron_class'].window.unique()[0]).loc[:,['depol_mean', 'neuron_class']].groupby(a.custom['by_neuron_class'].neuron_class.astype(object)).mean().reset_index()  
     
     info_for_nc = pd.merge(pd.merge(missing_E_synapses_by_neuron_class_df, input_conductance_by_neuron_class_df), mean_depol_by_nc)
     info_for_nc['true_mean_conductance'] = info_for_nc['resting_conductance'] * info_for_nc['depol_mean'] / 100.0

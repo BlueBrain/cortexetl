@@ -1,9 +1,9 @@
 version: 3
-simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/home/isbister/post_physiology_2023/sim_data/debugging_tests/0_debugging_test_18-8-23/07c6f958-3ed6-4777-8176-93bec1474019/config.json
-output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortex_etl_output/0_debugging_test_18-8-23
+simulation_campaign: /gpfs/bbp.cscs.ch/project/proj82/scratch/simulations/Thal-SSCx/spon_activity_sim/TEST11_02_09_23/5deb69bf-e520-4381-b3de-1ddbed91f05f/config.json
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl_output-etl3/Thal-SSCx/spon_activity_sim/TEST11_02_09_23
 clear_cache: false
 analysis:
-  hex0_spikes:
+  hex9_spikes:
     extraction:
       report: {type: spikes}
       limit: null
@@ -62,10 +62,10 @@ analysis:
           bounds: [500, 1000]
           window_type: spontaneous
         conn_spont:
-          bounds: [1500, 6500]
+          bounds: [1500, 3500]
           window_type: spontaneous
-      population: S1nonbarrel_neurons
-      node_set: hex0
+      population: All
+      node_set: hex9
     features:
     - type: multi
       groupby: [simulation_id, circuit_id, neuron_class, window]
@@ -111,9 +111,13 @@ analysis:
       desired_unconnected_fr_key: desired_unconnected_fr
       ei_corr_r_val_limits: [0.15, 0.4]
       depol_bc_key: gExc
-      campaign_short_name: Transfer 3rd conn.
-      fr_df_name: connection_data_from_mgfix_2-PfrTransfer-6-3rdConnectionRemaining_15-11-22.parquet
-  hex_O1_spikes:
+      campaign_short_name: Test
+      fr_df_name: FR_data.parquet
+      fr_analysis_neuron_classes_constant: LAYER_EI_NEURON_CLASSES
+      vertical_plot_seperate_groupings: E_AND_I_SEPERATE_GROUPINGS
+      input_conductance_by_neuron_class_parquet: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/reference_data_do_not_delete/input_conductance_by_neuron_class_EI.parquet
+
+  hex_ctc_spikes:
     extraction:
       report: {type: spikes}
       neuron_classes:
@@ -121,10 +125,10 @@ analysis:
       limit: null
       windows:
         conn_spont:
-          bounds: [1500, 6500]
+          bounds: [1500, 3500]
           window_type: spontaneous
-      population: S1nonbarrel_neurons
-      node_set: hex_O1
+      population: All
+      node_set: hex_ctc
     custom:
       create_flatspace_videos: false
       independent_variables: [ca, desired_connected_proportion_of_invivo_frs, depol_stdev_mean_ratio]

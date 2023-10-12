@@ -24,3 +24,7 @@ from .compare_campaigns import *
 from .missingsynapses import *
 
 from .unconnected import *
+
+from .custom_by_layer import *
+from .custom_by_neuron_class import *
+from .custom_by_simulation_and_fft import *

@@ -89,3 +89,9 @@ def calculate_suggested_unconnected_firing_rate(target_connected_fr, a, b, c):
 
 from math import log10, floor
 round_to_n = lambda x, n: round(x, -int(floor(log10(x))) + (n - 1))
+
+
+def flatten(lol):
+	return [x for xs in lol for x in xs]
+
+

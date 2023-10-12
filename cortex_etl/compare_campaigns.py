@@ -33,18 +33,18 @@ def compare_campaigns(a, a_name):
 
     # Add additional columns with campaign information
     for analyzer_ind, analyzer in enumerate(analyzers):
-        analyzer.custom['custom_simulations_post_analysis']['campaign_index'] = analyzer_ind
-        analyzer.custom['custom_simulations_post_analysis']['campaign_short_name'] = analyzer.analysis_config.custom['campaign_short_name']
+        analyzer.custom['by_simulation']['campaign_index'] = analyzer_ind
+        analyzer.custom['by_simulation']['campaign_short_name'] = analyzer.analysis_config.custom['campaign_short_name']
 
 
     # Concatenate campagin dfs
-    concatenated_custom_simulations_post_analysis = c_etl.concat_dfs_for_multiple_campaigns(analyzers, 'custom_simulations_post_analysis')
+    concatenated_by_simulation = c_etl.concat_dfs_for_multiple_campaigns(analyzers, 'by_simulation')
 
     # Lineplots
     hor_key="ca"; ver_key="none"; x_key="desired_connected_proportion_of_invivo_frs"; colour_var_key="campaign_short_name";
     hm_dims = (hor_key, ver_key, x_key, colour_var_key)
     file_dir = str(a.figpaths.campaign_comparison) + '/'
-    c_etl.comparison_lineplots(concatenated_custom_simulations_post_analysis, file_dir, *hm_dims)
+    c_etl.comparison_lineplots(concatenated_by_simulation, file_dir, *hm_dims)
 
     # Videos showing how figures change over the campaigns
     c_etl.video_from_image_files([str(a.figpaths.root) + "/ProportionOfInVivo_NonBursting.png" for a in analyzers], str(a.figpaths.campaign_comparison) + '/ProportionOfInVivo_NonBursting.mp4') 
