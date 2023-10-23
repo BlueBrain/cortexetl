@@ -628,12 +628,14 @@ def compare_firing_rates_for_condition_pairs_by_neuron_class(a, custom_by_neuron
             df2 = df2.etl.q(stat_filter)
 
             label = list(stat_filter.keys())[0]
-            
-        plt.figure()
-        plt.scatter(df1[stat_key_1], df2[stat_key_2], c=df1['ca'], s=2.)
-        fn = 'frs_' + comparison_pair[0] + '_VS_' + comparison_pair[1] + '_' + label + '.pdf'
-        plt.savefig(str(a.figpaths.fr_condition_comparisons) + '/' + fn, bbox_inches='tight')
-        plt.close()
+        
+        make_single_plot = False    
+        if make_single_plot:
+            plt.figure()
+            plt.scatter(df1[stat_key_1], df2[stat_key_2], c=df1['ca'], s=2.)
+            fn = 'frs_' + comparison_pair[0] + '_VS_' + comparison_pair[1] + '_' + label + '.pdf'
+            plt.savefig(str(a.figpaths.fr_condition_comparisons) + '/' + fn, bbox_inches='tight')
+            plt.close()
 
 
         slope_dict = plot_two_conditions_comparison_by_neuron_class(df1, 
