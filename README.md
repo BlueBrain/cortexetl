@@ -21,7 +21,7 @@ pip install -r requirements.txt
 
 ## Example notebooks
 
-A number of example notebooks are in development. These correspond to examples of [BBP Workflow](https://bbpteam.epfl.ch/project/spaces/display/BBPNSE/Workflow) calibration and calibrated simulation campaigns in [TEST](www.fill.com).
+A number of example notebooks are in development. These correspond to examples of [BBP Workflow](https://bbpteam.epfl.ch/project/spaces/display/BBPNSE/Workflow) calibration and calibrated simulation campaigns in [SSCx-Workflows](https://bbpgitlab.epfl.ch/conn/configs/simulations/bbp-workflow/sscx-workflows/-/tree/master/spont_evoked_calibration_and_calibrated/examples).
 
 These include:
 - Characterising the effect of OU mean and std on unconnected FRs of different layerwise populations: 
