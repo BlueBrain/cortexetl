@@ -24,16 +24,17 @@ def get_value_from_instance(row, value_key, a, map_to_use=None):
     sim_inst = a.repo.simulations.df.etl.q(simulation_id=row.simulation_id).iloc[0].simulation.instance
     sim_conf = sim_inst.config
     
-    fr_conf = sim_conf
-    inputs_conf = sim_conf['inputs']
-    second_mean_key = 'mean_percent'
-    second_std_key = 'sd_percent'
     if not isinstance(a.repo.simulations.df.iloc[0].simulation.instance, bluepysnap.simulation.Simulation):
         fr_conf = sim_conf.Run
         inputs_conf = sim_conf
         second_mean_key = 'MeanPercent'
         second_std_key = 'SDPercent'
-        
+    else:
+        fr_conf = sim_conf
+        inputs_conf = sim_conf['inputs']
+        second_mean_key = 'mean_percent'
+        second_std_key = 'sd_percent'
+
     backup_nc = c_etl.backup_ncs[row.neuron_class]
 
     if value_key == "desired_connected_fr_key":

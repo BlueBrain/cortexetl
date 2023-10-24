@@ -33,8 +33,6 @@ def add_sim_and_filters_info_to_df(a, custom_df_key):
     
 
 
-from blueetl.parallel import call_by_simulation
-from functools import partial
 def post_analysis(a):
 
     print("\n----- Custom post analysis -----")
