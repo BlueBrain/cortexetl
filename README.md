@@ -25,8 +25,9 @@ A number of example notebooks are in development. These correspond to examples o
 
 These include:
 - Characterising the effect of OU mean and std on unconnected FRs of different layerwise populations: 
-	notebooks/examples/O1/calibration/stage_1_unconnected_scan/unconnected_fr_analysis.ipynb
-- notebooks/examples/O1/calibration/stage_2_or_3_connection/
+	[notebooks/examples/O1/calibration/stage_1_unconnected_scan/unconnected_fr_analysis.ipynb](https://bbpgitlab.epfl.ch/conn/personal/isbister/cortex_etl/-/tree/main/notebooks/examples/O1/calibration/stage_1_unconnected_scan)
+- Characterising spiking activity during or after calibration:
+	[notebooks/examples/O1/calibration/stage_2_or_3_connection/stage_2_or_3_connection_x.yaml](https://bbpgitlab.epfl.ch/conn/personal/isbister/cortex_etl/-/tree/main/notebooks/examples/O1/calibration/stage_2_or_3_connection)
 
 
 
