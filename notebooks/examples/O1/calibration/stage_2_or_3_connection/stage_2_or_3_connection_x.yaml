@@ -60,6 +60,7 @@ analysis:
         conn_spont:
           bounds: [1500, 6500]
           window_type: spontaneous
+      population: S1nonbarrel_neurons
       node_set: hex0
     features:
     - type: multi
@@ -122,6 +123,7 @@ analysis:
         conn_spont:
           bounds: [1500, 6500]
           window_type: spontaneous
+      population: S1nonbarrel_neurons
       node_set: hex_O1
     custom:
       create_flatspace_videos: false

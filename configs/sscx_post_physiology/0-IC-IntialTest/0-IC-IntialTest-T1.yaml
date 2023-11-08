@@ -12,28 +12,28 @@ analysis:
       target: hex0
 
       neuron_classes:
-        L1_EXC: { layer: [1], synapse_class: [EXC] }
-        L23_EXC: { layer: [2, 3], synapse_class: [EXC] }
-        L4_EXC: { layer: [4], synapse_class: [EXC] }
-        L5_EXC: { layer: [5], synapse_class: [EXC] }
-        L6_EXC: { layer: [6], synapse_class: [EXC] }
-        L1_INH: { layer: [1], synapse_class: [INH] }
-        L23_INH: { layer: [2, 3], synapse_class: [INH] }
-        L4_INH: { layer: [4], synapse_class: [INH] }
-        L5_INH: { layer: [5], synapse_class: [INH] }
-        L6_INH: { layer: [6], synapse_class: [INH] }
-        L23_PV: { layer: [2, 3], mtype: [L23_LBC, L23_NBC, L23_CHC] }
-        L4_PV: { layer: [4], mtype: [L4_CHC, L4_NBC, L4_LBC] }
-        L5_PV: { layer: [5], mtype: [L5_CHC, L5_LBC, L5_NBC] }
-        L6_PV: { layer: [6], mtype: [L6_LBC, L6_CHC, L6_NBC] }
-        L23_SST: { layer: [2, 3], mtype: [L23_BTC, L23_NGC, L23_SBC, L23_MC, L23_DBC] }
-        L4_SST: { layer: [4], mtype: [L4_NGC, L4_DBC, L4_SBC, L4_BTC, L4_MC] }
-        L5_SST: { layer: [5], mtype: [L5_SBC, L5_BTC, L5_DBC, L5_NGC, L5_MC] }
-        L6_SST: { layer: [6], mtype: [L6_BTC, L6_NGC, L6_MC, L6_SBC, L6_DBC] }
-        L23_Htr3a: { layer: [2, 3], mtype: [L23_BP] }
-        L4_Htr3a: { layer: [4], mtype: [L4_BP] }
-        L5_Htr3a: { layer: [5], mtype: [L5_BP] }
-        L6_Htr3a: { layer: [6], mtype: [L6_BP] }
+        L1_EXC: { layer: ["1"], synapse_class: [EXC] }
+        L23_EXC: { layer: ["2", "3"], synapse_class: [EXC] }
+        L4_EXC: { layer: ["4"], synapse_class: [EXC] }
+        L5_EXC: { layer: ["5"], synapse_class: [EXC] }
+        L6_EXC: { layer: ["6"], synapse_class: [EXC] }
+        L1_INH: { layer: ["1"], synapse_class: [INH] }
+        L23_INH: { layer: ["2", "3"], synapse_class: [INH] }
+        L4_INH: { layer: ["4"], synapse_class: [INH] }
+        L5_INH: { layer: ["5"], synapse_class: [INH] }
+        L6_INH: { layer: ["6"], synapse_class: [INH] }
+        L23_PV: { layer: ["2", "3"], mtype: [L23_LBC, L23_NBC, L23_CHC] }
+        L4_PV: { layer: ["4"], mtype: [L4_CHC, L4_NBC, L4_LBC] }
+        L5_PV: { layer: ["5"], mtype: [L5_CHC, L5_LBC, L5_NBC] }
+        L6_PV: { layer: ["6"], mtype: [L6_LBC, L6_CHC, L6_NBC] }
+        L23_SST: { layer: ["2", "3"], mtype: [L23_BTC, L23_NGC, L23_SBC, L23_MC, L23_DBC] }
+        L4_SST: { layer: ["4"], mtype: [L4_NGC, L4_DBC, L4_SBC, L4_BTC, L4_MC] }
+        L5_SST: { layer: ["5"], mtype: [L5_SBC, L5_BTC, L5_DBC, L5_NGC, L5_MC] }
+        L6_SST: { layer: ["6"], mtype: [L6_BTC, L6_NGC, L6_MC, L6_SBC, L6_DBC] }
+        L23_Htr3a: { layer: ["2", "3"], mtype: [L23_BP] }
+        L4_Htr3a: { layer: ["4"], mtype: [L4_BP] }
+        L5_Htr3a: { layer: ["5"], mtype: [L5_BP] }
+        L6_Htr3a: { layer: ["6"], mtype: [L6_BP] }
         ALL_INH: { synapse_class: [INH], $limit: null }
         ALL_EXC: { synapse_class: [EXC], $limit: null }
         ALL: { $limit: null }

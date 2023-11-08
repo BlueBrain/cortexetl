@@ -32,7 +32,7 @@ def add_sim_and_filters_info_to_df(a, custom_df_key):
         a.custom[custom_df_key] = pd.merge(a.custom[custom_df_key], a.custom['by_simulation'].loc[:, filter_keys])
     
 
-
+import time
 def post_analysis(a):
 
     print("\n----- Custom post analysis -----")
