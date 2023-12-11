@@ -628,8 +628,9 @@ def evoked_analysis(a):
 
     neuron_classes, vivo_df, rp_psth_df, svo_psth_df = evoked_preprocessing(a)
 
-    evoked_ratios_analaysis(a, neuron_classes)
+
+    # evoked_ratios_analaysis(a, neuron_classes) # TEMPORARILY COMMENTED OUT
     create_heatmaps(a)
-    compare_time_courses(a, vivo_df, silico_bin_size=0.5, silico_sigma=2)
+    # compare_time_courses(a, vivo_df, silico_bin_size=0.5, silico_sigma=2) # TEMPORARILY COMMENTED OUT
     psth_plots(a, neuron_classes, rp_psth_df, svo_psth_df)
 

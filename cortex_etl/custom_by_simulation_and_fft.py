@@ -190,6 +190,8 @@ def custom_by_simulation_features(a):
 	evoked_smoothing_type = 'Gaussian'
 	evoked_kernel_sd = 1.0
 	hist_windows = ['conn_spont']
+	if ('evoked_window_for_custom_post_analysis' in list(a.analysis_config.custom.keys())):
+		hist_windows += [a.analysis_config.custom['evoked_window_for_custom_post_analysis']]
 
 	dataframes={"simulation_windows": a.repo.windows.df, 
 
