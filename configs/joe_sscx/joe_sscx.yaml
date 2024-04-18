@@ -1,0 +1,25 @@
+version: 3
+simulation_campaign: /gpfs/bbp.cscs.ch/project/proj85/scratch/from68/sonata_circuits/fullSSCx/longSim/compareModalities/f554be01-456c-4a15-8670-df39a3187b7e/config.json
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortex_etl_output/campaigns/joe_sscx
+
+clear_cache: false
+analysis:
+  Mosaic_spikes:
+    extraction:
+      report: {type: spikes}
+      neuron_classes:
+        ALL: {}
+      limit: null
+      node_set: Mosaic
+      windows:
+        conn_spont: { bounds: [ 0, 10000 ], window_type: spontaneous }
+      population: S1nonbarrel_neurons
+
+    custom:
+      create_flatspace_videos: true
+      independent_variables: [seed]
+      flatmap: /gpfs/bbp.cscs.ch/project/proj83/home/bolanos/BB_Rat_SSCX_flatmap_v2.nrrd
+      flatspace_videos:
+        fsv_0: {window: conn_spont, t_step: 50.0, n_spatial_bins: 20000, temporal_smoothing_sigma: 1.0, delete_images: False, stim_anal: null}
+
+        

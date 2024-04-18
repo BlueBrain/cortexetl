@@ -14,20 +14,23 @@ def images_from_filenames(list_of_filenames):
 			img_array.append(img)
 	return img_array, size
 
-
-def video_from_image_files(list_of_filenames, output_filename):
+import os
+def video_from_image_files(list_of_filenames, output_filename, delete_images=False):
 
 	if (list_of_filenames != []):
 
-	    img_array, size = images_from_filenames(list_of_filenames)
+		img_array, size = images_from_filenames(list_of_filenames)
 
-	    if (img_array != []):
+		if (img_array != []):
 
-	        out = cv2.VideoWriter(output_filename, cv2.VideoWriter_fourcc(*'mp4v'), 1, size)
-	        for i in range(len(img_array)):
-	            frame = cv2.resize(img_array[i], size)
-	            out.write(frame)
-	        out.release()
+			out = cv2.VideoWriter(output_filename, cv2.VideoWriter_fourcc(*'mp4v'), 1, size)
+			for i in range(len(img_array)):
+				frame = cv2.resize(img_array[i], size)
+				out.write(frame)
+			out.release()
+
+		if delete_images:
+			for f in list_of_filenames: os.remove(f)
 
 
 def one_option_true(a, options):
@@ -93,5 +96,25 @@ round_to_n = lambda x, n: round(x, -int(floor(log10(x))) + (n - 1))
 
 def flatten(lol):
 	return [x for xs in lol for x in xs]
+
+def set_xy_labels_and_title(ax, xlabel, ylabel, title=''):
+    ax.set_xlabel(xlabel, labelpad=-3)
+    ax.set_ylabel(ylabel, labelpad=-4)
+    ax.set_title(title)
+    
+def remove_intermediate_axis_labels(ax, y_or_x='x'):
+    
+    labels = [item.get_text() for item in ax.get_xticklabels()]
+    ticks = ax.get_xticks()
+    if y_or_x == 'y':
+        labels = [item.get_text() for item in ax.get_yticklabels()]
+        ticks = ax.get_yticks() 
+    
+    num_labels = len(labels)
+    for i in range(1, num_labels-1):
+        labels[i] = ''
+        
+    if y_or_x == 'x': ax.set_xticks(ticks, labels)
+    if y_or_x == 'y': ax.set_yticks(ticks, labels)
 
 

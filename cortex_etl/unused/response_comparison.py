@@ -12,52 +12,6 @@ import matplotlib.patches as mpatches
 
 
 
-def compare_metrics_of_two_layerwise_groups(df, layers, group_1, group_2, stat, prefix, mask_key=''):
-
-	if (mask_key != ''):
-		mask_dict = {mask_key:False}
-		df = df.etl.q(mask_dict)
-
-	cmap = cm.get_cmap('rocket', 5)
-	colors = cmap(np.linspace(0, 1, 5))
-
-	layer_colours = {
-				"L23": colors[0],
-				"L4": colors[1],
-				"L5": colors[2],
-				"L6": colors[3]}
-
-	group_1_df = df.etl.q(neuron_class=[layer + "_" + group_1 for layer in layers])
-	group_2_df = df.etl.q(neuron_class=[layer + "_" + group_2 for layer in layers])
-
-	group_1_df.loc[:, 'layer_colour'] = group_1_df.apply(lambda row: layer_colours[row['layer']], axis = 1)
-
-	layer_df = pd.merge(group_1_df, group_2_df, on=['simulation_id', "layer"])
-
-	layer_df[stat + "_silico_x"] = layer_df[stat + "_silico_x"] + np.random.normal(0.0, 0.1, len(layer_df[stat + "_silico_x"]))
-	layer_df[stat + "_silico_y"] = layer_df[stat + "_silico_y"] + np.random.normal(0.0, 0.1, len(layer_df[stat + "_silico_y"]))
-
-
-
-	plt.figure()
-	plt.scatter(layer_df[stat + "_silico_x"], layer_df[stat + "_silico_y"], c=np.asarray(layer_df['layer_colour']).tolist(), s=0.2)
-
-	# PLOT IN VIVO REFERENCES
-	for layer in layers:
-		single_layer_df = layer_df.etl.q(layer=layer)
-		single_layer_df = single_layer_df.iloc[0]
-		plt.scatter(single_layer_df[stat + "_vivo" + '_x'], single_layer_df[stat + "_vivo" + '_y'], c=np.asarray(single_layer_df['layer_colour']).tolist(), label=single_layer_df['layer'])
-
-
-	plt.gca().legend()
-	plt.gca().set_xlim([0.0, 20.0])
-	plt.gca().set_ylim([0.0, 20.0])
-	plt.gca().set_xlabel(group_1)
-	plt.gca().set_ylabel(group_2)
-	plt.gca().plot([0.0, 20.0], [0.0, 20.0], 'k--', alpha=0.75, zorder=0, lw=0.5, dashes=(5, 5))
-	plt.savefig(prefix + '_' + group_1 + '_v_' + group_2 + '_' + stat + '_' + mask_key + '.pdf')
-	plt.close()
-
 def compare_metrics_to_in_vivo_for_neuron_classes(df, neuron_classes, prefix, mask_key=''):
 
 	if (mask_key != ''):

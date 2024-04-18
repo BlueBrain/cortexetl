@@ -13,7 +13,7 @@ import cortex_etl as c_etl
 from blueetl.analysis import run_from_file
 
 
-def analysis_initial_processing(analysis_config_file, loglevel="INFO"):
+def analysis_initial_processing(analysis_config_file, loglevel="INFO", create_figure_dirs=True):
 
 	sns.set(style="ticks", context="paper", font="Helvetica Neue",
         rc={"axes.labelsize": 7, "legend.fontsize": 6, "axes.linewidth": 0.6, "xtick.labelsize": 6, "ytick.labelsize": 6,
@@ -24,8 +24,9 @@ def analysis_initial_processing(analysis_config_file, loglevel="INFO"):
 	ma = run_from_file(analysis_config_file, loglevel=loglevel)
 	ma = ma.apply_filter()
 
-	for a in ma.analyzers.values():
-		c_etl.create_figure_dirs(a)
+	if create_figure_dirs:
+		for a in ma.analyzers.values():
+			c_etl.create_figure_dirs(a)
 
 	return ma
 

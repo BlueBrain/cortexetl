@@ -1,0 +1,148 @@
+version: 3
+
+## with shot noise into CTX - 10, 20, 30 % with ML at 25, 35 and 45 Hz
+simulation_campaign:  /gpfs/bbp.cscs.ch/project/proj82/scratch/simulations/Thal-SSCx/spon_activity_sim/circV2_26_02_24_hexO1_Ca1_1_scanPFR_scanML/ddf5860c-aa16-4e9c-be5e-79d1e7ac4e23/config.json
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/ThalSSCx/
+
+clear_cache: false
+analysis:
+  hex47_spikes:
+    extraction:
+      report: {type: spikes}
+      limit: null
+      neuron_classes:
+        L23_EXC:
+          query:
+            layer: ["2", "3"]
+            synapse_class: [EXC]
+        L4_EXC:
+          query:
+            layer: ["4"]
+            synapse_class: [EXC]
+        L5_EXC:
+          query:
+            layer: ["5"]
+            synapse_class: [EXC]
+        L6_EXC:
+          query:
+            layer: ["6"]
+            synapse_class: [EXC]
+        L1_INH:
+          query:
+            layer: ["1"]
+            synapse_class: [INH]
+        L23_INH:
+          query:
+            layer: ["2", "3"]
+            synapse_class: [INH]
+        L4_INH:
+          query:
+            layer: ["4"]
+            synapse_class: [INH]
+        L5_INH:
+          query:
+            layer: ["5"]
+            synapse_class: [INH]
+        L6_INH:
+          query:
+            layer: ["6"]
+            synapse_class: [INH]
+        ALL_INH:
+          query:
+            synapse_class: [INH]
+          limit: null
+        ALL_EXC:
+          query:
+            synapse_class: [EXC]
+          limit: null
+        ALL: {limit: null}
+      windows:
+        unconn_2nd_half:
+          bounds: [500, 1500]
+          window_type: spontaneous
+        within_reg_conn_spon:
+          bounds: [1500, 3000]
+          window_type: spontaneous
+        conn_spont:
+          bounds: [3000, 4500]
+          window_type: spontaneous
+        full_sim:
+          bounds: [0, 5500]
+          window_type: spontaneous
+      population: All
+      node_set: hex_47
+#     features:
+#     - type: multi
+#       groupby: [simulation_id, circuit_id, neuron_class, window]
+#       function: cortex_etl.calculate_features.calculate_features_multi
+#       params:
+#         export_all_neurons: true
+#         histograms:
+#           1ms:
+#             bin_size: 1.0
+#             smoothing:
+#               1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+#               3sd: {smoothing_type: Gaussian, kernel_sd: 3.0}
+#           3ms:
+#             bin_size: 3.0
+#             smoothing:
+#               1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+#           5ms:
+#             bin_size: 5.0
+#             smoothing:
+#               1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+    custom:
+      temp: true
+      
+      
+  mc2_spikes:
+    extraction:
+      report: {type: spikes}
+      limit: null
+      neuron_classes:
+        VPL_TC:
+          query:
+            mtype: ["VPL_TC"]
+        Rt_RC:
+          query:
+            mtype: ["Rt_RC"]
+
+        ALL: {limit: null}
+      windows:
+        unconn_2nd_half:
+          bounds: [500, 1500]
+          window_type: spontaneous
+        within_reg_conn_spon:
+          bounds: [1500, 3000]
+          window_type: spontaneous
+        conn_spont:
+          bounds: [3000, 4500]
+          window_type: spontaneous
+        full_sim:
+          bounds: [0, 5500]
+          window_type: spontaneous
+      population: thalamus_neurons
+      node_set: mc2_Column
+#     features:
+#     - type: multi
+#       groupby: [simulation_id, circuit_id, neuron_class, window]
+#       function: cortex_etl.calculate_features.calculate_features_multi
+#       params:
+#         export_all_neurons: true
+#         histograms:
+#           1ms:
+#             bin_size: 1.0
+#             smoothing:
+#               1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+#               3sd: {smoothing_type: Gaussian, kernel_sd: 3.0}
+#           3ms:
+#             bin_size: 3.0
+#             smoothing:
+#               1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+#           5ms:
+#             bin_size: 5.0
+#             smoothing:
+#               1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+    custom:
+      temp: true
+ 

@@ -105,7 +105,7 @@ def custom_post_analysis_single_simulation(simulation_row,
     evoked_hist_bin_size = 3.0; evoked_smoothing_type = 'Gaussian'; evoked_kernel_sd = 1.0
 
     ##### SPONTANEOUS ANALYSIS ##### 
-    spont_features_for_sim = features_with_sim_info.etl.q(window=spont_window)
+    spont_features_for_sim = features_with_sim_info.reset_index().etl.q(window=spont_window)
     spont_hists = filtered_dataframes['histograms'].etl.q(window="conn_spont", 
                                                 bin_size=spont_hist_bin_size, 
                                                 smoothing_type=spont_smoothing_type, 
@@ -143,6 +143,8 @@ def custom_post_analysis_single_simulation(simulation_row,
 
     _, FFT_spont_hists = c_etl.hist_elements(filtered_dataframes['FFT_histograms'].etl.q(neuron_class="ALL", window="conn_spont"))
 
+    # print(FFT_spont_hists)
+
     if (not np.all(FFT_spont_hists == FFT_spont_hists[0])):
         r_dict['fft_plot_path'], r_dict['sim_fft_df'] = fft_analysis(filtered_dataframes['simulation_windows'], 
                                                                     str(simulation_row['fft_dir']) + '/FFT_plot.png', 
@@ -152,6 +154,7 @@ def custom_post_analysis_single_simulation(simulation_row,
                                                                     spont_window, 
                                                                     simulation_row['simulation_id'], 
                                                                     spont_smoothing_type)
+
 
     ##### EVOKED ANALYSIS #####     
     r_dict['higher_secondary_peak'] = False; r_dict['overly_sustained_response'] = False; r_dict['too_much_trial_to_trial_variance'] = False
@@ -193,6 +196,8 @@ def custom_by_simulation_features(a):
 	if ('evoked_window_for_custom_post_analysis' in list(a.analysis_config.custom.keys())):
 		hist_windows += [a.analysis_config.custom['evoked_window_for_custom_post_analysis']]
 
+	# print(a.features.by_neuron_class.df)
+
 	dataframes={"simulation_windows": a.repo.windows.df, 
 
 	            "histograms": a.features.histograms.df.etl.q(neuron_class=["ALL", "ALL_EXC", "ALL_INH"], 
@@ -210,6 +215,8 @@ def custom_by_simulation_features(a):
 	            "features_by_neuron_class": a.features.by_neuron_class.df.etl.q(window=hist_windows),
 	            "features_by_neuron_class_and_trial": a.features.by_neuron_class_and_trial.df.etl.q(neuron_class="ALL", 
 	                                                                                                window=hist_windows)}
+
+	_, FFT_spont_hists = c_etl.hist_elements(dataframes['FFT_histograms'].etl.q(neuron_class="ALL", window="conn_spont"))
 
 	results = call_by_simulation(a.repo.simulations.df, 
 	                                dataframes, 

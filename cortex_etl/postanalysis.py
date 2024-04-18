@@ -15,7 +15,7 @@ def persist_custom_dataframes(a):
 
     opts = {"engine": "pyarrow", "index": True}
     for key, df in a.custom.items(): 
-        df.to_parquet(path=str(a.analysis_config['output']) + "/" + key + ".parquet", **opts)
+        df.to_parquet(path=str(a.analysis_config.output) + "/" + key + ".parquet", **opts)
 
 
 def add_sim_and_filters_info_to_df(a, custom_df_key):
@@ -38,16 +38,16 @@ def post_analysis(a):
     print("\n----- Custom post analysis -----")
     tic = time.perf_counter()
 
-    load_custom_dataframes = False
-    if (load_custom_dataframes): load_custom_dataframes(['by_simulation', 'by_neuron_class', 'fft', 'by_layer_and_simulation'])
+    do_load_custom_dataframes = False
+    if do_load_custom_dataframes: load_custom_dataframes(['by_simulation', 'by_neuron_class', 'fft', 'by_layer_and_simulation'])
 
     a.custom = {}
     c_etl.custom_by_simulation_features(a)
     c_etl.custom_by_neuron_class_features(a)
     c_etl.custom_by_layer_features(a)
 
-    persist_custom_dataframes = False
-    if (persist_custom_dataframes): persist_custom_dataframes(a)
+    do_persist_custom_dataframes = True
+    if do_persist_custom_dataframes: persist_custom_dataframes(a)
     
     print(f"----- Custom post analysis complete: {time.perf_counter() - tic:0.2f}s -----")
 

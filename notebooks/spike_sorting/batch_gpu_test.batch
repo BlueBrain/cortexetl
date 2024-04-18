@@ -1,0 +1,10 @@
+#!/bin/bash -l
+#SBATCH -t 0:30:00           # Set 2 hours and 30 minute time limit
+#SBATCH -C "volta"            
+#SBATCH --exclusive           # only if you node to allocate whole node
+#SBATCH --account=proj83       # your project number
+#SBATCH --mem=0               # make sure entire memory is allocated to the job
+  
+. /gpfs/bbp.cscs.ch/home/isbister/cortex_etl_jupyter_04_01_23/bin/activate
+
+python gpu_test.py

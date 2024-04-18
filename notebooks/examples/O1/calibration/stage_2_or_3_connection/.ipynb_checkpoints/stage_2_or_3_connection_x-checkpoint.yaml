@@ -10,40 +10,76 @@ analysis:
       neuron_classes:
         L23_EXC:
           query:
-            layer: ["2", "3"]
+            layer: [2, 3]
             synapse_class: [EXC]
         L4_EXC:
           query:
-            layer: ["4"]
+            layer: [4]
             synapse_class: [EXC]
         L5_EXC:
           query:
-            layer: ["5"]
+            layer: [5]
             synapse_class: [EXC]
         L6_EXC:
           query:
-            layer: ["6"]
+            layer: [6]
             synapse_class: [EXC]
         L1_INH:
           query:
-            layer: ["1"]
+            layer: [1]
             synapse_class: [INH]
         L23_INH:
           query:
-            layer: ["2", "3"]
+            layer: [2, 3]
             synapse_class: [INH]
         L4_INH:
           query:
-            layer: ["4"]
+            layer: [4]
             synapse_class: [INH]
         L5_INH:
           query:
-            layer: ["5"]
+            layer: [5]
             synapse_class: [INH]
         L6_INH:
           query:
-            layer: ["6"]
+            layer: [6]
             synapse_class: [INH]
+#         L23_EXC:
+#           query:
+#             layer: ["2", "3"]
+#             synapse_class: [EXC]
+#         L4_EXC:
+#           query:
+#             layer: ["4"]
+#             synapse_class: [EXC]
+#         L5_EXC:
+#           query:
+#             layer: ["5"]
+#             synapse_class: [EXC]
+#         L6_EXC:
+#           query:
+#             layer: ["6"]
+#             synapse_class: [EXC]
+#         L1_INH:
+#           query:
+#             layer: ["1"]
+#             synapse_class: [INH]
+#         L23_INH:
+#           query:
+#             layer: ["2", "3"]
+#             synapse_class: [INH]
+#         L4_INH:
+#           query:
+#             layer: ["4"]
+#             synapse_class: [INH]
+#         L5_INH:
+#           query:
+#             layer: ["5"]
+#             synapse_class: [INH]
+#         L6_INH:
+#           query:
+#             layer: ["6"]
+#             synapse_class: [INH]
         ALL_INH:
           query:
             synapse_class: [INH]

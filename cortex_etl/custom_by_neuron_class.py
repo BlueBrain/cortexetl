@@ -6,6 +6,7 @@ import cortex_etl as c_etl
 
 
 def get_value_with_backup_nc(d, key_prefix, nc_map, nc, second_key='', backup_nc=''):
+
     if (key_prefix + nc_map[nc] in list(d.keys())):
         v = d[key_prefix + nc_map[nc]]
         if (second_key != ''):
@@ -24,16 +25,20 @@ def get_value_from_instance(row, value_key, a, map_to_use=None):
     sim_inst = a.repo.simulations.df.etl.q(simulation_id=row.simulation_id).iloc[0].simulation.instance
     sim_conf = sim_inst.config
     
+    # print(a.repo.simulations.df.iloc[0].simulation.instance)
     if not isinstance(a.repo.simulations.df.iloc[0].simulation.instance, bluepysnap.simulation.Simulation):
         fr_conf = sim_conf.Run
         inputs_conf = sim_conf
         second_mean_key = 'MeanPercent'
         second_std_key = 'SDPercent'
+        stim_spacer = '_'
     else:
         fr_conf = sim_conf
         inputs_conf = sim_conf['inputs']
         second_mean_key = 'mean_percent'
         second_std_key = 'sd_percent'
+        stim_spacer = ' '
+
 
     backup_nc = c_etl.backup_ncs[row.neuron_class]
 
@@ -44,10 +49,10 @@ def get_value_from_instance(row, value_key, a, map_to_use=None):
         des_unconn_fr_key = a.analysis_config.custom['desired_unconnected_fr_key'] + '_'
         return get_value_with_backup_nc(fr_conf, des_unconn_fr_key, map_to_use, row.neuron_class, backup_nc=backup_nc)    
     elif value_key == "MeanPercent":
-        mean_perc_key = "Stimulus " + a.analysis_config.custom['depol_bc_key'] + '_'
+        mean_perc_key = "Stimulus" + stim_spacer  + a.analysis_config.custom['depol_bc_key'] + '_'
         return get_value_with_backup_nc(inputs_conf, mean_perc_key, map_to_use, row.neuron_class, second_key=second_mean_key, backup_nc=backup_nc)
     elif value_key == "SDPercent":
-        std_perc_key = "Stimulus " + a.analysis_config.custom['depol_bc_key'] + '_'
+        std_perc_key = "Stimulus" + stim_spacer + a.analysis_config.custom['depol_bc_key'] + '_'
         return get_value_with_backup_nc(inputs_conf, std_perc_key, map_to_use, row.neuron_class, second_key=second_std_key, backup_nc=backup_nc)
 
 
