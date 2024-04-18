@@ -127,7 +127,8 @@ import seaborn as sns
 def evoked_ratios_line_plot(a, silico_evoked_ratios, silico_mean_ratios_across_sims, vivo_nc_ratios, neuron_classes, normalisation_type='none'):
 
     plt.figure(figsize=(8.2*0.3, 8.2*0.3*0.5))
-    plt.gca().set_facecolor('lightgrey')
+    ax = plt.gca()
+    ax.set_facecolor('lightgrey')
     cmap = sns.color_palette("seismic", as_cmap=True)
 
     vivo_nc_mean_ratio = np.mean(vivo_nc_ratios)
@@ -163,24 +164,24 @@ def evoked_ratios_line_plot(a, silico_evoked_ratios, silico_mean_ratios_across_s
     if (normalisation_type == "none"):
         plt.plot(range(len(neuron_classes)), vivo_nc_ratios, c='w', lw=1, marker='o', ms=3)
         plt.plot(range(len(neuron_classes)), silico_mean_ratios_across_sims.etl.q(neuron_class=neuron_classes), c='k', lw=1, marker='o', ms=3)
-        plt.gca().set_ylim([0.0, 200.0])
+        ax.set_ylim([0.0, 200.0])
 
     elif (normalisation_type == "mean_normalise"):
         plt.plot(range(len(neuron_classes)), mean_normalise(vivo_nc_ratios), c='w', lw=1, marker='o', ms=3)
         plt.plot(range(len(neuron_classes)), mean_normalise(silico_mean_ratios_across_sims.etl.q(neuron_class=neuron_classes)), c='k', lw=1, marker='o', ms=3)
-        plt.gca().set_ylim([0.0, 5.0])
-        # plt.gca().set_ylim([0.0, 1.0])
+        ax.set_ylim([0.0, 5.0])
 
 
 
-    plt.gca().yaxis.set_major_locator(ticker.MultipleLocator(200))
-    plt.gca().yaxis.set_minor_locator(ticker.MultipleLocator(50))
-    plt.gca().set_xticks(range(len(neuron_classes)), labels=[c_etl.neuron_class_label_map[nc] for nc in neuron_classes])
-    plt.gca().set_ylabel('Evok/spont\nratio', labelpad=-10.0)
+    ax.yaxis.set_major_locator(ticker.MultipleLocator(200))
+    ax.yaxis.set_minor_locator(ticker.MultipleLocator(50))
+    ax.set_xticks(range(len(neuron_classes)), labels=[c_etl.neuron_class_label_map[nc] for nc in neuron_classes])
+    ax.set_ylabel('Evok/spont\nratio', labelpad=-10.0)
+    
     plt.tight_layout()
+    plt.show()
     plt.savefig(str(a.figpaths.evoked) + "/" + normalisation_type + "_EvokedRatios.pdf")
-
-    # plt.close()
+    plt.close()
 
 
 
@@ -333,6 +334,4 @@ def plot_psths_single_neuron_class(neuron_class, baseline_PSTH_df, rp_psth_df, s
     ax.xaxis.set_minor_locator(ticker.MultipleLocator(5))
     plt.tight_layout()
     plt.savefig(figs_dir + str(silico_bin_size) + '_' + str(silico_sigma) + '_' + neuron_class + '_ALL_PSTHs_CLOSE.pdf')
-    plt.close()
-
-
+    plt.close
