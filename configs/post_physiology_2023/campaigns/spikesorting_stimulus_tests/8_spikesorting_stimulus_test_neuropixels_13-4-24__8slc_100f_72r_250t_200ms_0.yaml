@@ -80,19 +80,19 @@ analysis:
           query:
             layer: ["6"]
             mtype: [L6_BTC, L6_NGC, L6_MC, L6_SBC, L6_DBC]
-        L23_Htr3a:
+        L23_5HT3aR:
           query:
             layer: ["2", "3"]
             mtype: [L23_BP]
-        L4_Htr3a:
+        L4_5HT3aR:
           query:
             layer: ["4"]
             mtype: [L4_BP]
-        L5_Htr3a:
+        L5_5HT3aR:
           query:
             layer: ["5"]
             mtype: [L5_BP]
-        L6_Htr3a:
+        L6_5HT3aR:
           query:
             layer: ["6"]
             mtype: [L6_BP]
@@ -105,6 +105,7 @@ analysis:
             synapse_class: [EXC]
           limit: null
         ALL: {limit: null}
+        hex0_spikes: {limit: null}
       windows:
         unconn_2nd_half:
           bounds: [500, 1000]
@@ -120,6 +121,12 @@ analysis:
           window_type: spontaneous
         evoked_SOZ_25ms_0.0:
           bounds: [0, 25]
+          initial_offset: 1500
+          n_trials: 250
+          trial_steps_value: 200
+          window_type: evoked_stimulus_onset_zeroed
+        evoked_SOZ_50ms:
+          bounds: [0, 50]
           initial_offset: 1500
           n_trials: 250
           trial_steps_value: 200
@@ -189,6 +196,11 @@ analysis:
     #     max_psth:
     #       params: {t_stim: 0}
     custom:
+      window_groupings: &id001
+        0_50ms_stim_by_cond:
+        - Cond0_0_50ms_stim
+
+
       independent_variables: [ca, desired_connected_proportion_of_invivo_frs, depol_stdev_mean_ratio, vpm_num_fibres]
       vivo_frs: {L1_INH: 1.5, L23_EXC: 0.07, L23_INH: 0.961, L4_EXC: 0.619, L4_INH: 1.184,
         L5_EXC: 1.252, L5_INH: 2.357, L6_EXC: 0.47, L6_INH: 1.5}
@@ -225,3 +237,7 @@ analysis:
       fr_analysis_neuron_classes_constant: LAYER_EI_NEURON_CLASSES
       vertical_plot_seperate_groupings: E_AND_I_SEPERATE_GROUPINGS
       input_conductance_by_neuron_class_parquet: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/reference_data_do_not_delete/input_conductance_by_neuron_class_EI.parquet
+
+custom:
+  standard_key: gt
+  window_groupings: *id001

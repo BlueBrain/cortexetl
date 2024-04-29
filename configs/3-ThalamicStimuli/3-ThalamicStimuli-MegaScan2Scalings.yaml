@@ -1,6 +1,6 @@
-version: 2
+version: 3
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/bbp_workflow/sscx_calibration_mgfix/3-ThalamicStimuli/3-ThalamicStimuli-MegaScan2Scalings/adccba3d-981e-4599-85a0-cb5e963be15e/config.json
-output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl_output/3-ThalamicStimuli/3-ThalamicStimuli-MegaScan2Scalings
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl_output/3-ThalamicStimuli/3-ThalamicStimuli-MegaScan2Scalings-etl3
 simulations_filter_in_memory:
   vpm_l5e_cond_scaling_factor: 1.36
 
@@ -11,34 +11,103 @@ analysis:
 
       report: {type: spikes}
       limit: null
-      target: hex0
+      node_set: hex0
 
       neuron_classes:
-        L1_EXC: { layer: [1], synapse_class: [EXC] }
-        L23_EXC: { layer: [2, 3], synapse_class: [EXC] }
-        L4_EXC: { layer: [4], synapse_class: [EXC] }
-        L5_EXC: { layer: [5], synapse_class: [EXC] }
-        L6_EXC: { layer: [6], synapse_class: [EXC] }
-        L1_INH: { layer: [1], synapse_class: [INH] }
-        L23_INH: { layer: [2, 3], synapse_class: [INH] }
-        L4_INH: { layer: [4], synapse_class: [INH] }
-        L5_INH: { layer: [5], synapse_class: [INH] }
-        L6_INH: { layer: [6], synapse_class: [INH] }
-        L23_PV: { layer: [2, 3], mtype: [L23_LBC, L23_NBC, L23_CHC] }
-        L4_PV: { layer: [4], mtype: [L4_CHC, L4_NBC, L4_LBC] }
-        L5_PV: { layer: [5], mtype: [L5_CHC, L5_LBC, L5_NBC] }
-        L6_PV: { layer: [6], mtype: [L6_LBC, L6_CHC, L6_NBC] }
-        L23_SST: { layer: [2, 3], mtype: [L23_BTC, L23_NGC, L23_SBC, L23_MC, L23_DBC] }
-        L4_SST: { layer: [4], mtype: [L4_NGC, L4_DBC, L4_SBC, L4_BTC, L4_MC] }
-        L5_SST: { layer: [5], mtype: [L5_SBC, L5_BTC, L5_DBC, L5_NGC, L5_MC] }
-        L6_SST: { layer: [6], mtype: [L6_BTC, L6_NGC, L6_MC, L6_SBC, L6_DBC] }
-        L23_Htr3a: { layer: [2, 3], mtype: [L23_BP] }
-        L4_Htr3a: { layer: [4], mtype: [L4_BP] }
-        L5_Htr3a: { layer: [5], mtype: [L5_BP] }
-        L6_Htr3a: { layer: [6], mtype: [L6_BP] }
-        ALL_INH: { synapse_class: [INH], $limit: null }
-        ALL_EXC: { synapse_class: [EXC], $limit: null }
-        ALL: { $limit: null }
+        L23_EXC:
+          query:
+            layer: ["2", "3"]
+            synapse_class: [EXC]
+        L4_EXC:
+          query:
+            layer: ["4"]
+            synapse_class: [EXC]
+        L5_EXC:
+          query:
+            layer: ["5"]
+            synapse_class: [EXC]
+        L6_EXC:
+          query:
+            layer: ["6"]
+            synapse_class: [EXC]
+        L1_INH:
+          query:
+            layer: ["1"]
+            synapse_class: [INH]
+        L23_INH:
+          query:
+            layer: ["2", "3"]
+            synapse_class: [INH]
+        L4_INH:
+          query:
+            layer: ["4"]
+            synapse_class: [INH]
+        L5_INH:
+          query:
+            layer: ["5"]
+            synapse_class: [INH]
+        L6_INH:
+          query:
+            layer: ["6"]
+            synapse_class: [INH]
+        L23_PV: 
+          query:
+            layer: ["2", "3"]
+            mtype: [L23_LBC, L23_NBC, L23_CHC]
+        L4_PV: 
+          query:
+            layer: ["4"]
+            mtype: [L4_CHC, L4_NBC, L4_LBC]
+        L5_PV: 
+          query:
+            layer: ["5"]
+            mtype: [L5_CHC, L5_LBC, L5_NBC]
+        L6_PV: 
+          query:
+            layer: ["6"]
+            mtype: [L6_LBC, L6_CHC, L6_NBC]
+        L23_SST: 
+          query:
+            layer: ["2", "3"]
+            mtype: [L23_BTC, L23_NGC, L23_SBC, L23_MC, L23_DBC]
+        L4_SST: 
+          query:
+            layer: ["4"]
+            mtype: [L4_NGC, L4_DBC, L4_SBC, L4_BTC, L4_MC]
+        L5_SST: 
+          query:
+            layer: ["5"]
+            mtype: [L5_SBC, L5_BTC, L5_DBC, L5_NGC, L5_MC]
+        L6_SST: 
+          query:
+            layer: ["6"]
+            mtype: [L6_BTC, L6_NGC, L6_MC, L6_SBC, L6_DBC]
+        L23_5HT3aR: 
+          query:
+            layer: ["2", "3"]
+            mtype: [L23_BP]
+        L4_5HT3aR: 
+          query:
+            layer: ["4"]
+            mtype: [L4_BP]
+        L5_5HT3aR:
+          query:
+            layer: ["5"]
+            mtype: [L5_BP]
+        L6_5HT3aR:
+          query:
+            layer: ["6"]
+            mtype: [L6_BP]
+
+        ALL_INH:
+          query:
+            synapse_class: [INH]
+          limit: null
+        ALL_EXC:
+          query:
+            synapse_class: [EXC]
+          limit: null
+        ALL: {limit: null}
 
       windows:
         unconn_2nd_half: { bounds: [ 500, 1000 ], window_type: spontaneous }
@@ -108,9 +177,9 @@ analysis:
       heatmap_dims: {hor_key: ca, ver_key: vpm_pct, x_key: desired_connected_proportion_of_invivo_frs, y_key: depol_stdev_mean_ratio}
       raster_windows: [{evoked_SOZ_100ms: [1.8, 2.5]}, {stim_period: [3.5, 2.5]}, {half_stim_period: [3.5, 2.5]}]
 
-      plot_multi_sim_analysis: false
-      plot_rasters: true
-      create_raster_videos: true
+      plot_multi_sim_analysis: true
+      plot_rasters: false
+      create_raster_videos: false
       evoked_analysis: false
 
       spike_pair_analysis: false
@@ -138,21 +207,21 @@ analysis:
       theshold_conjunctive_trials_for_spike_pair_analysis: 4
       depol_bc_key: gExc
       
-      spont_replacement_custom_simulation_data_df: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/blueetl_ji_output/sscx_calibration_mgfix/2-PfrTransfer/2-PfrTransfer-6-3rdConnectionRemaining/hex0/custom_simulations_post_analysis.parquet
+      # spont_replacement_custom_simulation_data_df: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/blueetl_ji_output/sscx_calibration_mgfix/2-PfrTransfer/2-PfrTransfer-6-3rdConnectionRemaining/hex0/custom_simulations_post_analysis.parquet
 
       fr_analysis_neuron_classes_constant: LAYER_EI_NEURON_CLASSES
       vertical_plot_seperate_groupings: E_AND_I_SEPERATE_GROUPINGS
       input_conductance_by_neuron_class_parquet: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/reference_data_do_not_delete/input_conductance_by_neuron_class_EI.parquet
 
-  hex_O1_spikes:
-    extraction:
-      report: {type: spikes}
-      neuron_classes:
-        ALL: {$limit: null}
-      limit: null
-      target: hex_O1
-      windows:
-        evoked_SOZ_100ms: {bounds: [0, 100], initial_offset: 1500, n_trials: 10, trial_steps_value: 1000, window_type: evoked_stimulus_onset_zeroed}
+  # hex_O1_spikes:
+  #   extraction:
+  #     report: {type: spikes}
+  #     neuron_classes:
+  #       ALL: {$limit: null}
+  #     limit: null
+  #     target: hex_O1
+  #     windows:
+  #       evoked_SOZ_100ms: {bounds: [0, 100], initial_offset: 1500, n_trials: 10, trial_steps_value: 1000, window_type: evoked_stimulus_onset_zeroed}
 
     # features:
     # - type: multi
@@ -171,16 +240,16 @@ analysis:
     #         smoothing:
     #           1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
 
-    custom:
-      sim_filter_in_memory_name: '1.36'
+    # custom:
+    #   sim_filter_in_memory_name: '1.36'
 
-      create_flatspace_videos: false
+    #   create_flatspace_videos: false
 
-      independent_variables: [ca, desired_connected_proportion_of_invivo_frs, depol_stdev_mean_ratio, vpm_pct, vpm_l5e_cond_scaling_factor]
+    #   independent_variables: [ca, desired_connected_proportion_of_invivo_frs, depol_stdev_mean_ratio, vpm_pct, vpm_l5e_cond_scaling_factor]
       
-      evoked_window_for_custom_post_analysis: evoked_SOZ_250ms
-      flatmap: /gpfs/bbp.cscs.ch/project/proj83/home/bolanos/BB_Rat_SSCX_flatmap_v2.nrrd
-      flatspace_videos:
-        fsv_3: {window: evoked_SOZ_100ms, t_step: 5, n_spatial_bins: 1500, temporal_smoothing_sigma: 0.0,
-          delete_images: false, stim_anal: null}
+    #   evoked_window_for_custom_post_analysis: evoked_SOZ_250ms
+    #   flatmap: /gpfs/bbp.cscs.ch/project/proj83/home/bolanos/BB_Rat_SSCX_flatmap_v2.nrrd
+    #   flatspace_videos:
+    #     fsv_3: {window: evoked_SOZ_100ms, t_step: 5, n_spatial_bins: 1500, temporal_smoothing_sigma: 0.0,
+    #       delete_images: false, stim_anal: null}
 

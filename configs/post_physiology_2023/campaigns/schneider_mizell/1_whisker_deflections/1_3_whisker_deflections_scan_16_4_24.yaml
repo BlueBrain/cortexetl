@@ -76,19 +76,19 @@ analysis:
           query:
             layer: [6]
             mtype: [L6_BTC, L6_NGC, L6_MC, L6_SBC, L6_DBC]
-        L23_Htr3a: 
+        L23_5HT3aR: 
           query:
             layer: [2, 3]
             mtype: [L23_BP]
-        L4_Htr3a: 
+        L4_5HT3aR: 
           query:
             layer: [4]
             mtype: [L4_BP]
-        L5_Htr3a:
+        L5_5HT3aR:
           query:
             layer: [5]
             mtype: [L5_BP]
-        L6_Htr3a:
+        L6_5HT3aR:
           query:
             layer: [6]
             mtype: [L6_BP]
@@ -112,14 +112,14 @@ analysis:
         evoked_SOZ_25ms: 
           bounds: [ 0, 25 ]
           initial_offset: 1500
-          n_trials: 2
+          n_trials: 10
           trial_steps_value: 1000
           window_type: evoked_stimulus_onset_zeroed
         evoked_SOZ_250ms: 
           bounds: [ -50, 250 ]
           initial_offset: 1500
-          n_trials: 2
-          trial_steps_value: 500
+          n_trials: 10
+          trial_steps_value: 1000
           window_type: evoked_stimulus_onset_zeroed
       population: S1nonbarrel_neurons
       node_set: hex0

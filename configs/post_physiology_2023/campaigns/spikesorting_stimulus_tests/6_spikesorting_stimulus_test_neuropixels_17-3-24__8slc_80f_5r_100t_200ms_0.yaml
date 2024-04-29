@@ -81,19 +81,19 @@ analysis:
           query:
             layer: ["6"]
             mtype: [L6_BTC, L6_NGC, L6_MC, L6_SBC, L6_DBC]
-        L23_Htr3a:
+        L23_5HT3aR:
           query:
             layer: ["2", "3"]
             mtype: [L23_BP]
-        L4_Htr3a:
+        L4_5HT3aR:
           query:
             layer: ["4"]
             mtype: [L4_BP]
-        L5_Htr3a:
+        L5_5HT3aR:
           query:
             layer: ["5"]
             mtype: [L5_BP]
-        L6_Htr3a:
+        L6_5HT3aR:
           query:
             layer: ["6"]
             mtype: [L6_BP]

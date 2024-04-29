@@ -1,1 +1,16 @@
+*.mp4
+*/*.mp4
+*/*/*.mp4
+*/*/*/*.mp4
+
+*.pdf
+*/*.pdf
+*/*/*.pdf
+*/*/*/*.pdf
+
+*.png
+*/*.png
+*/*/*.png
+*/*/*/*.png
+
 cortex_etl/__pycache__/*

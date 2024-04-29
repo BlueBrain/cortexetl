@@ -62,7 +62,7 @@ def heatmap_settings(analysis_key):
         fixed_vmin = [-1.0]
         fixed_vmax = [1.0]
 
-    if (analysis_key in ["mean_ratio_difference"]):
+    if (analysis_key in ["mean_ratio_diff_to_v"]):
         cmap = sns.color_palette("seismic", as_cmap=True)
         cmap_center = 0.0
 

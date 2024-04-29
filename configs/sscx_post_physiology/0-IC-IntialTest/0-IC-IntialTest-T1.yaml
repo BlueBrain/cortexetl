@@ -30,10 +30,10 @@ analysis:
         L4_SST: { layer: ["4"], mtype: [L4_NGC, L4_DBC, L4_SBC, L4_BTC, L4_MC] }
         L5_SST: { layer: ["5"], mtype: [L5_SBC, L5_BTC, L5_DBC, L5_NGC, L5_MC] }
         L6_SST: { layer: ["6"], mtype: [L6_BTC, L6_NGC, L6_MC, L6_SBC, L6_DBC] }
-        L23_Htr3a: { layer: ["2", "3"], mtype: [L23_BP] }
-        L4_Htr3a: { layer: ["4"], mtype: [L4_BP] }
-        L5_Htr3a: { layer: ["5"], mtype: [L5_BP] }
-        L6_Htr3a: { layer: ["6"], mtype: [L6_BP] }
+        L23_5HT3aR: { layer: ["2", "3"], mtype: [L23_BP] }
+        L4_5HT3aR: { layer: ["4"], mtype: [L4_BP] }
+        L5_5HT3aR: { layer: ["5"], mtype: [L5_BP] }
+        L6_5HT3aR: { layer: ["6"], mtype: [L6_BP] }
         ALL_INH: { synapse_class: [INH], $limit: null }
         ALL_EXC: { synapse_class: [EXC], $limit: null }
         ALL: { $limit: null }
