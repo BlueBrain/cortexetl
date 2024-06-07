@@ -21,6 +21,7 @@ def analysis_initial_processing(analysis_config_file, loglevel="INFO", create_fi
             "ytick.major.size": 2, "ytick.major.width": 0.5, "ytick.minor.size": 1.5, "ytick.minor.width": 0.3,
             "axes.titlesize": 7, "axes.spines.right": False, "axes.spines.top": False})
 
+	# print("blueetl run_from_file")
 	ma = run_from_file(analysis_config_file, loglevel=loglevel)
 	ma = ma.apply_filter()
 

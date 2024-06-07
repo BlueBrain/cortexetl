@@ -13,7 +13,7 @@ def evoked_analysis(a):
     rp_psth_df, \
     svo_psth_df = evoked_processing(a)
 
-    evoked_plots(a, comp_ncs, vivo_df, rp_psth_df, svo_psth_df)
+    c_etl.evoked_plots(a, comp_ncs, vivo_df, rp_psth_df, svo_psth_df)
 
 
 """
@@ -53,6 +53,10 @@ def preprocess_vivo_dfs():
 
     rp_psth_df = pd.read_parquet("/gpfs/bbp.cscs.ch/project/proj147/home/isbister/blueetl_ji_1/bc-simulation-analysis/invivo/reyes-multi-sigma-PSTH.parquet")
     svo_psth_df = pd.read_parquet("/gpfs/bbp.cscs.ch/project/proj147/home/isbister/blueetl_ji_1/bc-simulation-analysis/invivo/svoboda-multi-sigma-PSTH.parquet")
+
+    vivo_df['neuron_class'] = vivo_df.apply(lambda row: row.neuron_class.replace("Htr3a", "5HT3aR"), axis=1)
+    rp_psth_df['neuron_class'] = rp_psth_df.apply(lambda row: row.neuron_class.replace("Htr3a", "5HT3aR"), axis=1)
+    svo_psth_df['neuron_class'] = svo_psth_df.apply(lambda row: row.neuron_class.replace("Htr3a", "5HT3aR"), axis=1)
 
     return vivo_df, rp_psth_df, svo_psth_df
 

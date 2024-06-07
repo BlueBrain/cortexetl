@@ -19,6 +19,31 @@ from itertools import chain
 import cortex_etl as c_etl
 
 
+
+import seaborn as sns
+def horizontal_box_plot(data, y, x, figsize, order, palette, labels, line_loc, figdir, lims=[], hue=None, width=.5, gap=0, dodge=False, legend=False, stat_labels={}, stat_units={}, suffix=''):
+
+    
+    
+    plt.figure(figsize=figsize)
+    # sns.violinplot(x="neuron_class", y="true_mean_conductance_change", data=merged_by_nc, palette=nc_c, order=nc_order)
+    # sns.stripplot(y="neuron_class", x="true_mean_conductance_change", data=merged_by_nc, jitter=True, s=1.2, palette=nc_c, order=nc_order, orient='h')
+    sns.boxplot(y=y, x=x, hue=hue, data=data, palette=palette, order=order, orient='h', width=width, linewidth=.2, showfliers=False, gap=gap, dodge=dodge, legend=legend)
+    ax = plt.gca()
+    ax.set_yticklabels(labels)
+    ax.set_ylabel('')
+    ax.set_xlabel(stat_labels[x] + " " + stat_units[x])
+    ax.axvline(x=line_loc, color='black', linestyle='dashed', linewidth=.3, zorder=-4)
+    
+    if len(lims):
+        ax.set_xlim(lims)
+    
+    plt.tight_layout()
+    plt.savefig(figdir + x + suffix + '.pdf', bbox_inches='tight')
+    plt.show()
+    plt.close()
+
+
 ############################################################################ 
 ### Heatmap + lineplot
 ############################################################################ 

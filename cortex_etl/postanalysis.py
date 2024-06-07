@@ -6,7 +6,7 @@ import cortex_etl as c_etl
 def load_custom_dataframes(a, df_keys):
     a.custom = {}
     for key in df_keys:
-        df_path = str(a.analysis_config['output']) + "/" + key + ".parquet"
+        df_path = str(a.analysis_config.output) + "/" + key + ".parquet"
         if (os.path.exists(df_path)):
             a.custom[key] = pd.read_parquet(df_path)
 

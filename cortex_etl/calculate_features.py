@@ -30,6 +30,16 @@ def get_initial_spiking_stats(repo, key, df, params):
         .rename("first_spike_time_means_cort_zeroed")
     )
 
+    first_spike_time_stds_cort_zeroed = (
+        spikes_by_trial[FIRST]
+        .groupby([GID, NEURON_CLASS_INDEX])
+        .std()
+        .rename("first_spike_time_stds_cort_zeroed")
+    )
+
+    did_spike_reliability = spikes_by_trial[COUNT].fillna(0).astype(bool).astype(float).groupby([GID, NEURON_CLASS_INDEX]).mean()
+    did_spike_reliability = did_spike_reliability.rename("did_spike_reliability")
+
     mean_spike_counts = spikes_by_trial[COUNT].fillna(0).groupby([GID, NEURON_CLASS_INDEX]).mean()
     mean_spike_counts = mean_spike_counts.rename("mean_spike_counts")
     mean_of_spike_counts_for_each_trial = (
@@ -50,8 +60,10 @@ def get_initial_spiking_stats(repo, key, df, params):
         "spikes_by_trial": spikes_by_trial,
         # by_gid
         "first_spike_time_means_cort_zeroed": first_spike_time_means_cort_zeroed,
+        "first_spike_time_stds_cort_zeroed": first_spike_time_stds_cort_zeroed,
         "mean_spike_counts": mean_spike_counts,
         "mean_firing_rates_per_second": mean_firing_rates_per_second,
+        "did_spike_reliability": did_spike_reliability,
         # by_neuron_class_and_trial
         "mean_of_spike_counts_for_each_trial": mean_of_spike_counts_for_each_trial,
         # by_neuron_class (scalar values)
@@ -106,6 +118,32 @@ def get_histogram_features(repo, key, df, hist_params):
 
     return d
 
+# NEW
+def get_single_trial_histogram_features(repo, key, df, hist_params):
+
+    # number_of_trials = repo.windows.get_number_of_trials(key.window)
+    duration = repo.windows.get_duration(key.window)
+    t_start, t_stop = repo.windows.get_bounds(key.window)
+    # all the spike times are concatenated regardless of the trial
+
+    histograms = pd.DataFrame({})
+    for trial in repo.windows.trial.unique():
+
+        times = df.etl.q(trial=trial)[TIME].to_numpy()
+
+        hist, _ = np.histogram(times, range=[t_start, t_stop], bins=int(duration / hist_params['bin_size']))
+        num_target_cells = len(
+            repo.neurons.df.etl.q(circuit_id=key.circuit_id, neuron_class=key.neuron_class)
+        )
+        hist = hist / (num_target_cells)
+        hist['trial'] = trial
+    
+    histograms = pd.concat([histograms, hist])
+
+    d = {"hist": hist}
+
+    return d
+
 
 
     
@@ -113,17 +151,17 @@ def get_histogram_features(repo, key, df, hist_params):
 
 def calculate_features_multi(repo, key, df, params):
 
-    # print('hey')
-
     export_all_neurons = params.get("export_all_neurons", False)
     spiking_stats = get_initial_spiking_stats(repo, key, df, params)
 
     # df with (gid) as index, and features as columns
     by_gid = pd.concat(
         [
+            spiking_stats["first_spike_time_stds_cort_zeroed"],
             spiking_stats["first_spike_time_means_cort_zeroed"],
             spiking_stats["mean_spike_counts"],
             spiking_stats["mean_firing_rates_per_second"],
+            spiking_stats["did_spike_reliability"]
         ],
         axis=1,
     )
@@ -163,9 +201,10 @@ def calculate_features_multi(repo, key, df, params):
     by_neuron_class_and_trial = spiking_stats["mean_of_spike_counts_for_each_trial"].to_frame()
 
     histograms = pd.DataFrame({})
+    trial_histograms = pd.DataFrame({})
     if ("histograms" in params.keys()):
         for hist_key, hist_params in params['histograms'].items():
-            # print(hist_key)
+
             histogram_features = get_histogram_features(repo, key, df, hist_params)
 
             # df with (bin) as index, and features as columns
@@ -188,15 +227,38 @@ def calculate_features_multi(repo, key, df, params):
                     histogram = pd.concat([histogram, smoothed_histogram])
 
             histograms = pd.concat([histograms, histogram])
-        # print(histograms)
 
 
-    # print('Finished')
+        # for hist_key, hist_params in params['histograms_by_trial'].items():
+
+        #     histogram_features = get_single_trial_histogram_features(repo, key, df, hist_params)
+
+        #     # df with (bin) as index, and features as columns
+        #     histogram = pd.DataFrame({"hist": histogram_features["hist"]}).rename_axis(BIN)
+        #     histogram['bin_size'] = hist_params['bin_size']
+        #     histogram['smoothing_type'] = pd.Categorical(['None'])[0]
+        #     # histogram['kernel_sd'] = pd.Categorical(['None'])[0]
+        #     histogram['kernel_sd'] = -1.0
+
+        #     # histograms.set_index(['bin_size', 'smoothing_type', 'kernel_sd'], append=True, inplace=True)
+
+        #     if ('smoothing' in hist_params.keys()):
+        #         for smoothing_key, smoothing_params in hist_params['smoothing'].items():
+
+        #             smoothed_histogram = pd.DataFrame({"hist": gaussian_filter(histogram_features["hist"], sigma=smoothing_params['kernel_sd'])}).rename_axis(BIN)
+        #             smoothed_histogram['bin_size'] = hist_params['bin_size']
+        #             smoothed_histogram['smoothing_type'] = smoothing_params['smoothing_type']
+        #             smoothed_histogram['kernel_sd'] = smoothing_params['kernel_sd']
+                    
+        #             histogram = pd.concat([histogram, smoothed_histogram])
+
+        #     trial_histograms = pd.concat([trial_histograms, histogram])
 
     return {
         "by_gid": by_gid,
         "by_gid_and_trial": by_gid_and_trial,
         "by_neuron_class": by_neuron_class,
         "by_neuron_class_and_trial": by_neuron_class_and_trial,
-        "histograms": histograms,
+        "histograms": histograms
+        # "histograms_by_trial": trial_histograms,
     }

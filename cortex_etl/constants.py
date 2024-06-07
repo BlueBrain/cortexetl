@@ -1,5 +1,6 @@
 # NEURON CLASS LISTS
 LAYER_EI_NEURON_CLASSES = ['L1_INH', 'L23_EXC', 'L23_INH', 'L4_EXC', 'L4_INH', 'L5_EXC', 'L5_INH', 'L6_EXC', 'L6_INH']
+LAYER_EI_NEURON_CLASSES_INH_FIRST = ['L1_INH', 'L23_INH', 'L4_INH', 'L5_INH', 'L6_INH', 'L23_EXC', 'L4_EXC', 'L5_EXC', 'L6_EXC']
 LAYER_EI_RP_NEURON_CLASSES = ['L23_EXC', 'L23_INH', 'L4_EXC', 'L4_INH', 'L5_EXC', 'L5_INH']
 LAYER_EI_SVO_NEURON_CLASSES = ['L23_EXC', 'L23_INH', 'L4_EXC', 'L4_INH', 'L5_EXC', 'L5_INH', "L6_EXC", "L6_INH"]
 ALL_EI_NEURON_CLASSES = ['ALL_INH', 'ALL_EXC']
@@ -38,37 +39,37 @@ sst_c = GREEN
 
 
 NEURON_CLASS_LAYERS_AND_SYNAPSE_CLASSES = {
-	'ALL': {"layers": ["ALL"], "synapse_class": "ALL", "layer_string": "ALL", "color":'k'},	
+	'ALL': {"layers": ["ALL"], "synapse_class": "ALL", "layer_string": "ALL", "color":'k', "marker":'.'},	
 
-	'ALL_EXC': {"layers": ["ALL"], "synapse_class": "EXC", "layer_string": "ALL", "color":red_c},	
-	'ALL_INH': {"layers": ["ALL"], "synapse_class": "INH", "layer_string": "ALL", "color":blue_c},	
+	'ALL_EXC': {"layers": ["ALL"], "synapse_class": "EXC", "layer_string": "ALL", "color":red_c, "marker":'.'},	
+	'ALL_INH': {"layers": ["ALL"], "synapse_class": "INH", "layer_string": "ALL", "color":blue_c, "marker":'.'},	
 
-	'L1_INH': {"layers": [1], "synapse_class": "INH", "layer_string": "L1", "color":blue_c},
-    'L1_5HT3aR': {"layers": [1], "synapse_class": "5HT3aR", "layer_string": "L1", "color":"paleturquoise"},
+	'L1_INH': {"layers": [1], "synapse_class": "INH", "layer_string": "L1", "color":blue_c, "marker":'o'},
+    'L1_5HT3aR': {"layers": [1], "synapse_class": "5HT3aR", "layer_string": "L1", "color":"paleturquoise", "marker":'o'},
 
-	'L23_EXC': {"layers": [2, 3], "synapse_class": "EXC", "layer_string": "L23", "color":red_c},
-	'L23_INH': {"layers": [2, 3], "synapse_class": "INH", "layer_string": "L23", "color":blue_c},
-	'L23_PV': {"layers": [2, 3], "synapse_class": "PV", "layer_string": "L23", "color":'midnightblue'},
-	'L23_SST': {"layers": [2, 3], "synapse_class": "SST", "layer_string": "L23", "color":sst_c},
-	'L23_5HT3aR': {"layers": [2, 3], "synapse_class": "5HT3aR", "layer_string": "L23", "color":'paleturquoise'},
+	'L23_EXC': {"layers": [2, 3], "synapse_class": "EXC", "layer_string": "L23", "color":red_c, "marker":'^'},
+	'L23_INH': {"layers": [2, 3], "synapse_class": "INH", "layer_string": "L23", "color":blue_c, "marker":'^'},
+	'L23_PV': {"layers": [2, 3], "synapse_class": "PV", "layer_string": "L23", "color":'midnightblue', "marker":'^'},
+	'L23_SST': {"layers": [2, 3], "synapse_class": "SST", "layer_string": "L23", "color":sst_c, "marker":'^'},
+	'L23_5HT3aR': {"layers": [2, 3], "synapse_class": "5HT3aR", "layer_string": "L23", "color":'paleturquoise', "marker":'^'},
 
-	'L4_EXC': {"layers": [4], "synapse_class": "EXC", "layer_string": "L4", "color":red_c},
-	'L4_INH': {"layers": [4], "synapse_class": "INH", "layer_string": "L4", "color":blue_c},
-	'L4_PV': {"layers": [4], "synapse_class": "PV", "layer_string": "L4", "color":'midnightblue'},
-	'L4_SST': {"layers": [4], "synapse_class": "SST", "layer_string": "L4", "color":sst_c},
-	'L4_5HT3aR': {"layers": [4], "synapse_class": "5HT3aR", "layer_string": "L4", "color":'paleturquoise'},
+	'L4_EXC': {"layers": [4], "synapse_class": "EXC", "layer_string": "L4", "color":red_c, "marker":'s'},
+	'L4_INH': {"layers": [4], "synapse_class": "INH", "layer_string": "L4", "color":blue_c, "marker":'s'},
+	'L4_PV': {"layers": [4], "synapse_class": "PV", "layer_string": "L4", "color":'midnightblue', "marker":'s'},
+	'L4_SST': {"layers": [4], "synapse_class": "SST", "layer_string": "L4", "color":sst_c, "marker":'s'},
+	'L4_5HT3aR': {"layers": [4], "synapse_class": "5HT3aR", "layer_string": "L4", "color":'paleturquoise', "marker":'s'},
 
-	'L5_EXC': {"layers": [5], "synapse_class": "EXC", "layer_string": "L5", "color":red_c},
-	'L5_INH': {"layers": [5], "synapse_class": "INH", "layer_string": "L5", "color":blue_c},
-	'L5_PV': {"layers": [5], "synapse_class": "PV", "layer_string": "L5", "color":'midnightblue'},
-	'L5_SST': {"layers": [5], "synapse_class": "SST", "layer_string": "L5", "color":sst_c},
-	'L5_5HT3aR': {"layers": [5], "synapse_class": "5HT3aR", "layer_string": "L5", "color":'paleturquoise'},
+	'L5_EXC': {"layers": [5], "synapse_class": "EXC", "layer_string": "L5", "color":red_c, "marker":'p'},
+	'L5_INH': {"layers": [5], "synapse_class": "INH", "layer_string": "L5", "color":blue_c, "marker":'p'},
+	'L5_PV': {"layers": [5], "synapse_class": "PV", "layer_string": "L5", "color":'midnightblue', "marker":'p'},
+	'L5_SST': {"layers": [5], "synapse_class": "SST", "layer_string": "L5", "color":sst_c, "marker":'p'},
+	'L5_5HT3aR': {"layers": [5], "synapse_class": "5HT3aR", "layer_string": "L5", "color":'paleturquoise', "marker":'p'},
 
-	'L6_EXC': {"layers": [6], "synapse_class": "EXC", "layer_string": "L6", "color":red_c},
-	'L6_INH': {"layers": [6], "synapse_class": "INH", "layer_string": "L6", "color":blue_c},
-	'L6_PV': {"layers": [6], "synapse_class": "PV", "layer_string": "L6", "color":'midnightblue'},
-	'L6_SST': {"layers": [6], "synapse_class": "SST", "layer_string": "L6", "color":sst_c},
-	'L6_5HT3aR': {"layers": [6], "synapse_class": "5HT3aR", "layer_string": "L6", "color":'paleturquoise'}}
+	'L6_EXC': {"layers": [6], "synapse_class": "EXC", "layer_string": "L6", "color":red_c, "marker":'h'},
+	'L6_INH': {"layers": [6], "synapse_class": "INH", "layer_string": "L6", "color":blue_c, "marker":'h'},
+	'L6_PV': {"layers": [6], "synapse_class": "PV", "layer_string": "L6", "color":'midnightblue', "marker":'h'},
+	'L6_SST': {"layers": [6], "synapse_class": "SST", "layer_string": "L6", "color":sst_c, "marker":'h'},
+	'L6_5HT3aR': {"layers": [6], "synapse_class": "5HT3aR", "layer_string": "L6", "color":'paleturquoise', "marker":'h'}}
 
 neuron_class_label_map = {
 						"ALL": "All",

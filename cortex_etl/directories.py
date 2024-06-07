@@ -5,6 +5,7 @@ def create_figure_dirs(a):
 
     a.figpaths = type('', (), {})()
     a.figpaths.root = a.analysis_config.output
+    # ["cache"]["path"]
     if ("sim_filter_in_memory_name" in list(a.analysis_config.custom.keys())):
         a.figpaths.root = a.figpaths.root / a.analysis_config.custom['sim_filter_in_memory_name']
     a.figpaths.root = a.figpaths.root / "figures"

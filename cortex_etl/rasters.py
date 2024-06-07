@@ -113,8 +113,8 @@ class RasterOptions(object):
         self.df_file_path_key = self.options_str + '_rasters_path_png'
         self.df_file_path_pdf_key = self.options_str + '_rasters_path_pdf'
 
-        a.repo.windows.df.loc[windows.index, self.df_file_path_key] = custom_file_path + (windows['window'].astype(str) + "_" + self.options_str + "_RASTER.png")
-        a.repo.windows.df.loc[windows.index, self.df_file_path_pdf_key] = custom_file_path+ (windows['window'].astype(str) + "_" + self.options_str + "_RASTER.pdf")
+        a.repo.windows.df.loc[windows.index, self.df_file_path_key] = custom_file_path + "/" + (windows['window'].astype(str) + "_" + self.options_str + "_RASTER.png")
+        a.repo.windows.df.loc[windows.index, self.df_file_path_pdf_key] = custom_file_path+ "/" + (windows['window'].astype(str) + "_" + self.options_str + "_RASTER.pdf")
 
 
     def create_video(self, a, mask_key='', invert_mask=False):
@@ -151,7 +151,8 @@ def plot_raster(simulation_row, window_row, window_spikes, circuit_neurons, neur
     plt.figure(figsize=(raster_option_combination.fig_width, raster_option_combination.fig_height))
     ax = plt.gca()
 
-    # SET NEURON CLASS COLOURS
+
+    # SET NEURON CLASS COLOURS 
     neuron_classes = neuron_classes.copy()
     neuron_classes.loc[:, 'c'] = neuron_classes.apply(lambda row : c_etl.NEURON_CLASS_LAYERS_AND_SYNAPSE_CLASSES[row['neuron_class']]["color"], axis=1)
 

@@ -180,9 +180,9 @@ analysis:
 
     custom:
       plot_multi_sim_analysis: false
-      plot_rasters: false
-      create_raster_videos: false
-      evoked_analysis: true
+      plot_rasters: true
+      create_raster_videos: true
+      evoked_analysis: false
       compare_to_missing_synapses: false
       extract_fr_df: false
       compare_campaigns: false
