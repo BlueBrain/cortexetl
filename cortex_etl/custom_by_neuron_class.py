@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-import bluepy
 import bluepysnap
 import cortex_etl as c_etl
 
