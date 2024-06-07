@@ -30,6 +30,13 @@ These include:
 	[notebooks/examples/O1/calibration/stage_2_or_3_connection/measure_spontaneous_actvity_and_connection.ipynb](https://bbpgitlab.epfl.ch/conn/personal/isbister/cortex_etl/-/tree/main/notebooks/examples/O1/calibration/stage_2_or_3_connection)
 
 
+## Acknowledgment
+
+The development of this software was supported by funding to the Blue Brain Project, a research center of the École polytechnique fédérale de Lausanne (EPFL), from the Swiss government’s ETH Board of the Swiss Federal Institutes of Technology.
+
+Copyright © 2024 Blue Brain Project/EPFL
+
+
 
 <!-- ## Name
 
