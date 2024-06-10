@@ -5,7 +5,7 @@ from scipy.stats import linregress
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-import cortex_etl as c_etl
+import cortexetl as c_etl
 
 
 def dist_target_FRs(spont_features_for_sim, 

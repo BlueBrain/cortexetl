@@ -1,4 +1,4 @@
-import cortex_etl as c_etl
+import cortexetl as c_etl
 
 import matplotlib.pyplot as plt
 import pandas as pd

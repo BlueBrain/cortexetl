@@ -1,5 +1,5 @@
 import pandas as pd
-import cortex_etl as c_etl
+import cortexetl as c_etl
 
 
 # Helper for concatenating dfs for multiple campaigns

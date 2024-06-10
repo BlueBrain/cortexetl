@@ -2,7 +2,7 @@ import numpy
 import pandas
 import os
 import tqdm
-import cortex_etl as c_etl
+import cortexetl as c_etl
 from blueetl.parallel import call_by_simulation
 import pandas as pd
 from functools import partial

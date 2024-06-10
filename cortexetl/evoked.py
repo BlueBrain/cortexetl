@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import os
-import cortex_etl as c_etl
+import cortexetl as c_etl
 
 """
 Entry function

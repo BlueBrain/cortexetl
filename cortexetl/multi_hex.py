@@ -7,7 +7,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.cm as cm
 import os
-import cortex_etl as c_etl
+import cortexetl as c_etl
 
 
 def get_flatspace_centre_of_hex(a, hex_ind):

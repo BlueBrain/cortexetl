@@ -16,7 +16,7 @@ from matplotlib.patches import Rectangle
 
 from itertools import chain
 
-import cortex_etl as c_etl
+import cortexetl as c_etl
 
 
 

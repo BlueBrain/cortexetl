@@ -18,7 +18,7 @@ def create_unconn_fr_and_sim_df(a, persist=True):
 
 
 
-import cortex_etl as c_etl
+import cortexetl as c_etl
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib import cm

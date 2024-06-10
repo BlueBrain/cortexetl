@@ -8,7 +8,7 @@ from blueetl.analysis import Analyzer
 from blueetl.constants import *
 from blueetl.utils import load_yaml
 
-import cortex_etl as c_etl
+import cortexetl as c_etl
 
 from blueetl.analysis import run_from_file
 

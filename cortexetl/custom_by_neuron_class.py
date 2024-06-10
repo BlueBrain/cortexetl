@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import bluepysnap
-import cortex_etl as c_etl
+import cortexetl as c_etl
 
 
 def get_value_with_backup_nc(d, key_prefix, nc_map, nc, second_key='', backup_nc=''):

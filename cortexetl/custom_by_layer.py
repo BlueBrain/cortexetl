@@ -4,7 +4,7 @@ from functools import partial
 from blueetl.parallel import call_by_simulation
 from itertools import chain
 from scipy.stats import linregress
-import cortex_etl as c_etl
+import cortexetl as c_etl
 
 
 def layer_wise_single_sim_analysis(simulation_row, 

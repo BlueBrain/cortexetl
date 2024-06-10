@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import linregress
 from blueetl.parallel import call_by_simulation
 from functools import partial
-import cortex_etl as c_etl
+import cortexetl as c_etl
 
 
 def plot_histogram(values, nbins, hist_range, filename):

@@ -1,4 +1,4 @@
-import cortex_etl as c_etl
+import cortexetl as c_etl
 import numpy as np
 import matplotlib.pyplot as plt
 def layer_and_pairwise_comparison(nc_stat_and_mask_df, vivo_df, vivo_exp, decay, nc_pairs, path, xlim, xticks):
@@ -34,7 +34,7 @@ def layer_and_pairwise_comparison(nc_stat_and_mask_df, vivo_df, vivo_exp, decay,
     plt.close()
 
 
-import cortex_etl as c_etl
+import cortexetl as c_etl
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm
@@ -67,7 +67,7 @@ def compare_metrics_in_vivo_vs_in_silico(df, vivo_df, vivo_exp, layers, groups, 
     plt.close()
 
 
-import cortex_etl as c_etl
+import cortexetl as c_etl
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm

@@ -13,7 +13,7 @@ from blueetl.constants import *
 from blueetl.parallel import call_by_simulation
 
 
-import cortex_etl as c_etl
+import cortexetl as c_etl
 
 
 

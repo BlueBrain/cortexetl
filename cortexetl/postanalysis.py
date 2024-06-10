@@ -1,6 +1,6 @@
 import pandas as pd
 import time
-import cortex_etl as c_etl
+import cortexetl as c_etl
 
 
 def load_custom_dataframes(a, df_keys):
