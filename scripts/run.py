@@ -1,5 +1,6 @@
 import sys
-import cortex_etl as c_etl
+sys.path.append('../')
+import cortexetl as c_etl
 
 def main():
 
