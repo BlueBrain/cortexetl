@@ -1,12 +1,12 @@
 version: 3
 # simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/home/isbister/post_physiology_2023/sim_data/debugging_tests/5_debugging_test_30-11-23/9010dbc7-98cf-45ff-941b-329d1066aa36/config.json
-# output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortexetl.output/debugging_test/5_debugging_test_30-11-23
+# output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortex_etl_output/debugging_test/5_debugging_test_30-11-23
 
 # simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/home/isbister/post_physiology_2023/sim_data/debugging_tests/5_debugging_test_30-11-23/69b34354-89c8-4c84-86cd-f723d11132ce/config.json
-# output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortexetl.output/debugging_test/5_debugging_test_30-11-23_5stims
+# output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortex_etl_output/debugging_test/5_debugging_test_30-11-23_5stims
 
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/home/isbister/post_physiology_2023/sim_data/debugging_tests/5_debugging_test_30-11-23/2919081d-a24b-4961-8f53-998f2af9f620/config.json
-output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortexetl.output/debugging_test/5_debugging_test_30-11-23_final_circuit_conf
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortex_etl_output/debugging_test/5_debugging_test_30-11-23_final_circuit_conf
 
 clear_cache: false
 analysis:

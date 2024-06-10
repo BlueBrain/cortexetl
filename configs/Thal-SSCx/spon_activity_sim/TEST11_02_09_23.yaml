@@ -1,6 +1,6 @@
 version: 3
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj82/scratch/simulations/Thal-SSCx/spon_activity_sim/TEST11_02_09_23/5deb69bf-e520-4381-b3de-1ddbed91f05f/config.json
-output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortexetl.output-etl3/Thal-SSCx/spon_activity_sim/TEST11_02_09_23
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl_output-etl3/Thal-SSCx/spon_activity_sim/TEST11_02_09_23
 clear_cache: false
 analysis:
   hex9_spikes:

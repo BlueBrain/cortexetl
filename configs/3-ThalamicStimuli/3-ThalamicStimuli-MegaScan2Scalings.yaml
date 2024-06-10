@@ -1,6 +1,6 @@
 version: 3
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/bbp_workflow/sscx_calibration_mgfix/3-ThalamicStimuli/3-ThalamicStimuli-MegaScan2Scalings/adccba3d-981e-4599-85a0-cb5e963be15e/config.json
-output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortexetl.output/3-ThalamicStimuli/3-ThalamicStimuli-MegaScan2Scalings-etl3
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl_output/3-ThalamicStimuli/3-ThalamicStimuli-MegaScan2Scalings-etl3
 simulations_filter_in_memory:
   vpm_l5e_cond_scaling_factor: 1.36
 

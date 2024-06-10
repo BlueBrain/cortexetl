@@ -5,6 +5,6 @@
 #SBATCH --account=proj83       # your project number
 #SBATCH --mem=0               # make sure entire memory is allocated to the job
   
-. /gpfs/bbp.cscs.ch/home/isbister/cortex_etl_jupyter_04_01_23/bin/activate
+. /gpfs/bbp.cscs.ch/home/isbister/cortexetl.jupyter_04_01_23/bin/activate
 
 python gpu_test.py

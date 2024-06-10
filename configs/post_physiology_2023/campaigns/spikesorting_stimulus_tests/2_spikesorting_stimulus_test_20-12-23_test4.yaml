@@ -1,6 +1,6 @@
 version: 3
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/home/isbister/post_physiology_2023/sim_data/campaigns/spikesorting_stimulus_tests/2_spikesorting_stimulus_test_20-12-23/2_spikesorting_stimulus_test_20-12-23_test4/242be042-93fe-413f-922f-c7ac952b3413/config.json
-output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortexetl.output/campaigns/spikesorting_stimulus_tests/2_spikesorting_stimulus_test_20-12-23/2_spikesorting_stimulus_test_20-12-23_test4
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortex_etl_output/campaigns/spikesorting_stimulus_tests/2_spikesorting_stimulus_test_20-12-23/2_spikesorting_stimulus_test_20-12-23_test4
 clear_cache: false
 analysis:
   hex0_spikes:

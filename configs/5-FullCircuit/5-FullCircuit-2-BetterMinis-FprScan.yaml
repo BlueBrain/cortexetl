@@ -1,6 +1,6 @@
 version: 2
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/bbp_workflow/sscx_calibration_mgfix/5-FullCircuit/5-FullCircuit-2-BetterMinis-FprScan/5d83d4c2-693c-4ecc-a9da-c8dd2c8100c3/config.json
-output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortexetl.output/5-FullCircuit/5-FullCircuit-2-BetterMinis-FprScan
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl_output/5-FullCircuit/5-FullCircuit-2-BetterMinis-FprScan
 
 clear_cache: false
 analysis:

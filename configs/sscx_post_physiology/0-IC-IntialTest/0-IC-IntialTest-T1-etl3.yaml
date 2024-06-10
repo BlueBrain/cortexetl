@@ -1,6 +1,6 @@
 version: 3
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/bbp_workflow/sscx_post_physiology/0-IC-IntialTest/0-IC-IntialTest-T1/9d2e9205-6424-45c5-a226-7fc47b77beab/config.json
-output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortexetl.output/sscx_post_physiology/0-IC-IntialTest/0-IC-IntialTest-T1
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl_output/sscx_post_physiology/0-IC-IntialTest/0-IC-IntialTest-T1
 
 # Campaign
 #   Ca: 1.05

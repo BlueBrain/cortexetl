@@ -1,6 +1,6 @@
 version: 3
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj85/scratch/from68/sonata_circuits/fullSSCx/longSim/compareModalities/f554be01-456c-4a15-8670-df39a3187b7e/config.json
-output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortexetl.output/campaigns/joe_sscx
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortex_etl_output/campaigns/joe_sscx
 
 clear_cache: false
 analysis:

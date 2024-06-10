@@ -1,6 +1,6 @@
 version: 2
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/bbp_workflow/sscx_post_physiology/0-TW-IntialTest/0-TW-IntialTest-T1/201c3980-c491-41ef-a451-7b5592c60d16/config.json
-output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortexetl.output/sscx_post_physiology/0-TW-IntialTest/0-TW-IntialTest-T1
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl_output/sscx_post_physiology/0-TW-IntialTest/0-TW-IntialTest-T1
 simulations_filter_in_memory:
   desired_connected_proportion_of_invivo_frs: 0.7
   depol_stdev_mean_ratio: 0.2

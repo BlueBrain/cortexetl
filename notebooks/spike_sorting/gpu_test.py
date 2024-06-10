@@ -115,7 +115,7 @@ import os
 
 import sys
 sys.path.append('../..')
-import cortex_etl as c_etl
+import cortexetl as c_etl
 def train_model(queue, model_package, model_package_i):
 
     num_samples = len(model_package.train_loader)

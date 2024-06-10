@@ -1,6 +1,6 @@
 version: 3
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/home/isbister/post_physiology_2023/sim_data/0_InterneuronsCalibration/0_InterneuronsCalibration_1stIteration_28_8_23/91d50084-e388-49f0-b08e-ef5347904507/config.json
-output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortexetl.output/0_InterneuronsCalibration/0_InterneuronsCalibration_1stIteration_28_8_23
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortex_etl_output/0_InterneuronsCalibration/0_InterneuronsCalibration_1stIteration_28_8_23
 clear_cache: false
 analysis:
   hex0_spikes:

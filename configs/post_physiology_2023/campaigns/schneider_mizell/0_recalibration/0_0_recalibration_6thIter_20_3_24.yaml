@@ -1,6 +1,6 @@
 version: 3
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/home/isbister/post_physiology_2023/sim_data/campaigns/schneider_mizell/0_recalibration/0_0_recalibration_6thIter_20_3_24/07647381-bcde-461a-be05-dff5f9d34ea2/config.json
-output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortexetl.output/campaigns/schneider_mizell/0_recalibration/0_0_recalibration_6thIter_20_3_24/
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortex_etl_output/campaigns/schneider_mizell/0_recalibration/0_0_recalibration_6thIter_20_3_24/
 clear_cache: false
 analysis:
   hex0_spikes:

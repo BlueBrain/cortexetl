@@ -1,6 +1,6 @@
 version: 2
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/bbp_workflow/sscx_calibration_mgfix/7-ActiveWhiskerTouch/7-ActiveWhiskerTouch-Test0/dc044a76-4dce-4935-b593-c446747e6af5/config.json
-output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortexetl.output/7-ActiveWhiskerTouch/7-ActiveWhiskerTouch-Test0
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl_output/7-ActiveWhiskerTouch/7-ActiveWhiskerTouch-Test0
 
 clear_cache: false
 analysis:
