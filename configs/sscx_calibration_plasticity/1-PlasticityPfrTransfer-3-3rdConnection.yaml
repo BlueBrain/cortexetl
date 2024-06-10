@@ -34,7 +34,7 @@ analysis:
     features:
     - type: multi
       groupby: [simulation_id, circuit_id, neuron_class, window]
-      function: cortex_etl.calculate_features.calculate_features_multi
+      function: cortexetl.calculate_features.calculate_features_multi
       params:
         export_all_neurons: true
         histograms:

@@ -1,6 +1,6 @@
 version: 3
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/home/isbister/post_physiology_2023/sim_data/campaigns/1_Hex0UnderHex01Parametrization/13f26ca8-c730-42d6-b647-d1d10546c9e9/config.json
-output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortex_etl_output/campaigns/1_Hex0UnderHex01Parametrization
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortexetl.output/campaigns/1_Hex0UnderHex01Parametrization
 clear_cache: false
 analysis:
   hex0_spikes:
@@ -122,7 +122,7 @@ analysis:
     features:
     - type: multi
       groupby: [simulation_id, circuit_id, neuron_class, window]
-      function: cortex_etl.calculate_features.calculate_features_multi
+      function: cortexetl.calculate_features.calculate_features_multi
       params:
         export_all_neurons: true
         histograms:

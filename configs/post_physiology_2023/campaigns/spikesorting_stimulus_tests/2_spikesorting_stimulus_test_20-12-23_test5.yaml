@@ -1,6 +1,6 @@
 version: 3
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/home/isbister/post_physiology_2023/sim_data/campaigns/spikesorting_stimulus_tests/2_spikesorting_stimulus_test_20-12-23/2_spikesorting_stimulus_test_20-12-23_test5/ea15b705-aac5-43b5-90c6-53d6a6cc744b/config.json
-output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortex_etl_output/campaigns/spikesorting_stimulus_tests/2_spikesorting_stimulus_test_20-12-23/2_spikesorting_stimulus_test_20-12-23_test5
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortexetl.output/campaigns/spikesorting_stimulus_tests/2_spikesorting_stimulus_test_20-12-23/2_spikesorting_stimulus_test_20-12-23_test5
 clear_cache: false
 analysis:
   hex0_spikes:
@@ -157,7 +157,7 @@ analysis:
     features:
     - type: multi
       groupby: [simulation_id, circuit_id, neuron_class, window]
-      function: cortex_etl.calculate_features.calculate_features_multi
+      function: cortexetl.calculate_features.calculate_features_multi
       params:
         export_all_neurons: true
         histograms:

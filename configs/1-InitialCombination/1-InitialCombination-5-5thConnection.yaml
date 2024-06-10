@@ -1,6 +1,6 @@
 version: 2
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/bbp_workflow/sscx_calibration_mgfix/1-InitialCombination/1-InitialCombination-5-5thConnection/59f84ffb-aa11-4156-a7da-54576d4cf419/config.json
-output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl_output/1-InitialCombination/1-InitialCombination-5-5thConnection
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortexetl.output/1-InitialCombination/1-InitialCombination-5-5thConnection
 
 clear_cache: false
 analysis:
@@ -34,7 +34,7 @@ analysis:
     features:
     - type: multi
       groupby: [simulation_id, circuit_id, neuron_class, window]
-      function: cortex_etl.calculate_features.calculate_features_multi
+      function: cortexetl.calculate_features.calculate_features_multi
       params:
         export_all_neurons: true
         histograms:
@@ -68,10 +68,10 @@ analysis:
       campaign_short_name: "5th conn."
       fr_df_name: "connection_data_from_mgfix_1-InitialCombination-5-5thConnection_6-11-22.parquet"
 
-      comparison_campaigns: [/gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl/configs/1-InitialCombination/1-InitialCombination-1-1stConnection.yaml, 
-                             /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl/configs/1-InitialCombination/1-InitialCombination-2-2ndConnection.yaml,
-                             /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl/configs/1-InitialCombination/1-InitialCombination-3-3rdConnection.yaml,
-                             /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl/configs/1-InitialCombination/1-InitialCombination-4-4thConnection.yaml]
+      comparison_campaigns: [/gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortexetl.configs/1-InitialCombination/1-InitialCombination-1-1stConnection.yaml, 
+                             /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortexetl.configs/1-InitialCombination/1-InitialCombination-2-2ndConnection.yaml,
+                             /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortexetl.configs/1-InitialCombination/1-InitialCombination-3-3rdConnection.yaml,
+                             /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortexetl.configs/1-InitialCombination/1-InitialCombination-4-4thConnection.yaml]
 
       fr_analysis_neuron_classes_constant: LAYER_EI_NEURON_CLASSES
       vertical_plot_seperate_groupings: E_AND_I_SEPERATE_GROUPINGS

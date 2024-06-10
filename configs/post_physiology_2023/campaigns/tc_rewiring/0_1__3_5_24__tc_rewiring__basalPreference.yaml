@@ -1,7 +1,7 @@
 version: 4
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj85/scratch/from68/sonata_circuits/whiskerFlick/basalPreference/451813c7-66a6-4e45-bb39-0d51fba5544a/config.json
 cache:
-  path: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortex_etl_output/campaigns/tc_rewiring/0_1__3_5_24__tc_rewiring__baselPreference
+  path: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortexetl.output/campaigns/tc_rewiring/0_1__3_5_24__tc_rewiring__baselPreference
   clear: false
 analysis:
   hex0_spikes:
@@ -130,7 +130,7 @@ analysis:
     features:
     - type: multi
       groupby: [simulation_id, circuit_id, neuron_class, window]
-      function: cortex_etl.calculate_features.calculate_features_multi
+      function: cortexetl.calculate_features.calculate_features_multi
       params:
         export_all_neurons: true
         histograms:

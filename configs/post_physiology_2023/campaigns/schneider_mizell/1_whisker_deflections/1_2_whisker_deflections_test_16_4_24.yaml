@@ -1,6 +1,6 @@
 version: 3
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/home/isbister/post_physiology_2023/sim_data/campaigns/schneider_mizell/0_recalibration/1_2_whisker_deflections_test_16_4_24/d2f3930b-88be-49d9-af29-9b1a6d9a4611/config.json
-output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortex_etl_output/campaigns/schneider_mizell/1_whisker_deflections/1_2_whisker_deflections_test_16_4_24/
+output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortexetl.output/campaigns/schneider_mizell/1_whisker_deflections/1_2_whisker_deflections_test_16_4_24/
 clear_cache: false
 analysis:
   hex0_spikes:
@@ -77,7 +77,7 @@ analysis:
     features:
     - type: multi
       groupby: [simulation_id, circuit_id, neuron_class, window]
-      function: cortex_etl.calculate_features.calculate_features_multi
+      function: cortexetl.calculate_features.calculate_features_multi
       params:
         export_all_neurons: true
         histograms:
