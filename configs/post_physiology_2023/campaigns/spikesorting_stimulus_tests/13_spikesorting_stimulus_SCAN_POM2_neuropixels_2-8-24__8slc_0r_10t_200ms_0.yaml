@@ -1,7 +1,7 @@
 version: 4
-simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/home/isbister/post_physiology_2023/sim_data/campaigns/spikesorting_stimulus_tests/8_spikesorting_stimulus_test_neuropixels_13-4-24/8_spikesorting_stimulus_test_neuropixels_13-4-24__8slc_100f_72r_250t_200ms_0/12c5ef9a-1f3b-4b18-b3f5-ec6a417f645c/config.json
+simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/home/isbister/post_physiology_2023/sim_data/campaigns/spikesorting_stimulus_tests/13_spikesorting_stimulus_SCAN_POM2_neuropixels_2-8-24/13_spikesorting_stimulus_SCAN_POM2_neuropixels_2-8-24__8slc_0r_10t_200ms_0/78bf4b5d-9c4c-45aa-86a5-4f9150eda75c/config.json
 cache:
-  path: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortex_etl_output/campaigns/spikesorting_stimulus_tests/8_spikesorting_stimulus_test_neuropixels_13-4-24/8_spikesorting_stimulus_test_neuropixels_13-4-24__8slc_100f_72r_250t_200ms_0
+  path: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortex_etl_output/campaigns/spikesorting_stimulus_tests/13_spikesorting_stimulus_SCAN_POM2_neuropixels_2-8-24/13_spikesorting_stimulus_SCAN_POM2_neuropixels_2-8-24__8slc_0r_10t_200ms_0
   clear: false
 analysis:
 
@@ -15,12 +15,12 @@ analysis:
 
       windows:
         full:
-          bounds: [0, 51500]
+          bounds: [0, 3500]
           window_type: spontaneous
         Cond0_0_50ms_stim:
           bounds: [0, 50]
           initial_offset: 1500
-          n_trials: 250
+          n_trials: 100
           trial_steps_value: 200
           window_type: evoked_stimulus_onset_zeroed
 
@@ -168,12 +168,12 @@ analysis:
         # conn_spont:
         #   bounds: [1000, 1500]
         #   window_type: spontaneous
-        evoked_SOZ_25ms:
-          bounds: [0, 25]
-          initial_offset: 1500
-          n_trials: 250
-          trial_steps_value: 200
-          window_type: evoked_stimulus_onset_zeroed
+        # evoked_SOZ_25ms_0.0:
+        #   bounds: [0, 25]
+        #   initial_offset: 1500
+        #   n_trials: 250
+        #   trial_steps_value: 200
+        #   window_type: evoked_stimulus_onset_zeroed
         # Cond0_0_50ms_stim:
         #   bounds: [0, 50]
         #   initial_offset: 1500
@@ -183,7 +183,7 @@ analysis:
         evoked_SOZ_100ms:
           bounds: [0, 100]
           initial_offset: 1500
-          n_trials: 250
+          n_trials: 10
           trial_steps_value: 200
           window_type: evoked_stimulus_onset_zeroed
         # evoked_SOZ_250ms:
@@ -252,7 +252,7 @@ analysis:
         y_key: depol_stdev_mean_ratio}
       raster_windows:
       - evoked_SOZ_100ms: [1.8, 2.5]
-      - stim_period: [20.0, 2.5]
+      # - stim_period: [20.0, 2.5]
       plot_multi_sim_analysis: false
       plot_rasters: true
       create_raster_videos: true
