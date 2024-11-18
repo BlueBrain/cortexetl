@@ -143,8 +143,6 @@ def custom_post_analysis_single_simulation(simulation_row,
 
     _, FFT_spont_hists = c_etl.hist_elements(filtered_dataframes['FFT_histograms'].etl.q(neuron_class="ALL", window="conn_spont"))
 
-    # print(FFT_spont_hists)
-
     if (not np.all(FFT_spont_hists == FFT_spont_hists[0])):
         r_dict['fft_plot_path'], r_dict['sim_fft_df'] = fft_analysis(filtered_dataframes['simulation_windows'], 
                                                                     str(simulation_row['fft_dir']) + '/FFT_plot.png', 
@@ -196,8 +194,6 @@ def custom_by_simulation_features(a):
 	if ('evoked_window_for_custom_post_analysis' in list(a.analysis_config.custom.keys())):
 		hist_windows += [a.analysis_config.custom['evoked_window_for_custom_post_analysis']]
 
-	# print(a.features.by_neuron_class.df)
-
 	dataframes={"simulation_windows": a.repo.windows.df, 
 
 	            "histograms": a.features.histograms.df.etl.q(neuron_class=["ALL", "ALL_EXC", "ALL_INH"], 
@@ -211,6 +207,7 @@ def custom_by_simulation_features(a):
 	                                                            bin_size=1., 
 	                                                            smoothing_type='None', 
 	                                                            kernel_sd=-1.),
+
 
 	            "features_by_neuron_class": a.features.by_neuron_class.df.etl.q(window=hist_windows),
 	            "features_by_neuron_class_and_trial": a.features.by_neuron_class_and_trial.df.etl.q(neuron_class="ALL", 

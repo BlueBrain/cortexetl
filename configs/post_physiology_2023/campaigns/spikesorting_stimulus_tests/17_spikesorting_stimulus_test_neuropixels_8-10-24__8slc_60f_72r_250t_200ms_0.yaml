@@ -1,5 +1,5 @@
 version: 4
-simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/home/isbister/post_physiology_2023/sim_data/campaigns/spikesorting_stimulus_tests/17_spikesorting_stimulus_test_neuropixels_8-10-24/17_spikesorting_stimulus_test_neuropixels_8-10-24__8slc_60f_72r_250t_200ms_0/a9bf068a-b940-4514-9e6c-6055283272cc/config.json
+simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/simulations/spike_sorting/17_spikesorting_stimulus_test_neuropixels_8-10-24/17_spikesorting_stimulus_test_neuropixels_8-10-24__8slc_60f_72r_250t_200ms_0/a9bf068a-b940-4514-9e6c-6055283272cc/config.json
 cache:
   path: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortex_etl_output/campaigns/spikesorting_stimulus_tests/17_spikesorting_stimulus_test_neuropixels_8-10-24/17_spikesorting_stimulus_test_neuropixels_8-10-24__8slc_60f_72r_250t_200ms_0
   clear: false

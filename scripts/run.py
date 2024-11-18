@@ -1,5 +1,5 @@
 import sys
-sys.path.append('../')
+sys.path.append('.')
 import cortexetl as c_etl
 
 def main():
