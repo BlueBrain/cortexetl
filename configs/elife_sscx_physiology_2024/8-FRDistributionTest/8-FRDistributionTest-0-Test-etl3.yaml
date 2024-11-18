@@ -1,5 +1,5 @@
 version: 3
-simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/bbp_workflow/sscx_calibration_mgfix/8-FRDistributionTest/8-FRDistributionTest-0-Test/06f6c255-9a0b-4c60-8a82-2c9a88dc3f9a/config.json
+simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/simulations/elife_sscx_physiology_2024/8-FRDistributionTest/8-FRDistributionTest-0-Test/06f6c255-9a0b-4c60-8a82-2c9a88dc3f9a/config.json
 output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl_output/8-FRDistributionTest/8-FRDistributionTest-0-Test
 clear_cache: false
 analysis:

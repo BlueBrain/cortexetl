@@ -1,5 +1,5 @@
 version: 2
-simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/bbp_workflow/sscx_calibration_mgfix/1-InitialCombination/1-InitialCombination-4-4thConnection/f445eccb-0c1a-4e5c-baa2-e8ff1a19d5c9/config.json
+simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/simulations/elife_sscx_physiology_2024/1-InitialCombination/1-InitialCombination-4-4thConnection/f445eccb-0c1a-4e5c-baa2-e8ff1a19d5c9/config.json
 output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl_output/1-InitialCombination/1-InitialCombination-4-4thConnection
 
 clear_cache: false

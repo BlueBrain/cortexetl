@@ -1,5 +1,5 @@
 version: 3
-simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/bbp_workflow/sscx_calibration_mgfix/2-PfrTransfer/2-PfrTransfer-6-3rdConnectionRemaining/fc2ad49f-e2f9-4fdf-a5b7-094743994fb6/config.json
+simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/simulations/elife_sscx_physiology_2024/2-PfrTransfer/2-PfrTransfer-6-3rdConnectionRemaining/fc2ad49f-e2f9-4fdf-a5b7-094743994fb6/config.json
 output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl_output-etl3/2-PfrTransfer/2-PfrTransfer-6-3rdConnectionRemaining
 clear_cache: false
 analysis:

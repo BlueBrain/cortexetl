@@ -1,5 +1,5 @@
 version: 3
-simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/bbp_workflow/sscx_O1_conductance_callibration/9da0abcb-25fe-43a4-8d5b-6cc3402fc3e4/config.json
+simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/simulations/elife_sscx_physiology_2024/0-UnconnectedScan/0-UnconnectedScan-Original/9da0abcb-25fe-43a4-8d5b-6cc3402fc3e4/config.json
 output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl_output-etl3/0-UnconnectedScan/ConductanceCallibrationSSCxO1-Campaign1-UnconnectedScan/
 analysis:
   hex0_spikes:

@@ -1,5 +1,5 @@
 ---
-simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/bbp_workflow/sscx_calibration_mgfix/6-O1-MPScan/6-O1-MPScan-0-5x3x2/3f543462-7a6f-4742-b62e-f03412769dbd/config.json
+simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/simulations/elife_sscx_physiology_2024/6-O1-MPScan/6-O1-MPScan-0-5x3x2/3f543462-7a6f-4742-b62e-f03412769dbd/config.json
 output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl_output/6-O1-MPScan/6-O1-MPScan-0-5x3x2
 
 version: 2

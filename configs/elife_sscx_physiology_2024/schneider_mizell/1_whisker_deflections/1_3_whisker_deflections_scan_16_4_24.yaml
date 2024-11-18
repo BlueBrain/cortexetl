@@ -1,5 +1,5 @@
 version: 3
-simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/scratch/home/isbister/post_physiology_2023/sim_data/campaigns/schneider_mizell/0_recalibration/1_3_whisker_deflections_scan_16_4_24/518fbeaf-f0ba-4f99-a0ff-22cb7e89eed7/config.json
+simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/simulations/elife_sscx_physiology_2024/9-SchneiderMizell/1_whisker_deflections/1_3_whisker_deflections_scan_16_4_24/518fbeaf-f0ba-4f99-a0ff-22cb7e89eed7/config.json
 output: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortex_etl_output/campaigns/schneider_mizell/1_whisker_deflections/1_3_whisker_deflections_scan_16_4_24/
 clear_cache: false
 analysis:
