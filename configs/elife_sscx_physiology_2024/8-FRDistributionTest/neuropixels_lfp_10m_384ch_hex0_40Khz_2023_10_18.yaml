@@ -1,7 +1,7 @@
 version: 4
-simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/simulations/elife_sscx_physiology_2024/8-FRDistributionTest/8-FRDistributionTest-0-Test/06f6c255-9a0b-4c60-8a82-2c9a88dc3f9a/config.json
+simulation_campaign: /gpfs/bbp.cscs.ch/project/proj85/scratch/laquitai/raw/neuropixels_lfp_10m_384ch_hex0_40Khz_2023_10_18/be011315-9555-493e-a59c-27f42d1058ed/config.json
 cache: 
-  path: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortexetl_output/elife_sscx_physiology_2024/8-FRDistributionTest/8-FRDistributionTest-0-Test
+  path: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortexetl_output/elife_sscx_physiology_2024/8-FRDistributionTest/neuropixels_lfp_10m_384ch_hex0_40Khz_2023_10_18
   clear: false
 analysis:
   hex0_spikes:
@@ -107,7 +107,7 @@ analysis:
           bounds: [500, 1000]
           window_type: spontaneous
         conn_spont:
-          bounds: [1500, 51500]
+          bounds: [1500, 50000]
           window_type: spontaneous
       node_set: hex0
     features:
@@ -126,6 +126,7 @@ analysis:
             bin_size: 3.0
             smoothing:
               1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+
     custom:
       plot_multi_sim_analysis: false
       plot_rasters: false
@@ -156,21 +157,4 @@ analysis:
       fr_analysis_neuron_classes_constant: LAYER_EI_NEURON_CLASSES
       vertical_plot_seperate_groupings: E_AND_I_SEPERATE_GROUPINGS
       input_conductance_by_neuron_class_parquet: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/reference_data_do_not_delete/input_conductance_by_neuron_class_EI.parquet
-  hex_O1_spikes:
-    extraction:
-      report: {type: spikes}
-      neuron_classes:
-        ALL: {limit: null}
-      limit: null
-      windows:
-        conn_spont:
-          bounds: [1500, 6500]
-          window_type: spontaneous
-      node_set: hex_O1
-    custom:
-      create_flatspace_videos: false
-      independent_variables: [ca, desired_connected_proportion_of_invivo_frs, depol_stdev_mean_ratio]
-      flatmap: /gpfs/bbp.cscs.ch/project/proj83/home/bolanos/BB_Rat_SSCX_flatmap_v2.nrrd
-      flatspace_videos:
-        fsv_3: {window: conn_spont, t_step: 100.0, n_spatial_bins: 1500, temporal_smoothing_sigma: 1.0,
-          delete_images: false, stim_anal: null}
+

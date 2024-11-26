@@ -1735,12 +1735,12 @@ analysis:
           n_trials: 250
           trial_steps_value: 200
           window_type: evoked_stimulus_onset_zeroed
-        # Cond0_0_50ms_stim:
-        #   bounds: [0, 50]
-        #   initial_offset: 1500
-        #   n_trials: 250
-        #   trial_steps_value: 200
-        #   window_type: evoked_stimulus_onset_zeroed
+        evoked_SOZ_50ms:
+          bounds: [0, 50]
+          initial_offset: 1500
+          n_trials: 250
+          trial_steps_value: 200
+          window_type: evoked_stimulus_onset_zeroed
         evoked_SOZ_100ms:
           bounds: [0, 100]
           initial_offset: 1500
@@ -1835,7 +1835,7 @@ analysis:
       evoked_mask_comparison_dataset: ReyesPuerta
       vivo_ratios_df: /gpfs/bbp.cscs.ch/project/proj100/analysis/vivo_ratios_svoboda_reyes.feather
       vivo_ratios_dataset: reyesp
-      vivo_df: /gpfs/bbp.cscs.ch/project/proj147/home/isbister/rp/dfs/invivo_psth_means_plot_ready.f
+      vivo_df: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/reference_data_do_not_delete/rp/dfs/invivo_psth_means_plot_ready.f
       theshold_conjunctive_trials_for_spike_pair_analysis: 4
       depol_bc_key: gExc
       # spont_replacement_custom_simulation_data_df: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/blueetl_ji_output/sscx_calibration_mgfix/2-PfrTransfer/2-PfrTransfer-6-3rdConnectionRemaining/hex0/custom_simulations_post_analysis.parquet
