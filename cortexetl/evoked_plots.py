@@ -365,9 +365,9 @@ Plots
 """
 def evoked_plots(a, comp_ncs, vivo_df, rp_psth_df, svo_psth_df):
     evoked_ratios_plots(a, comp_ncs)
-    # evoked_heatmaps(a)
-    # compare_time_courses(a, vivo_df, silico_bin_size=0.5, silico_sigma=2)
-    # psth_plots(a, comp_ncs, rp_psth_df, svo_psth_df)
+    evoked_heatmaps(a)
+    compare_time_courses(a, vivo_df, silico_bin_size=0.5, silico_sigma=2)
+    psth_plots(a, comp_ncs, rp_psth_df, svo_psth_df)
 
 
 def evoked_ratios_plots(a, comp_ncs):

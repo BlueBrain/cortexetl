@@ -13,4 +13,4 @@
 */*/*.png
 */*/*/*.png
 
-cortex_etl/__pycache__/*
+cortexetl/__pycache__/*

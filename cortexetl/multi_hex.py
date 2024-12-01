@@ -14,7 +14,7 @@ def get_flatspace_centre_of_hex(a, hex_ind):
 
 	gids = a.repo.neurons.df.etl.q(circuit_id=0, neuron_class=["ALL_EXC_" + str(hex_ind), "ALL_INH_" + str(hex_ind)])['gid']
 	locations = a.repo.simulations.df.iloc[0]['circuit'].cells.get(gids, ["x", "y", "z"])
-	flat_locations = c_etl.flatten_locations(locations, "/gpfs/bbp.cscs.ch/project/proj83/home/bolanos/BB_Rat_SSCX_flatmap_v2.nrrd")
+	flat_locations = c_etl.flatten_locations(locations, "/gpfs/bbp.cscs.ch/project/proj83/home/isbister/data/reference_data_do_not_delete/BB_Rat_SSCX_flatmap_v2.nrrd")
 	x = np.mean(flat_locations[0])
 	y = np.mean(flat_locations[1])
 	return x,y

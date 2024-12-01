@@ -37,8 +37,8 @@ def evoked_processing(a):
 
 def preprocess_vivo_dfs():
     vivo_dfs = []
-    for vivo_path, vivo_name in zip(["/gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/reference_data_do_not_delete/bc-simulation-analysis/invivo/reyes-multi-sigma-features.parquet",
-                                    "/gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/reference_data_do_not_delete/bc-simulation-analysis/invivo/svoboda-multi-sigma-features.parquet"], 
+    for vivo_path, vivo_name in zip(["/gpfs/bbp.cscs.ch/project/proj83/home/isbister/data/reference_data_do_not_delete/bc-simulation-analysis/invivo/reyes-multi-sigma-features.parquet",
+                                    "/gpfs/bbp.cscs.ch/project/proj83/home/isbister/data/reference_data_do_not_delete/bc-simulation-analysis/invivo/svoboda-multi-sigma-features.parquet"], 
                          ['ReyesPuerta', 'YuSvoboda']):
         
         df = pd.read_parquet(vivo_path)\
@@ -51,8 +51,8 @@ def preprocess_vivo_dfs():
 
     vivo_df = pd.concat(vivo_dfs)
 
-    rp_psth_df = pd.read_parquet("/gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/reference_data_do_not_delete/bc-simulation-analysis/invivo/reyes-multi-sigma-PSTH.parquet")
-    svo_psth_df = pd.read_parquet("/gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/reference_data_do_not_delete/bc-simulation-analysis/invivo/svoboda-multi-sigma-PSTH.parquet")
+    rp_psth_df = pd.read_parquet("/gpfs/bbp.cscs.ch/project/proj83/home/isbister/data/reference_data_do_not_delete/bc-simulation-analysis/invivo/reyes-multi-sigma-PSTH.parquet")
+    svo_psth_df = pd.read_parquet("/gpfs/bbp.cscs.ch/project/proj83/home/isbister/data/reference_data_do_not_delete/bc-simulation-analysis/invivo/svoboda-multi-sigma-PSTH.parquet")
 
     vivo_df['neuron_class'] = vivo_df.apply(lambda row: row.neuron_class.replace("Htr3a", "5HT3aR"), axis=1)
     rp_psth_df['neuron_class'] = rp_psth_df.apply(lambda row: row.neuron_class.replace("Htr3a", "5HT3aR"), axis=1)

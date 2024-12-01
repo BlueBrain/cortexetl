@@ -1,0 +1,139 @@
+version: 4
+simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/simulations/elife_sscx_physiology_2024/0-UnconnectedScan/0-UnconnectedScan-Original/9da0abcb-25fe-43a4-8d5b-6cc3402fc3e4/config.json
+cache:
+  path: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/data/cortexetl_output/elife_sscx_physiology_2024/0-UnconnectedScan/0-UnconnectedScan-Original
+  clear: False
+  
+analysis:
+  hex0_spikes:
+    node_set: hex0
+    extraction:
+      report: {type: spikes}
+      limit: null
+      neuron_classes:
+        L23_EXC:
+          query:
+            layer: ["2", "3"]
+            synapse_class: [EXC]
+        L4_EXC:
+          query:
+            layer: ["4"]
+            synapse_class: [EXC]
+        L5_EXC:
+          query:
+            layer: ["5"]
+            synapse_class: [EXC]
+        L6_EXC:
+          query:
+            layer: ["6"]
+            synapse_class: [EXC]
+        L1_INH:
+          query:
+            layer: ["1"]
+            synapse_class: [INH]
+        L23_INH:
+          query:
+            layer: ["2", "3"]
+            synapse_class: [INH]
+        L4_INH:
+          query:
+            layer: ["4"]
+            synapse_class: [INH]
+        L5_INH:
+          query:
+            layer: ["5"]
+            synapse_class: [INH]
+        L6_INH:
+          query:
+            layer: ["6"]
+            synapse_class: [INH]
+        L23_PV:
+          query:
+            layer: ["2", "3"]
+            mtype: [L23_LBC, L23_NBC, L23_CHC]
+        L4_PV:
+          query:
+            layer: ["4"]
+            mtype: [L4_CHC, L4_NBC, L4_LBC]
+        L5_PV:
+          query:
+            layer: ["5"]
+            mtype: [L5_CHC, L5_LBC, L5_NBC]
+        L6_PV:
+          query:
+            layer: ["6"]
+            mtype: [L6_LBC, L6_CHC, L6_NBC]
+        L23_SST:
+          query:
+            layer: ["2", "3"]
+            mtype: [L23_BTC, L23_NGC, L23_SBC, L23_MC, L23_DBC]
+        L4_SST:
+          query:
+            layer: ["4"]
+            mtype: [L4_NGC, L4_DBC, L4_SBC, L4_BTC, L4_MC]
+        L5_SST:
+          query:
+            layer: ["5"]
+            mtype: [L5_SBC, L5_BTC, L5_DBC, L5_NGC, L5_MC]
+        L6_SST:
+          query:
+            layer: ["6"]
+            mtype: [L6_BTC, L6_NGC, L6_MC, L6_SBC, L6_DBC]
+        L23_5HT3aR:
+          query:
+            layer: ["2", "3"]
+            mtype: [L23_BP]
+        L4_5HT3aR:
+          query:
+            layer: ["4"]
+            mtype: [L4_BP]
+        L5_5HT3aR:
+          query:
+            layer: ["5"]
+            mtype: [L5_BP]
+        L6_5HT3aR:
+          query:
+            layer: ["6"]
+            mtype: [L6_BP]
+
+      windows:
+        unconn_2nd_half:
+          bounds: [500, 1000]
+          window_type: spontaneous
+        unconn:
+          bounds: [0, 1000]
+          window_type: spontaneous
+        full_sim:
+          bounds: [0, 1000]
+          window_type: spontaneous
+      
+    features:
+    - type: multi
+      groupby: [simulation_id, circuit_id, neuron_class, window]
+      function: cortexetl.calculate_features.calculate_features_multi
+      params:
+        export_all_neurons: true
+        histograms:
+          1ms:
+            bin_size: 1.0
+            smoothing:
+              1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+          3ms:
+            bin_size: 3.0
+            smoothing:
+              1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+    custom:
+      independent_variables: [depol_mean, depol_std]
+      raster_windows: [full_sim, unconn_2nd_half]
+      fr_df_windows: [unconn_2nd_half]
+      unconnected_frs_df: true
+      unconnected_frs_plot: true
+      fr_df_name: unconnected_frs_including_interneurons_16-8-23.parquet
+      desired_connected_fr_key: desired_connected_fr
+      desired_unconnected_fr_key: desired_unconnected_fr
+      fr_analysis_neuron_classes_constant: LAYER_EI_NEURON_CLASSES
+      vertical_plot_seperate_groupings: E_AND_I_SEPERATE_GROUPINGS
+      input_conductance_by_neuron_class_parquet: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/data/reference_data_do_not_delete/input_conductance_by_neuron_class_EI.parquet
+      unconn_fr_grid_nc_groupings: E_AND_I_SUB_POP_BY_LAYER_GROUPINGS
+
+      

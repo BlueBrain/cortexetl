@@ -164,7 +164,7 @@ analysis:
     custom:
       create_flatspace_videos: false
       independent_variables: [ca, desired_connected_proportion_of_invivo_frs, depol_stdev_mean_ratio]
-      flatmap: /gpfs/bbp.cscs.ch/project/proj83/home/bolanos/BB_Rat_SSCX_flatmap_v2.nrrd
+      flatmap: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/data/reference_data_do_not_delete/BB_Rat_SSCX_flatmap_v2.nrrd
       flatspace_videos:
         fsv_3: {window: conn_spont, t_step: 100.0, n_spatial_bins: 1500, temporal_smoothing_sigma: 1.0,
           delete_images: false, stim_anal: null}

@@ -11,7 +11,7 @@ def concat_dfs_for_multiple_campaigns(analyzers, dataframe_key):
 
 
 # Compare metrics for a sequential series of campaigns (e.g. an optimisation)
-def compare_campaigns(a, a_name):
+def compare_campaigns(a, a_name, optimisation_evolution_videos=False):
     
     print("\n----- Compare campaigns -----")
 
@@ -47,8 +47,18 @@ def compare_campaigns(a, a_name):
     c_etl.comparison_lineplots(concatenated_by_simulation, file_dir, *hm_dims)
 
     # Videos showing how figures change over the campaigns
-    c_etl.video_from_image_files([str(a.figpaths.root) + "/ProportionOfInVivo_NonBursting.png" for a in analyzers], str(a.figpaths.campaign_comparison) + '/ProportionOfInVivo_NonBursting.mp4') 
-    c_etl.video_from_image_files([str(a.figpaths.root) + "/SingProportionOfInVivo_NonBursting.png" for a in analyzers], str(a.figpaths.campaign_comparison) + '/SingProportionOfInVivo_NonBursting.mp4') 
-    c_etl.video_from_image_files([str(a.figpaths.root) + "/FRs_NonBursting.png" for a in analyzers], str(a.figpaths.campaign_comparison) + '/FRs_NonBursting.mp4') 
-    c_etl.video_from_image_files([str(a.figpaths.root) + "/DepolM_NonBursting.png" for a in analyzers], str(a.figpaths.campaign_comparison) + '/DepolM_NonBursting.mp4') 
-    c_etl.video_from_image_files([str(a.figpaths.root) + "/DesiredUnconnectedFRs.png" for a in analyzers], str(a.figpaths.campaign_comparison) + '/DesiredUnconnectedFRs.mp4') 
+    # Need to plot spontaneous
+    if optimisation_evolution_videos:
+        c_etl.video_from_image_files([str(a.figpaths.root) + "/ProportionOfInVivo_NonBursting.png" for a in analyzers], str(a.figpaths.campaign_comparison) + '/ProportionOfInVivo_NonBursting.mp4') 
+        c_etl.video_from_image_files([str(a.figpaths.root) + "/SingProportionOfInVivo_NonBursting.png" for a in analyzers], str(a.figpaths.campaign_comparison) + '/SingProportionOfInVivo_NonBursting.mp4') 
+        c_etl.video_from_image_files([str(a.figpaths.root) + "/FRs_NonBursting.png" for a in analyzers], str(a.figpaths.campaign_comparison) + '/FRs_NonBursting.mp4') 
+        c_etl.video_from_image_files([str(a.figpaths.root) + "/DepolM_NonBursting.png" for a in analyzers], str(a.figpaths.campaign_comparison) + '/DepolM_NonBursting.mp4') 
+        c_etl.video_from_image_files([str(a.figpaths.root) + "/DesiredUnconnectedFRs.png" for a in analyzers], str(a.figpaths.campaign_comparison) + '/DesiredUnconnectedFRs.mp4') 
+
+
+
+
+
+
+
+
