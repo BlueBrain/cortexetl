@@ -14,3 +14,13 @@
 */*/*/*.png
 
 cortexetl/__pycache__/*
+
+.DS_Store
+*/.DS_Store
+*/*/.DS_Store
+*/*/*/.DS_Store
+
+*.pyc
+*/*.pyc
+*/*/*.pyc
+*/*/*/*.pyc
