@@ -2,7 +2,7 @@ version: 4
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/simulations/elife_sscx_physiology_2024/5-FullCircuit/5-FullCircuit-2-BetterMinis-Fpr15-StimScan-10x/bb16bd9f-3d21-4a35-8296-d6aec4c55bf7/config.json
 
 cache:
-  path: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/cortex_etl_output/5-FullCircuit/5-FullCircuit-2-BetterMinis-Fpr15-StimScan-10x
+  path: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/data/cortexetl_output/elife_sscx_physiology_2024/5-FullCircuit/5-FullCircuit-2-BetterMinis-Fpr15-StimScan-10x
   clear: false
 
 analysis:
