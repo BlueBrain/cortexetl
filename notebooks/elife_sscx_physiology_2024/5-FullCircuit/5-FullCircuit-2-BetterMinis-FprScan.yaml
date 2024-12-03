@@ -6,198 +6,198 @@ cache:
   clear: false
   
 analysis:
-  # hex0_spikes:
-  #   extraction:
+  hex0_spikes:
+    extraction:
 
-  #     report: {type: spikes}
-  #     limit: null
-  #     node_set: hex0
+      report: {type: spikes}
+      limit: null
+      node_set: hex0
 
-  #     neuron_classes:
-  #       L23_EXC:
-  #         query:
-  #           layer: ["2", "3"]
-  #           synapse_class: [EXC]
-  #       L4_EXC:
-  #         query:
-  #           layer: ["4"]
-  #           synapse_class: [EXC]
-  #       L5_EXC:
-  #         query:
-  #           layer: ["5"]
-  #           synapse_class: [EXC]
-  #       L6_EXC:
-  #         query:
-  #           layer: ["6"]
-  #           synapse_class: [EXC]
-  #       L1_INH:
-  #         query:
-  #           layer: ["1"]
-  #           synapse_class: [INH]
-  #       L23_INH:
-  #         query:
-  #           layer: ["2", "3"]
-  #           synapse_class: [INH]
-  #       L4_INH:
-  #         query:
-  #           layer: ["4"]
-  #           synapse_class: [INH]
-  #       L5_INH:
-  #         query:
-  #           layer: ["5"]
-  #           synapse_class: [INH]
-  #       L6_INH:
-  #         query:
-  #           layer: ["6"]
-  #           synapse_class: [INH]
-  #       ALL_INH:
-  #         query:
-  #           synapse_class: [INH]
-  #         limit: null
-  #       ALL_EXC:
-  #         query:
-  #           synapse_class: [EXC]
-  #         limit: null
-  #       ALL: {limit: null}
+      neuron_classes:
+        L23_EXC:
+          query:
+            layer: [2, 3]
+            synapse_class: [EXC]
+        L4_EXC:
+          query:
+            layer: [4]
+            synapse_class: [EXC]
+        L5_EXC:
+          query:
+            layer: [5]
+            synapse_class: [EXC]
+        L6_EXC:
+          query:
+            layer: [6]
+            synapse_class: [EXC]
+        L1_INH:
+          query:
+            layer: [1]
+            synapse_class: [INH]
+        L23_INH:
+          query:
+            layer: [2, 3]
+            synapse_class: [INH]
+        L4_INH:
+          query:
+            layer: [4]
+            synapse_class: [INH]
+        L5_INH:
+          query:
+            layer: [5]
+            synapse_class: [INH]
+        L6_INH:
+          query:
+            layer: [6]
+            synapse_class: [INH]
+        ALL_INH:
+          query:
+            synapse_class: [INH]
+          limit: null
+        ALL_EXC:
+          query:
+            synapse_class: [EXC]
+          limit: null
+        ALL: {limit: null}
 
-  #     windows:
-  #       unconn_2nd_half: { bounds: [ 500, 1000 ], window_type: spontaneous }
-  #       conn_spont: { bounds: [ 1500, 4500 ], window_type: spontaneous }
+      windows:
+        unconn_2nd_half: { bounds: [ 500, 1000 ], window_type: spontaneous }
+        conn_spont: { bounds: [ 1500, 4500 ], window_type: spontaneous }
 
-  #   features:
-  #   - type: multi
-  #     groupby: [simulation_id, circuit_id, neuron_class, window]
-  #     function: cortexetl.calculate_features.calculate_features_multi
-  #     params:
-  #       export_all_neurons: true
-  #       histograms:
-  #         1ms:
-  #           bin_size: 1.0
-  #           smoothing:
-  #             1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
-  #             3sd: {smoothing_type: Gaussian, kernel_sd: 3.0}
-  #         3ms:
-  #           bin_size: 3.0
-  #           smoothing:
-  #             1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+    features:
+    - type: multi
+      groupby: [simulation_id, circuit_id, neuron_class, window]
+      function: cortexetl.calculate_features.calculate_features_multi
+      params:
+        export_all_neurons: true
+        histograms:
+          1ms:
+            bin_size: 1.0
+            smoothing:
+              1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+              3sd: {smoothing_type: Gaussian, kernel_sd: 3.0}
+          3ms:
+            bin_size: 3.0
+            smoothing:
+              1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
 
-  #   custom:
+    custom:
 
-  #     plot_multi_sim_analysis: false
-  #     plot_rasters: false
-  #     create_raster_videos: false
-  #     extract_fr_df: false
+      plot_multi_sim_analysis: false
+      plot_rasters: false
+      create_raster_videos: false
+      extract_fr_df: false
       
-  #     independent_variables: ["ca", "desired_connected_proportion_of_invivo_frs", "depol_stdev_mean_ratio"]
-  #     vivo_frs: {L1_INH: 1.5, L23_EXC: 0.07, L23_INH: 0.961, L4_EXC: 0.619, L4_INH: 1.184, L5_EXC: 1.252, L5_INH: 2.357, L6_EXC: 0.47, L6_INH: 1.5}
-  #     heatmap_dims: {hor_key: "ca", ver_key: "none", x_key: "desired_connected_proportion_of_invivo_frs", y_key: "depol_stdev_mean_ratio"}
-  #     raster_windows: [{conn_spont: 5.0}]
-  #     fr_comparison_pairs: [['unconn_2nd_half', 'conn_spont'], ['desired_connected_fr', 'conn_spont'], ['desired_unconnected_fr', 'unconn_2nd_half'], ['connection_fr_increase', 'connection_fr_error']]
-  #     desired_connected_fr_key: desired_connected_fr
-  #     desired_unconnected_fr_key: desired_unconnected_fr
-  #     ei_corr_r_val_limits: [0.15, 0.4]
-  #     depol_bc_key: gExc
+      independent_variables: ["ca", "desired_connected_proportion_of_invivo_frs", "depol_stdev_mean_ratio"]
+      vivo_frs: {L1_INH: 1.5, L23_EXC: 0.07, L23_INH: 0.961, L4_EXC: 0.619, L4_INH: 1.184, L5_EXC: 1.252, L5_INH: 2.357, L6_EXC: 0.47, L6_INH: 1.5}
+      heatmap_dims: {hor_key: "ca", ver_key: "none", x_key: "desired_connected_proportion_of_invivo_frs", y_key: "depol_stdev_mean_ratio"}
+      raster_windows: [{conn_spont: 5.0}]
+      fr_comparison_pairs: [['unconn_2nd_half', 'conn_spont'], ['desired_connected_fr', 'conn_spont'], ['desired_unconnected_fr', 'unconn_2nd_half'], ['connection_fr_increase', 'connection_fr_error']]
+      desired_connected_fr_key: desired_connected_fr
+      desired_unconnected_fr_key: desired_unconnected_fr
+      ei_corr_r_val_limits: [0.15, 0.4]
+      depol_bc_key: gExc
 
-  #     campaign_short_name: "1st nbS1 conn."
-  #     fr_df_name: "connection_data_from_mgfix_5-FullCircuit-2-BetterMinis-FprScan_10-04-23.parquet"
+      campaign_short_name: "1st nbS1 conn."
+      fr_df_name: "connection_data_from_mgfix_5-FullCircuit-2-BetterMinis-FprScan_10-04-23.parquet"
 
-  #     fr_analysis_neuron_classes_constant: LAYER_EI_NEURON_CLASSES
-  #     vertical_plot_seperate_groupings: E_AND_I_SEPERATE_GROUPINGS
-  #     input_conductance_by_neuron_class_parquet: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/reference_data_do_not_delete/input_conductance_by_neuron_class_EI.parquet
+      fr_analysis_neuron_classes_constant: LAYER_EI_NEURON_CLASSES
+      vertical_plot_seperate_groupings: E_AND_I_SEPERATE_GROUPINGS
+      input_conductance_by_neuron_class_parquet: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/reference_data_do_not_delete/input_conductance_by_neuron_class_EI.parquet
 
-  # hex59_spikes:
-  #   extraction:
+  hex59_spikes:
+    extraction:
 
-  #     report: {type: spikes}
-  #     node_set: hex59
+      report: {type: spikes}
+      node_set: hex59
 
-  #     neuron_classes:
-  #       L23_EXC:
-  #         query:
-  #           layer: ["2", "3"]
-  #           synapse_class: [EXC]
-  #       L4_EXC:
-  #         query:
-  #           layer: ["4"]
-  #           synapse_class: [EXC]
-  #       L5_EXC:
-  #         query:
-  #           layer: ["5"]
-  #           synapse_class: [EXC]
-  #       L6_EXC:
-  #         query:
-  #           layer: ["6"]
-  #           synapse_class: [EXC]
-  #       L1_INH:
-  #         query:
-  #           layer: ["1"]
-  #           synapse_class: [INH]
-  #       L23_INH:
-  #         query:
-  #           layer: ["2", "3"]
-  #           synapse_class: [INH]
-  #       L4_INH:
-  #         query:
-  #           layer: ["4"]
-  #           synapse_class: [INH]
-  #       L5_INH:
-  #         query:
-  #           layer: ["5"]
-  #           synapse_class: [INH]
-  #       L6_INH:
-  #         query:
-  #           layer: ["6"]
-  #           synapse_class: [INH]
-  #       ALL_INH:
-  #         query:
-  #           synapse_class: [INH]
-  #         limit: null
-  #       ALL_EXC:
-  #         query:
-  #           synapse_class: [EXC]
-  #         limit: null
-  #       ALL: {limit: null}
+      neuron_classes:
+        L23_EXC:
+          query:
+            layer: [2, 3]
+            synapse_class: [EXC]
+        L4_EXC:
+          query:
+            layer: [4]
+            synapse_class: [EXC]
+        L5_EXC:
+          query:
+            layer: [5]
+            synapse_class: [EXC]
+        L6_EXC:
+          query:
+            layer: [6]
+            synapse_class: [EXC]
+        L1_INH:
+          query:
+            layer: [1]
+            synapse_class: [INH]
+        L23_INH:
+          query:
+            layer: [2, 3]
+            synapse_class: [INH]
+        L4_INH:
+          query:
+            layer: [4]
+            synapse_class: [INH]
+        L5_INH:
+          query:
+            layer: [5]
+            synapse_class: [INH]
+        L6_INH:
+          query:
+            layer: [6]
+            synapse_class: [INH]
+        ALL_INH:
+          query:
+            synapse_class: [INH]
+          limit: null
+        ALL_EXC:
+          query:
+            synapse_class: [EXC]
+          limit: null
+        ALL: {limit: null}
 
-  #     windows:
-  #       unconn_2nd_half: { bounds: [ 500, 1000 ], window_type: spontaneous }
-  #       conn_spont: { bounds: [ 1500, 4500 ], window_type: spontaneous }
+      windows:
+        unconn_2nd_half: { bounds: [ 500, 1000 ], window_type: spontaneous }
+        conn_spont: { bounds: [ 1500, 4500 ], window_type: spontaneous }
 
-  #   features:
-  #   - type: multi
-  #     groupby: [simulation_id, circuit_id, neuron_class, window]
-  #     function: cortexetl.calculate_features.calculate_features_multi
-  #     params:
-  #       export_all_neurons: true
-  #       histograms:
-  #         1ms:
-  #           bin_size: 1.0
-  #           smoothing:
-  #             1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
-  #             3sd: {smoothing_type: Gaussian, kernel_sd: 3.0}
-  #         3ms:
-  #           bin_size: 3.0
-  #           smoothing:
-  #             1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+    features:
+    - type: multi
+      groupby: [simulation_id, circuit_id, neuron_class, window]
+      function: cortexetl.calculate_features.calculate_features_multi
+      params:
+        export_all_neurons: true
+        histograms:
+          1ms:
+            bin_size: 1.0
+            smoothing:
+              1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
+              3sd: {smoothing_type: Gaussian, kernel_sd: 3.0}
+          3ms:
+            bin_size: 3.0
+            smoothing:
+              1sd: {smoothing_type: Gaussian, kernel_sd: 1.0}
 
-  #   custom:
+    custom:
 
-  #     plot_multi_sim_analysis: true
-  #     plot_rasters: false
-  #     create_raster_videos: false
-  #     extract_fr_df: false
+      plot_multi_sim_analysis: true
+      plot_rasters: false
+      create_raster_videos: false
+      extract_fr_df: false
       
-  #     independent_variables: ["ca", "desired_connected_proportion_of_invivo_frs", "depol_stdev_mean_ratio"]
-  #     vivo_frs: {L1_INH: 1.5, L23_EXC: 0.07, L23_INH: 0.961, L4_EXC: 0.619, L4_INH: 1.184, L5_EXC: 1.252, L5_INH: 2.357, L6_EXC: 0.47, L6_INH: 1.5}
-  #     heatmap_dims: {hor_key: "ca", ver_key: "none", x_key: "desired_connected_proportion_of_invivo_frs", y_key: "depol_stdev_mean_ratio"}
-  #     raster_windows: [{conn_spont: 5.0}]
-  #     fr_comparison_pairs: [['unconn_2nd_half', 'conn_spont'], ['desired_connected_fr', 'conn_spont'], ['desired_unconnected_fr', 'unconn_2nd_half'], ['connection_fr_increase', 'connection_fr_error']]
-  #     desired_connected_fr_key: desired_connected_fr
-  #     desired_unconnected_fr_key: desired_unconnected_fr
-  #     ei_corr_r_val_limits: [0.15, 0.4]
-  #     depol_bc_key: gExc
+      independent_variables: ["ca", "desired_connected_proportion_of_invivo_frs", "depol_stdev_mean_ratio"]
+      vivo_frs: {L1_INH: 1.5, L23_EXC: 0.07, L23_INH: 0.961, L4_EXC: 0.619, L4_INH: 1.184, L5_EXC: 1.252, L5_INH: 2.357, L6_EXC: 0.47, L6_INH: 1.5}
+      heatmap_dims: {hor_key: "ca", ver_key: "none", x_key: "desired_connected_proportion_of_invivo_frs", y_key: "depol_stdev_mean_ratio"}
+      raster_windows: [{conn_spont: 5.0}]
+      fr_comparison_pairs: [['unconn_2nd_half', 'conn_spont'], ['desired_connected_fr', 'conn_spont'], ['desired_unconnected_fr', 'unconn_2nd_half'], ['connection_fr_increase', 'connection_fr_error']]
+      desired_connected_fr_key: desired_connected_fr
+      desired_unconnected_fr_key: desired_unconnected_fr
+      ei_corr_r_val_limits: [0.15, 0.4]
+      depol_bc_key: gExc
 
-  #     campaign_short_name: "1st nbS1 conn."
-  #     fr_df_name: "connection_data_from_mgfix_5-FullCircuit-2-BetterMinis-FprScan_10-04-23.parquet"
+      campaign_short_name: "1st nbS1 conn."
+      fr_df_name: "connection_data_from_mgfix_5-FullCircuit-2-BetterMinis-FprScan_10-04-23.parquet"
 
   hexes_spikes:
     extraction:
@@ -207,1140 +207,4090 @@ analysis:
       node_set: null
 
       neuron_classes:
-        # L23_EXC_0:
-        #   query:
-        #     layer: ["2", "3"]
-        #     synapse_class: [EXC]
-        #     node_set: hex0
-        # L4_EXC_0:
-        #   query:
-        #     layer: ["4"]
-        #     synapse_class: [EXC]
-        #     node_set: hex0
-        # L5_EXC_0:
-        #   query:
-        #     layer: ["5"]
-        #     synapse_class: [EXC]
-        #     node_set: hex0
-        # L6_EXC_0:
-        #   query:
-        #     layer: ["6"]
-        #     synapse_class: [EXC]
-        #     node_set: hex0
-        # L1_INH_0:
-        #   query:
-        #     layer: ["1"]
-        #     synapse_class: [INH]
-        #     node_set: hex0
-        # L23_INH_0:
-        #   query:
-        #     layer: ["2", "3"]
-        #     synapse_class: [INH]
-        #     node_set: hex0
-        # L4_INH_0:
-        #   query:
-        #     layer: ["4"]
-        #     synapse_class: [INH]
-        #     target: hex0
+        L1_INH_0:
+          node_set: hex0
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_0:
+          node_set: hex0
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_0:
+          node_set: hex0
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_0:
+          node_set: hex0
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_0:
+          node_set: hex0
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_0:
+          node_set: hex0
+          query:
+            layer: [5]
+            synapse_class: EXC
         L5_INH_0:
           node_set: hex0
-          # query:
-          #   layer: ["5"]
-          #   synapse_class: [INH]
-            
-        # L6_INH_0:
-        #   query:
-        #     layer: ["6"]
-        #     synapse_class: [INH]
-        #     target: hex0
-        # ALL_INH_0:
-        #   query:
-        #     synapse_class: [INH]
-        #     target: hex0
-        # ALL_EXC_0:
-        #   query:
-        #     synapse_class: [EXC]
-        #     target: hex0
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_0:
+          node_set: hex0
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_0:
+          node_set: hex0
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_1:
+          node_set: hex1
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_1:
+          node_set: hex1
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_1:
+          node_set: hex1
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_1:
+          node_set: hex1
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_1:
+          node_set: hex1
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_1:
+          node_set: hex1
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_1:
+          node_set: hex1
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_1:
+          node_set: hex1
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_1:
+          node_set: hex1
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_2:
+          node_set: hex2
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_2:
+          node_set: hex2
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_2:
+          node_set: hex2
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_2:
+          node_set: hex2
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_2:
+          node_set: hex2
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_2:
+          node_set: hex2
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_2:
+          node_set: hex2
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_2:
+          node_set: hex2
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_2:
+          node_set: hex2
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_3:
+          node_set: hex3
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_3:
+          node_set: hex3
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_3:
+          node_set: hex3
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_3:
+          node_set: hex3
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_3:
+          node_set: hex3
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_3:
+          node_set: hex3
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_3:
+          node_set: hex3
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_3:
+          node_set: hex3
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_3:
+          node_set: hex3
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_4:
+          node_set: hex4
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_4:
+          node_set: hex4
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_4:
+          node_set: hex4
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_4:
+          node_set: hex4
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_4:
+          node_set: hex4
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_4:
+          node_set: hex4
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_4:
+          node_set: hex4
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_4:
+          node_set: hex4
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_4:
+          node_set: hex4
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_5:
+          node_set: hex5
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_5:
+          node_set: hex5
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_5:
+          node_set: hex5
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_5:
+          node_set: hex5
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_5:
+          node_set: hex5
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_5:
+          node_set: hex5
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_5:
+          node_set: hex5
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_5:
+          node_set: hex5
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_5:
+          node_set: hex5
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_6:
+          node_set: hex6
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_6:
+          node_set: hex6
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_6:
+          node_set: hex6
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_6:
+          node_set: hex6
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_6:
+          node_set: hex6
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_6:
+          node_set: hex6
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_6:
+          node_set: hex6
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_6:
+          node_set: hex6
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_6:
+          node_set: hex6
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_7:
+          node_set: hex7
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_7:
+          node_set: hex7
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_7:
+          node_set: hex7
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_7:
+          node_set: hex7
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_7:
+          node_set: hex7
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_7:
+          node_set: hex7
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_7:
+          node_set: hex7
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_7:
+          node_set: hex7
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_7:
+          node_set: hex7
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_8:
+          node_set: hex8
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_8:
+          node_set: hex8
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_8:
+          node_set: hex8
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_8:
+          node_set: hex8
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_8:
+          node_set: hex8
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_8:
+          node_set: hex8
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_8:
+          node_set: hex8
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_8:
+          node_set: hex8
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_8:
+          node_set: hex8
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_9:
+          node_set: hex9
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_9:
+          node_set: hex9
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_9:
+          node_set: hex9
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_9:
+          node_set: hex9
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_9:
+          node_set: hex9
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_9:
+          node_set: hex9
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_9:
+          node_set: hex9
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_9:
+          node_set: hex9
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_9:
+          node_set: hex9
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_10:
+          node_set: hex10
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_10:
+          node_set: hex10
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_10:
+          node_set: hex10
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_10:
+          node_set: hex10
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_10:
+          node_set: hex10
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_10:
+          node_set: hex10
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_10:
+          node_set: hex10
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_10:
+          node_set: hex10
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_10:
+          node_set: hex10
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_11:
+          node_set: hex11
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_11:
+          node_set: hex11
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_11:
+          node_set: hex11
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_11:
+          node_set: hex11
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_11:
+          node_set: hex11
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_11:
+          node_set: hex11
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_11:
+          node_set: hex11
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_11:
+          node_set: hex11
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_11:
+          node_set: hex11
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_12:
+          node_set: hex12
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_12:
+          node_set: hex12
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_12:
+          node_set: hex12
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_12:
+          node_set: hex12
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_12:
+          node_set: hex12
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_12:
+          node_set: hex12
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_12:
+          node_set: hex12
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_12:
+          node_set: hex12
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_12:
+          node_set: hex12
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_13:
+          node_set: hex13
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_13:
+          node_set: hex13
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_13:
+          node_set: hex13
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_13:
+          node_set: hex13
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_13:
+          node_set: hex13
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_13:
+          node_set: hex13
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_13:
+          node_set: hex13
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_13:
+          node_set: hex13
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_13:
+          node_set: hex13
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_14:
+          node_set: hex14
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_14:
+          node_set: hex14
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_14:
+          node_set: hex14
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_14:
+          node_set: hex14
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_14:
+          node_set: hex14
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_14:
+          node_set: hex14
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_14:
+          node_set: hex14
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_14:
+          node_set: hex14
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_14:
+          node_set: hex14
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_15:
+          node_set: hex15
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_15:
+          node_set: hex15
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_15:
+          node_set: hex15
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_15:
+          node_set: hex15
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_15:
+          node_set: hex15
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_15:
+          node_set: hex15
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_15:
+          node_set: hex15
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_15:
+          node_set: hex15
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_15:
+          node_set: hex15
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_16:
+          node_set: hex16
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_16:
+          node_set: hex16
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_16:
+          node_set: hex16
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_16:
+          node_set: hex16
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_16:
+          node_set: hex16
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_16:
+          node_set: hex16
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_16:
+          node_set: hex16
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_16:
+          node_set: hex16
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_16:
+          node_set: hex16
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_17:
+          node_set: hex17
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_17:
+          node_set: hex17
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_17:
+          node_set: hex17
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_17:
+          node_set: hex17
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_17:
+          node_set: hex17
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_17:
+          node_set: hex17
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_17:
+          node_set: hex17
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_17:
+          node_set: hex17
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_17:
+          node_set: hex17
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_18:
+          node_set: hex18
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_18:
+          node_set: hex18
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_18:
+          node_set: hex18
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_18:
+          node_set: hex18
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_18:
+          node_set: hex18
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_18:
+          node_set: hex18
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_18:
+          node_set: hex18
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_18:
+          node_set: hex18
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_18:
+          node_set: hex18
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_19:
+          node_set: hex19
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_19:
+          node_set: hex19
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_19:
+          node_set: hex19
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_19:
+          node_set: hex19
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_19:
+          node_set: hex19
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_19:
+          node_set: hex19
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_19:
+          node_set: hex19
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_19:
+          node_set: hex19
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_19:
+          node_set: hex19
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_20:
+          node_set: hex20
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_20:
+          node_set: hex20
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_20:
+          node_set: hex20
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_20:
+          node_set: hex20
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_20:
+          node_set: hex20
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_20:
+          node_set: hex20
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_20:
+          node_set: hex20
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_20:
+          node_set: hex20
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_20:
+          node_set: hex20
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_21:
+          node_set: hex21
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_21:
+          node_set: hex21
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_21:
+          node_set: hex21
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_21:
+          node_set: hex21
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_21:
+          node_set: hex21
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_21:
+          node_set: hex21
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_21:
+          node_set: hex21
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_21:
+          node_set: hex21
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_21:
+          node_set: hex21
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_22:
+          node_set: hex22
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_22:
+          node_set: hex22
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_22:
+          node_set: hex22
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_22:
+          node_set: hex22
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_22:
+          node_set: hex22
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_22:
+          node_set: hex22
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_22:
+          node_set: hex22
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_22:
+          node_set: hex22
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_22:
+          node_set: hex22
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_23:
+          node_set: hex23
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_23:
+          node_set: hex23
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_23:
+          node_set: hex23
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_23:
+          node_set: hex23
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_23:
+          node_set: hex23
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_23:
+          node_set: hex23
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_23:
+          node_set: hex23
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_23:
+          node_set: hex23
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_23:
+          node_set: hex23
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_24:
+          node_set: hex24
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_24:
+          node_set: hex24
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_24:
+          node_set: hex24
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_24:
+          node_set: hex24
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_24:
+          node_set: hex24
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_24:
+          node_set: hex24
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_24:
+          node_set: hex24
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_24:
+          node_set: hex24
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_24:
+          node_set: hex24
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_25:
+          node_set: hex25
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_25:
+          node_set: hex25
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_25:
+          node_set: hex25
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_25:
+          node_set: hex25
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_25:
+          node_set: hex25
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_25:
+          node_set: hex25
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_25:
+          node_set: hex25
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_25:
+          node_set: hex25
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_25:
+          node_set: hex25
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_26:
+          node_set: hex26
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_26:
+          node_set: hex26
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_26:
+          node_set: hex26
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_26:
+          node_set: hex26
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_26:
+          node_set: hex26
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_26:
+          node_set: hex26
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_26:
+          node_set: hex26
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_26:
+          node_set: hex26
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_26:
+          node_set: hex26
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_27:
+          node_set: hex27
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_27:
+          node_set: hex27
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_27:
+          node_set: hex27
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_27:
+          node_set: hex27
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_27:
+          node_set: hex27
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_27:
+          node_set: hex27
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_27:
+          node_set: hex27
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_27:
+          node_set: hex27
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_27:
+          node_set: hex27
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_28:
+          node_set: hex28
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_28:
+          node_set: hex28
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_28:
+          node_set: hex28
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_28:
+          node_set: hex28
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_28:
+          node_set: hex28
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_28:
+          node_set: hex28
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_28:
+          node_set: hex28
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_28:
+          node_set: hex28
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_28:
+          node_set: hex28
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_29:
+          node_set: hex29
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_29:
+          node_set: hex29
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_29:
+          node_set: hex29
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_29:
+          node_set: hex29
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_29:
+          node_set: hex29
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_29:
+          node_set: hex29
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_29:
+          node_set: hex29
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_29:
+          node_set: hex29
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_29:
+          node_set: hex29
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_30:
+          node_set: hex30
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_30:
+          node_set: hex30
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_30:
+          node_set: hex30
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_30:
+          node_set: hex30
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_30:
+          node_set: hex30
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_30:
+          node_set: hex30
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_30:
+          node_set: hex30
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_30:
+          node_set: hex30
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_30:
+          node_set: hex30
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_31:
+          node_set: hex31
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_31:
+          node_set: hex31
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_31:
+          node_set: hex31
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_31:
+          node_set: hex31
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_31:
+          node_set: hex31
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_31:
+          node_set: hex31
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_31:
+          node_set: hex31
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_31:
+          node_set: hex31
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_31:
+          node_set: hex31
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_32:
+          node_set: hex32
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_32:
+          node_set: hex32
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_32:
+          node_set: hex32
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_32:
+          node_set: hex32
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_32:
+          node_set: hex32
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_32:
+          node_set: hex32
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_32:
+          node_set: hex32
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_32:
+          node_set: hex32
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_32:
+          node_set: hex32
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_33:
+          node_set: hex33
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_33:
+          node_set: hex33
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_33:
+          node_set: hex33
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_33:
+          node_set: hex33
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_33:
+          node_set: hex33
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_33:
+          node_set: hex33
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_33:
+          node_set: hex33
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_33:
+          node_set: hex33
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_33:
+          node_set: hex33
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_34:
+          node_set: hex34
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_34:
+          node_set: hex34
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_34:
+          node_set: hex34
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_34:
+          node_set: hex34
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_34:
+          node_set: hex34
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_34:
+          node_set: hex34
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_34:
+          node_set: hex34
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_34:
+          node_set: hex34
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_34:
+          node_set: hex34
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_35:
+          node_set: hex35
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_35:
+          node_set: hex35
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_35:
+          node_set: hex35
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_35:
+          node_set: hex35
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_35:
+          node_set: hex35
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_35:
+          node_set: hex35
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_35:
+          node_set: hex35
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_35:
+          node_set: hex35
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_35:
+          node_set: hex35
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_36:
+          node_set: hex36
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_36:
+          node_set: hex36
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_36:
+          node_set: hex36
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_36:
+          node_set: hex36
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_36:
+          node_set: hex36
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_36:
+          node_set: hex36
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_36:
+          node_set: hex36
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_36:
+          node_set: hex36
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_36:
+          node_set: hex36
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_37:
+          node_set: hex37
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_37:
+          node_set: hex37
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_37:
+          node_set: hex37
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_37:
+          node_set: hex37
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_37:
+          node_set: hex37
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_37:
+          node_set: hex37
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_37:
+          node_set: hex37
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_37:
+          node_set: hex37
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_37:
+          node_set: hex37
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_38:
+          node_set: hex38
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_38:
+          node_set: hex38
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_38:
+          node_set: hex38
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_38:
+          node_set: hex38
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_38:
+          node_set: hex38
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_38:
+          node_set: hex38
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_38:
+          node_set: hex38
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_38:
+          node_set: hex38
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_38:
+          node_set: hex38
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_39:
+          node_set: hex39
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_39:
+          node_set: hex39
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_39:
+          node_set: hex39
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_39:
+          node_set: hex39
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_39:
+          node_set: hex39
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_39:
+          node_set: hex39
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_39:
+          node_set: hex39
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_39:
+          node_set: hex39
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_39:
+          node_set: hex39
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_40:
+          node_set: hex40
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_40:
+          node_set: hex40
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_40:
+          node_set: hex40
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_40:
+          node_set: hex40
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_40:
+          node_set: hex40
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_40:
+          node_set: hex40
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_40:
+          node_set: hex40
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_40:
+          node_set: hex40
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_40:
+          node_set: hex40
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_41:
+          node_set: hex41
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_41:
+          node_set: hex41
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_41:
+          node_set: hex41
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_41:
+          node_set: hex41
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_41:
+          node_set: hex41
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_41:
+          node_set: hex41
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_41:
+          node_set: hex41
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_41:
+          node_set: hex41
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_41:
+          node_set: hex41
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_42:
+          node_set: hex42
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_42:
+          node_set: hex42
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_42:
+          node_set: hex42
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_42:
+          node_set: hex42
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_42:
+          node_set: hex42
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_42:
+          node_set: hex42
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_42:
+          node_set: hex42
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_42:
+          node_set: hex42
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_42:
+          node_set: hex42
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_43:
+          node_set: hex43
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_43:
+          node_set: hex43
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_43:
+          node_set: hex43
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_43:
+          node_set: hex43
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_43:
+          node_set: hex43
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_43:
+          node_set: hex43
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_43:
+          node_set: hex43
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_43:
+          node_set: hex43
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_43:
+          node_set: hex43
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_44:
+          node_set: hex44
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_44:
+          node_set: hex44
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_44:
+          node_set: hex44
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_44:
+          node_set: hex44
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_44:
+          node_set: hex44
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_44:
+          node_set: hex44
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_44:
+          node_set: hex44
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_44:
+          node_set: hex44
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_44:
+          node_set: hex44
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_45:
+          node_set: hex45
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_45:
+          node_set: hex45
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_45:
+          node_set: hex45
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_45:
+          node_set: hex45
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_45:
+          node_set: hex45
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_45:
+          node_set: hex45
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_45:
+          node_set: hex45
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_45:
+          node_set: hex45
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_45:
+          node_set: hex45
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_46:
+          node_set: hex46
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_46:
+          node_set: hex46
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_46:
+          node_set: hex46
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_46:
+          node_set: hex46
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_46:
+          node_set: hex46
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_46:
+          node_set: hex46
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_46:
+          node_set: hex46
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_46:
+          node_set: hex46
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_46:
+          node_set: hex46
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_47:
+          node_set: hex47
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_47:
+          node_set: hex47
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_47:
+          node_set: hex47
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_47:
+          node_set: hex47
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_47:
+          node_set: hex47
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_47:
+          node_set: hex47
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_47:
+          node_set: hex47
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_47:
+          node_set: hex47
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_47:
+          node_set: hex47
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_48:
+          node_set: hex48
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_48:
+          node_set: hex48
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_48:
+          node_set: hex48
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_48:
+          node_set: hex48
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_48:
+          node_set: hex48
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_48:
+          node_set: hex48
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_48:
+          node_set: hex48
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_48:
+          node_set: hex48
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_48:
+          node_set: hex48
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_49:
+          node_set: hex49
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_49:
+          node_set: hex49
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_49:
+          node_set: hex49
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_49:
+          node_set: hex49
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_49:
+          node_set: hex49
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_49:
+          node_set: hex49
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_49:
+          node_set: hex49
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_49:
+          node_set: hex49
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_49:
+          node_set: hex49
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_50:
+          node_set: hex50
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_50:
+          node_set: hex50
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_50:
+          node_set: hex50
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_50:
+          node_set: hex50
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_50:
+          node_set: hex50
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_50:
+          node_set: hex50
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_50:
+          node_set: hex50
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_50:
+          node_set: hex50
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_50:
+          node_set: hex50
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_51:
+          node_set: hex51
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_51:
+          node_set: hex51
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_51:
+          node_set: hex51
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_51:
+          node_set: hex51
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_51:
+          node_set: hex51
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_51:
+          node_set: hex51
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_51:
+          node_set: hex51
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_51:
+          node_set: hex51
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_51:
+          node_set: hex51
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_52:
+          node_set: hex52
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_52:
+          node_set: hex52
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_52:
+          node_set: hex52
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_52:
+          node_set: hex52
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_52:
+          node_set: hex52
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_52:
+          node_set: hex52
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_52:
+          node_set: hex52
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_52:
+          node_set: hex52
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_52:
+          node_set: hex52
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_53:
+          node_set: hex53
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_53:
+          node_set: hex53
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_53:
+          node_set: hex53
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_53:
+          node_set: hex53
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_53:
+          node_set: hex53
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_53:
+          node_set: hex53
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_53:
+          node_set: hex53
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_53:
+          node_set: hex53
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_53:
+          node_set: hex53
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_54:
+          node_set: hex54
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_54:
+          node_set: hex54
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_54:
+          node_set: hex54
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_54:
+          node_set: hex54
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_54:
+          node_set: hex54
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_54:
+          node_set: hex54
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_54:
+          node_set: hex54
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_54:
+          node_set: hex54
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_54:
+          node_set: hex54
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_55:
+          node_set: hex55
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_55:
+          node_set: hex55
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_55:
+          node_set: hex55
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_55:
+          node_set: hex55
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_55:
+          node_set: hex55
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_55:
+          node_set: hex55
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_55:
+          node_set: hex55
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_55:
+          node_set: hex55
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_55:
+          node_set: hex55
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_56:
+          node_set: hex56
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_56:
+          node_set: hex56
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_56:
+          node_set: hex56
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_56:
+          node_set: hex56
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_56:
+          node_set: hex56
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_56:
+          node_set: hex56
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_56:
+          node_set: hex56
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_56:
+          node_set: hex56
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_56:
+          node_set: hex56
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_57:
+          node_set: hex57
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_57:
+          node_set: hex57
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_57:
+          node_set: hex57
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_57:
+          node_set: hex57
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_57:
+          node_set: hex57
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_57:
+          node_set: hex57
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_57:
+          node_set: hex57
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_57:
+          node_set: hex57
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_57:
+          node_set: hex57
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_58:
+          node_set: hex58
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_58:
+          node_set: hex58
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_58:
+          node_set: hex58
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_58:
+          node_set: hex58
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_58:
+          node_set: hex58
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_58:
+          node_set: hex58
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_58:
+          node_set: hex58
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_58:
+          node_set: hex58
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_58:
+          node_set: hex58
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_59:
+          node_set: hex59
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_59:
+          node_set: hex59
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_59:
+          node_set: hex59
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_59:
+          node_set: hex59
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_59:
+          node_set: hex59
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_59:
+          node_set: hex59
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_59:
+          node_set: hex59
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_59:
+          node_set: hex59
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_59:
+          node_set: hex59
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_60:
+          node_set: hex60
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_60:
+          node_set: hex60
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_60:
+          node_set: hex60
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_60:
+          node_set: hex60
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_60:
+          node_set: hex60
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_60:
+          node_set: hex60
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_60:
+          node_set: hex60
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_60:
+          node_set: hex60
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_60:
+          node_set: hex60
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_61:
+          node_set: hex61
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_61:
+          node_set: hex61
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_61:
+          node_set: hex61
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_61:
+          node_set: hex61
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_61:
+          node_set: hex61
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_61:
+          node_set: hex61
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_61:
+          node_set: hex61
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_61:
+          node_set: hex61
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_61:
+          node_set: hex61
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_62:
+          node_set: hex62
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_62:
+          node_set: hex62
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_62:
+          node_set: hex62
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_62:
+          node_set: hex62
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_62:
+          node_set: hex62
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_62:
+          node_set: hex62
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_62:
+          node_set: hex62
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_62:
+          node_set: hex62
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_62:
+          node_set: hex62
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_63:
+          node_set: hex63
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_63:
+          node_set: hex63
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_63:
+          node_set: hex63
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_63:
+          node_set: hex63
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_63:
+          node_set: hex63
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_63:
+          node_set: hex63
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_63:
+          node_set: hex63
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_63:
+          node_set: hex63
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_63:
+          node_set: hex63
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_64:
+          node_set: hex64
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_64:
+          node_set: hex64
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_64:
+          node_set: hex64
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_64:
+          node_set: hex64
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_64:
+          node_set: hex64
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_64:
+          node_set: hex64
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_64:
+          node_set: hex64
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_64:
+          node_set: hex64
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_64:
+          node_set: hex64
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_65:
+          node_set: hex65
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_65:
+          node_set: hex65
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_65:
+          node_set: hex65
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_65:
+          node_set: hex65
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_65:
+          node_set: hex65
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_65:
+          node_set: hex65
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_65:
+          node_set: hex65
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_65:
+          node_set: hex65
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_65:
+          node_set: hex65
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_66:
+          node_set: hex66
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_66:
+          node_set: hex66
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_66:
+          node_set: hex66
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_66:
+          node_set: hex66
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_66:
+          node_set: hex66
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_66:
+          node_set: hex66
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_66:
+          node_set: hex66
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_66:
+          node_set: hex66
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_66:
+          node_set: hex66
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_67:
+          node_set: hex67
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_67:
+          node_set: hex67
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_67:
+          node_set: hex67
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_67:
+          node_set: hex67
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_67:
+          node_set: hex67
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_67:
+          node_set: hex67
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_67:
+          node_set: hex67
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_67:
+          node_set: hex67
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_67:
+          node_set: hex67
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_68:
+          node_set: hex68
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_68:
+          node_set: hex68
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_68:
+          node_set: hex68
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_68:
+          node_set: hex68
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_68:
+          node_set: hex68
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_68:
+          node_set: hex68
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_68:
+          node_set: hex68
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_68:
+          node_set: hex68
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_68:
+          node_set: hex68
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_69:
+          node_set: hex69
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_69:
+          node_set: hex69
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_69:
+          node_set: hex69
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_69:
+          node_set: hex69
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_69:
+          node_set: hex69
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_69:
+          node_set: hex69
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_69:
+          node_set: hex69
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_69:
+          node_set: hex69
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_69:
+          node_set: hex69
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_70:
+          node_set: hex70
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_70:
+          node_set: hex70
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_70:
+          node_set: hex70
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_70:
+          node_set: hex70
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_70:
+          node_set: hex70
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_70:
+          node_set: hex70
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_70:
+          node_set: hex70
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_70:
+          node_set: hex70
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_70:
+          node_set: hex70
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_71:
+          node_set: hex71
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_71:
+          node_set: hex71
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_71:
+          node_set: hex71
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_71:
+          node_set: hex71
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_71:
+          node_set: hex71
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_71:
+          node_set: hex71
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_71:
+          node_set: hex71
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_71:
+          node_set: hex71
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_71:
+          node_set: hex71
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_72:
+          node_set: hex72
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_72:
+          node_set: hex72
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_72:
+          node_set: hex72
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_72:
+          node_set: hex72
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_72:
+          node_set: hex72
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_72:
+          node_set: hex72
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_72:
+          node_set: hex72
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_72:
+          node_set: hex72
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_72:
+          node_set: hex72
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_73:
+          node_set: hex73
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_73:
+          node_set: hex73
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_73:
+          node_set: hex73
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_73:
+          node_set: hex73
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_73:
+          node_set: hex73
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_73:
+          node_set: hex73
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_73:
+          node_set: hex73
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_73:
+          node_set: hex73
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_73:
+          node_set: hex73
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_74:
+          node_set: hex74
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_74:
+          node_set: hex74
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_74:
+          node_set: hex74
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_74:
+          node_set: hex74
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_74:
+          node_set: hex74
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_74:
+          node_set: hex74
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_74:
+          node_set: hex74
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_74:
+          node_set: hex74
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_74:
+          node_set: hex74
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_75:
+          node_set: hex75
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_75:
+          node_set: hex75
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_75:
+          node_set: hex75
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_75:
+          node_set: hex75
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_75:
+          node_set: hex75
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_75:
+          node_set: hex75
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_75:
+          node_set: hex75
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_75:
+          node_set: hex75
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_75:
+          node_set: hex75
+          query:
+            layer: [6]
+            synapse_class: INH
+        L1_INH_76:
+          node_set: hex76
+          query:
+            layer: [1]
+            synapse_class: INH
+        L23_EXC_76:
+          node_set: hex76
+          query:
+            layer: [2, 3]
+            synapse_class: EXC
+        L23_INH_76:
+          node_set: hex76
+          query:
+            layer: [2, 3]
+            synapse_class: INH
+        L4_EXC_76:
+          node_set: hex76
+          query:
+            layer: [4]
+            synapse_class: EXC
+        L4_INH_76:
+          node_set: hex76
+          query:
+            layer: [4]
+            synapse_class: INH
+        L5_EXC_76:
+          node_set: hex76
+          query:
+            layer: [5]
+            synapse_class: EXC
+        L5_INH_76:
+          node_set: hex76
+          query:
+            layer: [5]
+            synapse_class: INH
+        L6_EXC_76:
+          node_set: hex76
+          query:
+            layer: [6]
+            synapse_class: EXC
+        L6_INH_76:
+          node_set: hex76
+          query:
+            layer: [6]
+            synapse_class: INH
+
+
+        ALL_EXC_0:
+          node_set: hex0
+          query:
+            synapse_class: EXC
+        ALL_INH_0:
+          node_set: hex0
+          query:
+            synapse_class: INH
+        ALL_EXC_1:
+          node_set: hex1
+          query:
+            synapse_class: EXC
+        ALL_INH_1:
+          node_set: hex1
+          query:
+            synapse_class: INH
+        ALL_EXC_2:
+          node_set: hex2
+          query:
+            synapse_class: EXC
+        ALL_INH_2:
+          node_set: hex2
+          query:
+            synapse_class: INH
+        ALL_EXC_3:
+          node_set: hex3
+          query:
+            synapse_class: EXC
+        ALL_INH_3:
+          node_set: hex3
+          query:
+            synapse_class: INH
+        ALL_EXC_4:
+          node_set: hex4
+          query:
+            synapse_class: EXC
+        ALL_INH_4:
+          node_set: hex4
+          query:
+            synapse_class: INH
+        ALL_EXC_5:
+          node_set: hex5
+          query:
+            synapse_class: EXC
+        ALL_INH_5:
+          node_set: hex5
+          query:
+            synapse_class: INH
+        ALL_EXC_6:
+          node_set: hex6
+          query:
+            synapse_class: EXC
+        ALL_INH_6:
+          node_set: hex6
+          query:
+            synapse_class: INH
+        ALL_EXC_7:
+          node_set: hex7
+          query:
+            synapse_class: EXC
+        ALL_INH_7:
+          node_set: hex7
+          query:
+            synapse_class: INH
+        ALL_EXC_8:
+          node_set: hex8
+          query:
+            synapse_class: EXC
+        ALL_INH_8:
+          node_set: hex8
+          query:
+            synapse_class: INH
+        ALL_EXC_9:
+          node_set: hex9
+          query:
+            synapse_class: EXC
+        ALL_INH_9:
+          node_set: hex9
+          query:
+            synapse_class: INH
+        ALL_EXC_10:
+          node_set: hex10
+          query:
+            synapse_class: EXC
+        ALL_INH_10:
+          node_set: hex10
+          query:
+            synapse_class: INH
+        ALL_EXC_11:
+          node_set: hex11
+          query:
+            synapse_class: EXC
+        ALL_INH_11:
+          node_set: hex11
+          query:
+            synapse_class: INH
+        ALL_EXC_12:
+          node_set: hex12
+          query:
+            synapse_class: EXC
+        ALL_INH_12:
+          node_set: hex12
+          query:
+            synapse_class: INH
+        ALL_EXC_13:
+          node_set: hex13
+          query:
+            synapse_class: EXC
+        ALL_INH_13:
+          node_set: hex13
+          query:
+            synapse_class: INH
+        ALL_EXC_14:
+          node_set: hex14
+          query:
+            synapse_class: EXC
+        ALL_INH_14:
+          node_set: hex14
+          query:
+            synapse_class: INH
+        ALL_EXC_15:
+          node_set: hex15
+          query:
+            synapse_class: EXC
+        ALL_INH_15:
+          node_set: hex15
+          query:
+            synapse_class: INH
+        ALL_EXC_16:
+          node_set: hex16
+          query:
+            synapse_class: EXC
+        ALL_INH_16:
+          node_set: hex16
+          query:
+            synapse_class: INH
+        ALL_EXC_17:
+          node_set: hex17
+          query:
+            synapse_class: EXC
+        ALL_INH_17:
+          node_set: hex17
+          query:
+            synapse_class: INH
+        ALL_EXC_18:
+          node_set: hex18
+          query:
+            synapse_class: EXC
+        ALL_INH_18:
+          node_set: hex18
+          query:
+            synapse_class: INH
+        ALL_EXC_19:
+          node_set: hex19
+          query:
+            synapse_class: EXC
+        ALL_INH_19:
+          node_set: hex19
+          query:
+            synapse_class: INH
+        ALL_EXC_20:
+          node_set: hex20
+          query:
+            synapse_class: EXC
+        ALL_INH_20:
+          node_set: hex20
+          query:
+            synapse_class: INH
+        ALL_EXC_21:
+          node_set: hex21
+          query:
+            synapse_class: EXC
+        ALL_INH_21:
+          node_set: hex21
+          query:
+            synapse_class: INH
+        ALL_EXC_22:
+          node_set: hex22
+          query:
+            synapse_class: EXC
+        ALL_INH_22:
+          node_set: hex22
+          query:
+            synapse_class: INH
+        ALL_EXC_23:
+          node_set: hex23
+          query:
+            synapse_class: EXC
+        ALL_INH_23:
+          node_set: hex23
+          query:
+            synapse_class: INH
+        ALL_EXC_24:
+          node_set: hex24
+          query:
+            synapse_class: EXC
+        ALL_INH_24:
+          node_set: hex24
+          query:
+            synapse_class: INH
+        ALL_EXC_25:
+          node_set: hex25
+          query:
+            synapse_class: EXC
+        ALL_INH_25:
+          node_set: hex25
+          query:
+            synapse_class: INH
+        ALL_EXC_26:
+          node_set: hex26
+          query:
+            synapse_class: EXC
+        ALL_INH_26:
+          node_set: hex26
+          query:
+            synapse_class: INH
+        ALL_EXC_27:
+          node_set: hex27
+          query:
+            synapse_class: EXC
+        ALL_INH_27:
+          node_set: hex27
+          query:
+            synapse_class: INH
+        ALL_EXC_28:
+          node_set: hex28
+          query:
+            synapse_class: EXC
+        ALL_INH_28:
+          node_set: hex28
+          query:
+            synapse_class: INH
+        ALL_EXC_29:
+          node_set: hex29
+          query:
+            synapse_class: EXC
+        ALL_INH_29:
+          node_set: hex29
+          query:
+            synapse_class: INH
+        ALL_EXC_30:
+          node_set: hex30
+          query:
+            synapse_class: EXC
+        ALL_INH_30:
+          node_set: hex30
+          query:
+            synapse_class: INH
+        ALL_EXC_31:
+          node_set: hex31
+          query:
+            synapse_class: EXC
+        ALL_INH_31:
+          node_set: hex31
+          query:
+            synapse_class: INH
+        ALL_EXC_32:
+          node_set: hex32
+          query:
+            synapse_class: EXC
+        ALL_INH_32:
+          node_set: hex32
+          query:
+            synapse_class: INH
+        ALL_EXC_33:
+          node_set: hex33
+          query:
+            synapse_class: EXC
+        ALL_INH_33:
+          node_set: hex33
+          query:
+            synapse_class: INH
+        ALL_EXC_34:
+          node_set: hex34
+          query:
+            synapse_class: EXC
+        ALL_INH_34:
+          node_set: hex34
+          query:
+            synapse_class: INH
+        ALL_EXC_35:
+          node_set: hex35
+          query:
+            synapse_class: EXC
+        ALL_INH_35:
+          node_set: hex35
+          query:
+            synapse_class: INH
+        ALL_EXC_36:
+          node_set: hex36
+          query:
+            synapse_class: EXC
+        ALL_INH_36:
+          node_set: hex36
+          query:
+            synapse_class: INH
+        ALL_EXC_37:
+          node_set: hex37
+          query:
+            synapse_class: EXC
+        ALL_INH_37:
+          node_set: hex37
+          query:
+            synapse_class: INH
+        ALL_EXC_38:
+          node_set: hex38
+          query:
+            synapse_class: EXC
+        ALL_INH_38:
+          node_set: hex38
+          query:
+            synapse_class: INH
+        ALL_EXC_39:
+          node_set: hex39
+          query:
+            synapse_class: EXC
+        ALL_INH_39:
+          node_set: hex39
+          query:
+            synapse_class: INH
+        ALL_EXC_40:
+          node_set: hex40
+          query:
+            synapse_class: EXC
+        ALL_INH_40:
+          node_set: hex40
+          query:
+            synapse_class: INH
+        ALL_EXC_41:
+          node_set: hex41
+          query:
+            synapse_class: EXC
+        ALL_INH_41:
+          node_set: hex41
+          query:
+            synapse_class: INH
+        ALL_EXC_42:
+          node_set: hex42
+          query:
+            synapse_class: EXC
+        ALL_INH_42:
+          node_set: hex42
+          query:
+            synapse_class: INH
+        ALL_EXC_43:
+          node_set: hex43
+          query:
+            synapse_class: EXC
+        ALL_INH_43:
+          node_set: hex43
+          query:
+            synapse_class: INH
+        ALL_EXC_44:
+          node_set: hex44
+          query:
+            synapse_class: EXC
+        ALL_INH_44:
+          node_set: hex44
+          query:
+            synapse_class: INH
+        ALL_EXC_45:
+          node_set: hex45
+          query:
+            synapse_class: EXC
+        ALL_INH_45:
+          node_set: hex45
+          query:
+            synapse_class: INH
+        ALL_EXC_46:
+          node_set: hex46
+          query:
+            synapse_class: EXC
+        ALL_INH_46:
+          node_set: hex46
+          query:
+            synapse_class: INH
+        ALL_EXC_47:
+          node_set: hex47
+          query:
+            synapse_class: EXC
+        ALL_INH_47:
+          node_set: hex47
+          query:
+            synapse_class: INH
+        ALL_EXC_48:
+          node_set: hex48
+          query:
+            synapse_class: EXC
+        ALL_INH_48:
+          node_set: hex48
+          query:
+            synapse_class: INH
+        ALL_EXC_49:
+          node_set: hex49
+          query:
+            synapse_class: EXC
+        ALL_INH_49:
+          node_set: hex49
+          query:
+            synapse_class: INH
+        ALL_EXC_50:
+          node_set: hex50
+          query:
+            synapse_class: EXC
+        ALL_INH_50:
+          node_set: hex50
+          query:
+            synapse_class: INH
+        ALL_EXC_51:
+          node_set: hex51
+          query:
+            synapse_class: EXC
+        ALL_INH_51:
+          node_set: hex51
+          query:
+            synapse_class: INH
+        ALL_EXC_52:
+          node_set: hex52
+          query:
+            synapse_class: EXC
+        ALL_INH_52:
+          node_set: hex52
+          query:
+            synapse_class: INH
+        ALL_EXC_53:
+          node_set: hex53
+          query:
+            synapse_class: EXC
+        ALL_INH_53:
+          node_set: hex53
+          query:
+            synapse_class: INH
+        ALL_EXC_54:
+          node_set: hex54
+          query:
+            synapse_class: EXC
+        ALL_INH_54:
+          node_set: hex54
+          query:
+            synapse_class: INH
+        ALL_EXC_55:
+          node_set: hex55
+          query:
+            synapse_class: EXC
+        ALL_INH_55:
+          node_set: hex55
+          query:
+            synapse_class: INH
+        ALL_EXC_56:
+          node_set: hex56
+          query:
+            synapse_class: EXC
+        ALL_INH_56:
+          node_set: hex56
+          query:
+            synapse_class: INH
+        ALL_EXC_57:
+          node_set: hex57
+          query:
+            synapse_class: EXC
+        ALL_INH_57:
+          node_set: hex57
+          query:
+            synapse_class: INH
+        ALL_EXC_58:
+          node_set: hex58
+          query:
+            synapse_class: EXC
+        ALL_INH_58:
+          node_set: hex58
+          query:
+            synapse_class: INH
+        ALL_EXC_59:
+          node_set: hex59
+          query:
+            synapse_class: EXC
+        ALL_INH_59:
+          node_set: hex59
+          query:
+            synapse_class: INH
+        ALL_EXC_60:
+          node_set: hex60
+          query:
+            synapse_class: EXC
+        ALL_INH_60:
+          node_set: hex60
+          query:
+            synapse_class: INH
+        ALL_EXC_61:
+          node_set: hex61
+          query:
+            synapse_class: EXC
+        ALL_INH_61:
+          node_set: hex61
+          query:
+            synapse_class: INH
+        ALL_EXC_62:
+          node_set: hex62
+          query:
+            synapse_class: EXC
+        ALL_INH_62:
+          node_set: hex62
+          query:
+            synapse_class: INH
+        ALL_EXC_63:
+          node_set: hex63
+          query:
+            synapse_class: EXC
+        ALL_INH_63:
+          node_set: hex63
+          query:
+            synapse_class: INH
+        ALL_EXC_64:
+          node_set: hex64
+          query:
+            synapse_class: EXC
+        ALL_INH_64:
+          node_set: hex64
+          query:
+            synapse_class: INH
+        ALL_EXC_65:
+          node_set: hex65
+          query:
+            synapse_class: EXC
+        ALL_INH_65:
+          node_set: hex65
+          query:
+            synapse_class: INH
+        ALL_EXC_66:
+          node_set: hex66
+          query:
+            synapse_class: EXC
+        ALL_INH_66:
+          node_set: hex66
+          query:
+            synapse_class: INH
+        ALL_EXC_67:
+          node_set: hex67
+          query:
+            synapse_class: EXC
+        ALL_INH_67:
+          node_set: hex67
+          query:
+            synapse_class: INH
+        ALL_EXC_68:
+          node_set: hex68
+          query:
+            synapse_class: EXC
+        ALL_INH_68:
+          node_set: hex68
+          query:
+            synapse_class: INH
+        ALL_EXC_69:
+          node_set: hex69
+          query:
+            synapse_class: EXC
+        ALL_INH_69:
+          node_set: hex69
+          query:
+            synapse_class: INH
+        ALL_EXC_70:
+          node_set: hex70
+          query:
+            synapse_class: EXC
+        ALL_INH_70:
+          node_set: hex70
+          query:
+            synapse_class: INH
+        ALL_EXC_71:
+          node_set: hex71
+          query:
+            synapse_class: EXC
+        ALL_INH_71:
+          node_set: hex71
+          query:
+            synapse_class: INH
+        ALL_EXC_72:
+          node_set: hex72
+          query:
+            synapse_class: EXC
+        ALL_INH_72:
+          node_set: hex72
+          query:
+            synapse_class: INH
+        ALL_EXC_73:
+          node_set: hex73
+          query:
+            synapse_class: EXC
+        ALL_INH_73:
+          node_set: hex73
+          query:
+            synapse_class: INH
+        ALL_EXC_74:
+          node_set: hex74
+          query:
+            synapse_class: EXC
+        ALL_INH_74:
+          node_set: hex74
+          query:
+            synapse_class: INH
+        ALL_EXC_75:
+          node_set: hex75
+          query:
+            synapse_class: EXC
+        ALL_INH_75:
+          node_set: hex75
+          query:
+            synapse_class: INH
+        ALL_EXC_76:
+          node_set: hex76
+          query:
+            synapse_class: EXC
+        ALL_INH_76:
+          node_set: hex76
+          query:
+            synapse_class: INH
 
-
-  #     neuron_classes:
-  #       ALL_INH_0: { synapse_class: [ INH ], $limit: null, $target: hex0}
-  #       ALL_EXC_0: { synapse_class: [ EXC ], $limit: null, $target: hex0}
-
-  #       ALL_INH_1: { synapse_class: [ INH ], $limit: null, $target: hex1}
-  #       ALL_EXC_1: { synapse_class: [ EXC ], $limit: null, $target: hex1}
-
-  #       ALL_INH_2: { synapse_class: [ INH ], $limit: null, $target: hex2}
-  #       ALL_EXC_2: { synapse_class: [ EXC ], $limit: null, $target: hex2}
-
-  #       ALL_INH_3: { synapse_class: [ INH ], $limit: null, $target: hex3}
-  #       ALL_EXC_3: { synapse_class: [ EXC ], $limit: null, $target: hex3}
-
-  #       ALL_INH_4: { synapse_class: [ INH ], $limit: null, $target: hex4}
-  #       ALL_EXC_4: { synapse_class: [ EXC ], $limit: null, $target: hex4}
-
-  #       ALL_INH_5: { synapse_class: [ INH ], $limit: null, $target: hex5}
-  #       ALL_EXC_5: { synapse_class: [ EXC ], $limit: null, $target: hex5}
-
-  #       ALL_INH_6: { synapse_class: [ INH ], $limit: null, $target: hex6}
-  #       ALL_EXC_6: { synapse_class: [ EXC ], $limit: null, $target: hex6}
-
-  #       ALL_INH_7: { synapse_class: [ INH ], $limit: null, $target: hex7}
-  #       ALL_EXC_7: { synapse_class: [ EXC ], $limit: null, $target: hex7}
-
-  #       ALL_INH_8: { synapse_class: [ INH ], $limit: null, $target: hex8}
-  #       ALL_EXC_8: { synapse_class: [ EXC ], $limit: null, $target: hex8}
-
-  #       ALL_INH_9: { synapse_class: [ INH ], $limit: null, $target: hex9}
-  #       ALL_EXC_9: { synapse_class: [ EXC ], $limit: null, $target: hex9}
-
-  #       ALL_INH_10: { synapse_class: [ INH ], $limit: null, $target: hex10}
-  #       ALL_EXC_10: { synapse_class: [ EXC ], $limit: null, $target: hex10}
-
-  #       ALL_INH_11: { synapse_class: [ INH ], $limit: null, $target: hex11}
-  #       ALL_EXC_11: { synapse_class: [ EXC ], $limit: null, $target: hex11}
-
-  #       ALL_INH_12: { synapse_class: [ INH ], $limit: null, $target: hex12}
-  #       ALL_EXC_12: { synapse_class: [ EXC ], $limit: null, $target: hex12}
-
-  #       ALL_INH_13: { synapse_class: [ INH ], $limit: null, $target: hex13}
-  #       ALL_EXC_13: { synapse_class: [ EXC ], $limit: null, $target: hex13}
-
-  #       ALL_INH_14: { synapse_class: [ INH ], $limit: null, $target: hex14}
-  #       ALL_EXC_14: { synapse_class: [ EXC ], $limit: null, $target: hex14}
-
-  #       ALL_INH_15: { synapse_class: [ INH ], $limit: null, $target: hex15}
-  #       ALL_EXC_15: { synapse_class: [ EXC ], $limit: null, $target: hex15}
-
-  #       ALL_INH_16: { synapse_class: [ INH ], $limit: null, $target: hex16}
-  #       ALL_EXC_16: { synapse_class: [ EXC ], $limit: null, $target: hex16}
-
-  #       ALL_INH_17: { synapse_class: [ INH ], $limit: null, $target: hex17}
-  #       ALL_EXC_17: { synapse_class: [ EXC ], $limit: null, $target: hex17}
-
-  #       ALL_INH_18: { synapse_class: [ INH ], $limit: null, $target: hex18}
-  #       ALL_EXC_18: { synapse_class: [ EXC ], $limit: null, $target: hex18}
-
-  #       ALL_INH_19: { synapse_class: [ INH ], $limit: null, $target: hex19}
-  #       ALL_EXC_19: { synapse_class: [ EXC ], $limit: null, $target: hex19}
-
-  #       ALL_INH_20: { synapse_class: [ INH ], $limit: null, $target: hex20}
-  #       ALL_EXC_20: { synapse_class: [ EXC ], $limit: null, $target: hex20}
-
-  #       ALL_INH_21: { synapse_class: [ INH ], $limit: null, $target: hex21}
-  #       ALL_EXC_21: { synapse_class: [ EXC ], $limit: null, $target: hex21}
-
-  #       ALL_INH_22: { synapse_class: [ INH ], $limit: null, $target: hex22}
-  #       ALL_EXC_22: { synapse_class: [ EXC ], $limit: null, $target: hex22}
-
-  #       ALL_INH_23: { synapse_class: [ INH ], $limit: null, $target: hex23}
-  #       ALL_EXC_23: { synapse_class: [ EXC ], $limit: null, $target: hex23}
-
-  #       ALL_INH_24: { synapse_class: [ INH ], $limit: null, $target: hex24}
-  #       ALL_EXC_24: { synapse_class: [ EXC ], $limit: null, $target: hex24}
-
-  #       ALL_INH_25: { synapse_class: [ INH ], $limit: null, $target: hex25}
-  #       ALL_EXC_25: { synapse_class: [ EXC ], $limit: null, $target: hex25}
-
-  #       ALL_INH_26: { synapse_class: [ INH ], $limit: null, $target: hex26}
-  #       ALL_EXC_26: { synapse_class: [ EXC ], $limit: null, $target: hex26}
-
-  #       ALL_INH_27: { synapse_class: [ INH ], $limit: null, $target: hex27}
-  #       ALL_EXC_27: { synapse_class: [ EXC ], $limit: null, $target: hex27}
-
-  #       ALL_INH_28: { synapse_class: [ INH ], $limit: null, $target: hex28}
-  #       ALL_EXC_28: { synapse_class: [ EXC ], $limit: null, $target: hex28}
-
-  #       ALL_INH_29: { synapse_class: [ INH ], $limit: null, $target: hex29}
-  #       ALL_EXC_29: { synapse_class: [ EXC ], $limit: null, $target: hex29}
-
-  #       ALL_INH_30: { synapse_class: [ INH ], $limit: null, $target: hex30}
-  #       ALL_EXC_30: { synapse_class: [ EXC ], $limit: null, $target: hex30}
-
-  #       ALL_INH_31: { synapse_class: [ INH ], $limit: null, $target: hex31}
-  #       ALL_EXC_31: { synapse_class: [ EXC ], $limit: null, $target: hex31}
-
-  #       ALL_INH_32: { synapse_class: [ INH ], $limit: null, $target: hex32}
-  #       ALL_EXC_32: { synapse_class: [ EXC ], $limit: null, $target: hex32}
-
-  #       ALL_INH_33: { synapse_class: [ INH ], $limit: null, $target: hex33}
-  #       ALL_EXC_33: { synapse_class: [ EXC ], $limit: null, $target: hex33}
-
-  #       ALL_INH_34: { synapse_class: [ INH ], $limit: null, $target: hex34}
-  #       ALL_EXC_34: { synapse_class: [ EXC ], $limit: null, $target: hex34}
-
-  #       ALL_INH_35: { synapse_class: [ INH ], $limit: null, $target: hex35}
-  #       ALL_EXC_35: { synapse_class: [ EXC ], $limit: null, $target: hex35}
-
-  #       ALL_INH_36: { synapse_class: [ INH ], $limit: null, $target: hex36}
-  #       ALL_EXC_36: { synapse_class: [ EXC ], $limit: null, $target: hex36}
-
-  #       ALL_INH_37: { synapse_class: [ INH ], $limit: null, $target: hex37}
-  #       ALL_EXC_37: { synapse_class: [ EXC ], $limit: null, $target: hex37}
-
-  #       ALL_INH_38: { synapse_class: [ INH ], $limit: null, $target: hex38}
-  #       ALL_EXC_38: { synapse_class: [ EXC ], $limit: null, $target: hex38}
-
-  #       ALL_INH_39: { synapse_class: [ INH ], $limit: null, $target: hex39}
-  #       ALL_EXC_39: { synapse_class: [ EXC ], $limit: null, $target: hex39}
-
-  #       ALL_INH_40: { synapse_class: [ INH ], $limit: null, $target: hex40}
-  #       ALL_EXC_40: { synapse_class: [ EXC ], $limit: null, $target: hex40}
-
-  #       ALL_INH_41: { synapse_class: [ INH ], $limit: null, $target: hex41}
-  #       ALL_EXC_41: { synapse_class: [ EXC ], $limit: null, $target: hex41}
-
-  #       ALL_INH_42: { synapse_class: [ INH ], $limit: null, $target: hex42}
-  #       ALL_EXC_42: { synapse_class: [ EXC ], $limit: null, $target: hex42}
-
-  #       ALL_INH_43: { synapse_class: [ INH ], $limit: null, $target: hex43}
-  #       ALL_EXC_43: { synapse_class: [ EXC ], $limit: null, $target: hex43}
-
-  #       ALL_INH_44: { synapse_class: [ INH ], $limit: null, $target: hex44}
-  #       ALL_EXC_44: { synapse_class: [ EXC ], $limit: null, $target: hex44}
-
-  #       ALL_INH_45: { synapse_class: [ INH ], $limit: null, $target: hex45}
-  #       ALL_EXC_45: { synapse_class: [ EXC ], $limit: null, $target: hex45}
-
-  #       ALL_INH_46: { synapse_class: [ INH ], $limit: null, $target: hex46}
-  #       ALL_EXC_46: { synapse_class: [ EXC ], $limit: null, $target: hex46}
-
-  #       ALL_INH_47: { synapse_class: [ INH ], $limit: null, $target: hex47}
-  #       ALL_EXC_47: { synapse_class: [ EXC ], $limit: null, $target: hex47}
-
-  #       ALL_INH_48: { synapse_class: [ INH ], $limit: null, $target: hex48}
-  #       ALL_EXC_48: { synapse_class: [ EXC ], $limit: null, $target: hex48}
-
-  #       ALL_INH_49: { synapse_class: [ INH ], $limit: null, $target: hex49}
-  #       ALL_EXC_49: { synapse_class: [ EXC ], $limit: null, $target: hex49}
-
-  #       ALL_INH_50: { synapse_class: [ INH ], $limit: null, $target: hex50}
-  #       ALL_EXC_50: { synapse_class: [ EXC ], $limit: null, $target: hex50}
-
-  #       ALL_INH_51: { synapse_class: [ INH ], $limit: null, $target: hex51}
-  #       ALL_EXC_51: { synapse_class: [ EXC ], $limit: null, $target: hex51}
-
-  #       ALL_INH_52: { synapse_class: [ INH ], $limit: null, $target: hex52}
-  #       ALL_EXC_52: { synapse_class: [ EXC ], $limit: null, $target: hex52}
-
-  #       ALL_INH_53: { synapse_class: [ INH ], $limit: null, $target: hex53}
-  #       ALL_EXC_53: { synapse_class: [ EXC ], $limit: null, $target: hex53}
-
-  #       ALL_INH_54: { synapse_class: [ INH ], $limit: null, $target: hex54}
-  #       ALL_EXC_54: { synapse_class: [ EXC ], $limit: null, $target: hex54}
-
-  #       ALL_INH_55: { synapse_class: [ INH ], $limit: null, $target: hex55}
-  #       ALL_EXC_55: { synapse_class: [ EXC ], $limit: null, $target: hex55}
-
-  #       ALL_INH_56: { synapse_class: [ INH ], $limit: null, $target: hex56}
-  #       ALL_EXC_56: { synapse_class: [ EXC ], $limit: null, $target: hex56}
-
-  #       ALL_INH_57: { synapse_class: [ INH ], $limit: null, $target: hex57}
-  #       ALL_EXC_57: { synapse_class: [ EXC ], $limit: null, $target: hex57}
-
-  #       ALL_INH_58: { synapse_class: [ INH ], $limit: null, $target: hex58}
-  #       ALL_EXC_58: { synapse_class: [ EXC ], $limit: null, $target: hex58}
-
-  #       ALL_INH_59: { synapse_class: [ INH ], $limit: null, $target: hex59}
-  #       ALL_EXC_59: { synapse_class: [ EXC ], $limit: null, $target: hex59}
-
-  #       ALL_INH_60: { synapse_class: [ INH ], $limit: null, $target: hex60}
-  #       ALL_EXC_60: { synapse_class: [ EXC ], $limit: null, $target: hex60}
-
-  #       ALL_INH_61: { synapse_class: [ INH ], $limit: null, $target: hex61}
-  #       ALL_EXC_61: { synapse_class: [ EXC ], $limit: null, $target: hex61}
-
-  #       ALL_INH_62: { synapse_class: [ INH ], $limit: null, $target: hex62}
-  #       ALL_EXC_62: { synapse_class: [ EXC ], $limit: null, $target: hex62}
-
-  #       ALL_INH_63: { synapse_class: [ INH ], $limit: null, $target: hex63}
-  #       ALL_EXC_63: { synapse_class: [ EXC ], $limit: null, $target: hex63}
-
-  #       ALL_INH_64: { synapse_class: [ INH ], $limit: null, $target: hex64}
-  #       ALL_EXC_64: { synapse_class: [ EXC ], $limit: null, $target: hex64}
-
-  #       ALL_INH_65: { synapse_class: [ INH ], $limit: null, $target: hex65}
-  #       ALL_EXC_65: { synapse_class: [ EXC ], $limit: null, $target: hex65}
-
-  #       ALL_INH_66: { synapse_class: [ INH ], $limit: null, $target: hex66}
-  #       ALL_EXC_66: { synapse_class: [ EXC ], $limit: null, $target: hex66}
-
-  #       ALL_INH_67: { synapse_class: [ INH ], $limit: null, $target: hex67}
-  #       ALL_EXC_67: { synapse_class: [ EXC ], $limit: null, $target: hex67}
-
-  #       ALL_INH_68: { synapse_class: [ INH ], $limit: null, $target: hex68}
-  #       ALL_EXC_68: { synapse_class: [ EXC ], $limit: null, $target: hex68}
-
-  #       ALL_INH_69: { synapse_class: [ INH ], $limit: null, $target: hex69}
-  #       ALL_EXC_69: { synapse_class: [ EXC ], $limit: null, $target: hex69}
-
-  #       ALL_INH_70: { synapse_class: [ INH ], $limit: null, $target: hex70}
-  #       ALL_EXC_70: { synapse_class: [ EXC ], $limit: null, $target: hex70}
-
-  #       ALL_INH_71: { synapse_class: [ INH ], $limit: null, $target: hex71}
-  #       ALL_EXC_71: { synapse_class: [ EXC ], $limit: null, $target: hex71}
-
-  #       ALL_INH_72: { synapse_class: [ INH ], $limit: null, $target: hex72}
-  #       ALL_EXC_72: { synapse_class: [ EXC ], $limit: null, $target: hex72}
-
-  #       ALL_INH_73: { synapse_class: [ INH ], $limit: null, $target: hex73}
-  #       ALL_EXC_73: { synapse_class: [ EXC ], $limit: null, $target: hex73}
-
-  #       ALL_INH_74: { synapse_class: [ INH ], $limit: null, $target: hex74}
-  #       ALL_EXC_74: { synapse_class: [ EXC ], $limit: null, $target: hex74}
-
-  #       ALL_INH_75: { synapse_class: [ INH ], $limit: null, $target: hex75}
-  #       ALL_EXC_75: { synapse_class: [ EXC ], $limit: null, $target: hex75}
-
-  #       ALL_INH_76: { synapse_class: [ INH ], $limit: null, $target: hex76}
-  #       ALL_EXC_76: { synapse_class: [ EXC ], $limit: null, $target: hex76}
-
-
-  #       L1_INH_0: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex0 }
-  #       L23_INH_0: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex0 }
-  #       L4_INH_0: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex0 }
-  #       L5_INH_0: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex0 }
-  #       L6_INH_0: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex0 }
-  #       L23_EXC_0: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex0 }
-  #       L4_EXC_0: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex0 }
-  #       L5_EXC_0: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex0 }
-  #       L6_EXC_0: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex0 }
-
-
-  #       L1_INH_1: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex1 }
-  #       L23_INH_1: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex1 }
-  #       L4_INH_1: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex1 }
-  #       L5_INH_1: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex1 }
-  #       L6_INH_1: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex1 }
-  #       L23_EXC_1: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex1 }
-  #       L4_EXC_1: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex1 }
-  #       L5_EXC_1: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex1 }
-  #       L6_EXC_1: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex1 }
-
-
-  #       L1_INH_2: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex2 }
-  #       L23_INH_2: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex2 }
-  #       L4_INH_2: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex2 }
-  #       L5_INH_2: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex2 }
-  #       L6_INH_2: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex2 }
-  #       L23_EXC_2: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex2 }
-  #       L4_EXC_2: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex2 }
-  #       L5_EXC_2: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex2 }
-  #       L6_EXC_2: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex2 }
-
-
-  #       L1_INH_3: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex3 }
-  #       L23_INH_3: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex3 }
-  #       L4_INH_3: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex3 }
-  #       L5_INH_3: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex3 }
-  #       L6_INH_3: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex3 }
-  #       L23_EXC_3: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex3 }
-  #       L4_EXC_3: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex3 }
-  #       L5_EXC_3: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex3 }
-  #       L6_EXC_3: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex3 }
-
-
-  #       L1_INH_4: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex4 }
-  #       L23_INH_4: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex4 }
-  #       L4_INH_4: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex4 }
-  #       L5_INH_4: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex4 }
-  #       L6_INH_4: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex4 }
-  #       L23_EXC_4: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex4 }
-  #       L4_EXC_4: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex4 }
-  #       L5_EXC_4: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex4 }
-  #       L6_EXC_4: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex4 }
-
-
-  #       L1_INH_5: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex5 }
-  #       L23_INH_5: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex5 }
-  #       L4_INH_5: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex5 }
-  #       L5_INH_5: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex5 }
-  #       L6_INH_5: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex5 }
-  #       L23_EXC_5: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex5 }
-  #       L4_EXC_5: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex5 }
-  #       L5_EXC_5: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex5 }
-  #       L6_EXC_5: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex5 }
-
-
-  #       L1_INH_6: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex6 }
-  #       L23_INH_6: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex6 }
-  #       L4_INH_6: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex6 }
-  #       L5_INH_6: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex6 }
-  #       L6_INH_6: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex6 }
-  #       L23_EXC_6: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex6 }
-  #       L4_EXC_6: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex6 }
-  #       L5_EXC_6: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex6 }
-  #       L6_EXC_6: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex6 }
-
-
-  #       L1_INH_7: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex7 }
-  #       L23_INH_7: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex7 }
-  #       L4_INH_7: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex7 }
-  #       L5_INH_7: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex7 }
-  #       L6_INH_7: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex7 }
-  #       L23_EXC_7: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex7 }
-  #       L4_EXC_7: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex7 }
-  #       L5_EXC_7: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex7 }
-  #       L6_EXC_7: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex7 }
-
-
-  #       L1_INH_8: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex8 }
-  #       L23_INH_8: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex8 }
-  #       L4_INH_8: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex8 }
-  #       L5_INH_8: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex8 }
-  #       L6_INH_8: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex8 }
-  #       L23_EXC_8: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex8 }
-  #       L4_EXC_8: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex8 }
-  #       L5_EXC_8: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex8 }
-  #       L6_EXC_8: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex8 }
-
-
-  #       L1_INH_9: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex9 }
-  #       L23_INH_9: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex9 }
-  #       L4_INH_9: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex9 }
-  #       L5_INH_9: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex9 }
-  #       L6_INH_9: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex9 }
-  #       L23_EXC_9: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex9 }
-  #       L4_EXC_9: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex9 }
-  #       L5_EXC_9: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex9 }
-  #       L6_EXC_9: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex9 }
-
-
-  #       L1_INH_10: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex10 }
-  #       L23_INH_10: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex10 }
-  #       L4_INH_10: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex10 }
-  #       L5_INH_10: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex10 }
-  #       L6_INH_10: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex10 }
-  #       L23_EXC_10: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex10 }
-  #       L4_EXC_10: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex10 }
-  #       L5_EXC_10: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex10 }
-  #       L6_EXC_10: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex10 }
-
-
-  #       L1_INH_11: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex11 }
-  #       L23_INH_11: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex11 }
-  #       L4_INH_11: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex11 }
-  #       L5_INH_11: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex11 }
-  #       L6_INH_11: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex11 }
-  #       L23_EXC_11: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex11 }
-  #       L4_EXC_11: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex11 }
-  #       L5_EXC_11: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex11 }
-  #       L6_EXC_11: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex11 }
-
-
-  #       L1_INH_12: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex12 }
-  #       L23_INH_12: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex12 }
-  #       L4_INH_12: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex12 }
-  #       L5_INH_12: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex12 }
-  #       L6_INH_12: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex12 }
-  #       L23_EXC_12: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex12 }
-  #       L4_EXC_12: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex12 }
-  #       L5_EXC_12: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex12 }
-  #       L6_EXC_12: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex12 }
-
-
-  #       L1_INH_13: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex13 }
-  #       L23_INH_13: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex13 }
-  #       L4_INH_13: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex13 }
-  #       L5_INH_13: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex13 }
-  #       L6_INH_13: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex13 }
-  #       L23_EXC_13: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex13 }
-  #       L4_EXC_13: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex13 }
-  #       L5_EXC_13: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex13 }
-  #       L6_EXC_13: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex13 }
-
-
-  #       L1_INH_14: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex14 }
-  #       L23_INH_14: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex14 }
-  #       L4_INH_14: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex14 }
-  #       L5_INH_14: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex14 }
-  #       L6_INH_14: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex14 }
-  #       L23_EXC_14: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex14 }
-  #       L4_EXC_14: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex14 }
-  #       L5_EXC_14: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex14 }
-  #       L6_EXC_14: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex14 }
-
-
-  #       L1_INH_15: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex15 }
-  #       L23_INH_15: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex15 }
-  #       L4_INH_15: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex15 }
-  #       L5_INH_15: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex15 }
-  #       L6_INH_15: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex15 }
-  #       L23_EXC_15: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex15 }
-  #       L4_EXC_15: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex15 }
-  #       L5_EXC_15: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex15 }
-  #       L6_EXC_15: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex15 }
-
-
-  #       L1_INH_16: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex16 }
-  #       L23_INH_16: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex16 }
-  #       L4_INH_16: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex16 }
-  #       L5_INH_16: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex16 }
-  #       L6_INH_16: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex16 }
-  #       L23_EXC_16: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex16 }
-  #       L4_EXC_16: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex16 }
-  #       L5_EXC_16: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex16 }
-  #       L6_EXC_16: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex16 }
-
-
-  #       L1_INH_17: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex17 }
-  #       L23_INH_17: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex17 }
-  #       L4_INH_17: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex17 }
-  #       L5_INH_17: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex17 }
-  #       L6_INH_17: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex17 }
-  #       L23_EXC_17: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex17 }
-  #       L4_EXC_17: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex17 }
-  #       L5_EXC_17: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex17 }
-  #       L6_EXC_17: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex17 }
-
-
-  #       L1_INH_18: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex18 }
-  #       L23_INH_18: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex18 }
-  #       L4_INH_18: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex18 }
-  #       L5_INH_18: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex18 }
-  #       L6_INH_18: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex18 }
-  #       L23_EXC_18: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex18 }
-  #       L4_EXC_18: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex18 }
-  #       L5_EXC_18: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex18 }
-  #       L6_EXC_18: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex18 }
-
-
-  #       L1_INH_19: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex19 }
-  #       L23_INH_19: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex19 }
-  #       L4_INH_19: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex19 }
-  #       L5_INH_19: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex19 }
-  #       L6_INH_19: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex19 }
-  #       L23_EXC_19: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex19 }
-  #       L4_EXC_19: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex19 }
-  #       L5_EXC_19: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex19 }
-  #       L6_EXC_19: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex19 }
-
-
-  #       L1_INH_20: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex20 }
-  #       L23_INH_20: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex20 }
-  #       L4_INH_20: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex20 }
-  #       L5_INH_20: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex20 }
-  #       L6_INH_20: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex20 }
-  #       L23_EXC_20: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex20 }
-  #       L4_EXC_20: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex20 }
-  #       L5_EXC_20: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex20 }
-  #       L6_EXC_20: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex20 }
-
-
-  #       L1_INH_21: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex21 }
-  #       L23_INH_21: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex21 }
-  #       L4_INH_21: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex21 }
-  #       L5_INH_21: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex21 }
-  #       L6_INH_21: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex21 }
-  #       L23_EXC_21: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex21 }
-  #       L4_EXC_21: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex21 }
-  #       L5_EXC_21: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex21 }
-  #       L6_EXC_21: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex21 }
-
-
-  #       L1_INH_22: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex22 }
-  #       L23_INH_22: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex22 }
-  #       L4_INH_22: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex22 }
-  #       L5_INH_22: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex22 }
-  #       L6_INH_22: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex22 }
-  #       L23_EXC_22: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex22 }
-  #       L4_EXC_22: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex22 }
-  #       L5_EXC_22: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex22 }
-  #       L6_EXC_22: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex22 }
-
-
-  #       L1_INH_23: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex23 }
-  #       L23_INH_23: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex23 }
-  #       L4_INH_23: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex23 }
-  #       L5_INH_23: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex23 }
-  #       L6_INH_23: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex23 }
-  #       L23_EXC_23: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex23 }
-  #       L4_EXC_23: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex23 }
-  #       L5_EXC_23: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex23 }
-  #       L6_EXC_23: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex23 }
-
-
-  #       L1_INH_24: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex24 }
-  #       L23_INH_24: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex24 }
-  #       L4_INH_24: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex24 }
-  #       L5_INH_24: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex24 }
-  #       L6_INH_24: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex24 }
-  #       L23_EXC_24: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex24 }
-  #       L4_EXC_24: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex24 }
-  #       L5_EXC_24: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex24 }
-  #       L6_EXC_24: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex24 }
-
-
-  #       L1_INH_25: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex25 }
-  #       L23_INH_25: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex25 }
-  #       L4_INH_25: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex25 }
-  #       L5_INH_25: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex25 }
-  #       L6_INH_25: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex25 }
-  #       L23_EXC_25: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex25 }
-  #       L4_EXC_25: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex25 }
-  #       L5_EXC_25: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex25 }
-  #       L6_EXC_25: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex25 }
-
-
-  #       L1_INH_26: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex26 }
-  #       L23_INH_26: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex26 }
-  #       L4_INH_26: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex26 }
-  #       L5_INH_26: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex26 }
-  #       L6_INH_26: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex26 }
-  #       L23_EXC_26: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex26 }
-  #       L4_EXC_26: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex26 }
-  #       L5_EXC_26: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex26 }
-  #       L6_EXC_26: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex26 }
-
-
-  #       L1_INH_27: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex27 }
-  #       L23_INH_27: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex27 }
-  #       L4_INH_27: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex27 }
-  #       L5_INH_27: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex27 }
-  #       L6_INH_27: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex27 }
-  #       L23_EXC_27: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex27 }
-  #       L4_EXC_27: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex27 }
-  #       L5_EXC_27: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex27 }
-  #       L6_EXC_27: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex27 }
-
-
-  #       L1_INH_28: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex28 }
-  #       L23_INH_28: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex28 }
-  #       L4_INH_28: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex28 }
-  #       L5_INH_28: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex28 }
-  #       L6_INH_28: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex28 }
-  #       L23_EXC_28: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex28 }
-  #       L4_EXC_28: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex28 }
-  #       L5_EXC_28: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex28 }
-  #       L6_EXC_28: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex28 }
-
-
-  #       L1_INH_29: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex29 }
-  #       L23_INH_29: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex29 }
-  #       L4_INH_29: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex29 }
-  #       L5_INH_29: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex29 }
-  #       L6_INH_29: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex29 }
-  #       L23_EXC_29: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex29 }
-  #       L4_EXC_29: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex29 }
-  #       L5_EXC_29: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex29 }
-  #       L6_EXC_29: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex29 }
-
-
-  #       L1_INH_30: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex30 }
-  #       L23_INH_30: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex30 }
-  #       L4_INH_30: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex30 }
-  #       L5_INH_30: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex30 }
-  #       L6_INH_30: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex30 }
-  #       L23_EXC_30: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex30 }
-  #       L4_EXC_30: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex30 }
-  #       L5_EXC_30: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex30 }
-  #       L6_EXC_30: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex30 }
-
-
-  #       L1_INH_31: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex31 }
-  #       L23_INH_31: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex31 }
-  #       L4_INH_31: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex31 }
-  #       L5_INH_31: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex31 }
-  #       L6_INH_31: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex31 }
-  #       L23_EXC_31: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex31 }
-  #       L4_EXC_31: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex31 }
-  #       L5_EXC_31: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex31 }
-  #       L6_EXC_31: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex31 }
-
-
-  #       L1_INH_32: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex32 }
-  #       L23_INH_32: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex32 }
-  #       L4_INH_32: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex32 }
-  #       L5_INH_32: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex32 }
-  #       L6_INH_32: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex32 }
-  #       L23_EXC_32: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex32 }
-  #       L4_EXC_32: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex32 }
-  #       L5_EXC_32: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex32 }
-  #       L6_EXC_32: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex32 }
-
-
-  #       L1_INH_33: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex33 }
-  #       L23_INH_33: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex33 }
-  #       L4_INH_33: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex33 }
-  #       L5_INH_33: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex33 }
-  #       L6_INH_33: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex33 }
-  #       L23_EXC_33: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex33 }
-  #       L4_EXC_33: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex33 }
-  #       L5_EXC_33: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex33 }
-  #       L6_EXC_33: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex33 }
-
-
-  #       L1_INH_34: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex34 }
-  #       L23_INH_34: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex34 }
-  #       L4_INH_34: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex34 }
-  #       L5_INH_34: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex34 }
-  #       L6_INH_34: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex34 }
-  #       L23_EXC_34: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex34 }
-  #       L4_EXC_34: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex34 }
-  #       L5_EXC_34: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex34 }
-  #       L6_EXC_34: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex34 }
-
-
-  #       L1_INH_35: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex35 }
-  #       L23_INH_35: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex35 }
-  #       L4_INH_35: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex35 }
-  #       L5_INH_35: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex35 }
-  #       L6_INH_35: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex35 }
-  #       L23_EXC_35: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex35 }
-  #       L4_EXC_35: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex35 }
-  #       L5_EXC_35: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex35 }
-  #       L6_EXC_35: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex35 }
-
-
-  #       L1_INH_36: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex36 }
-  #       L23_INH_36: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex36 }
-  #       L4_INH_36: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex36 }
-  #       L5_INH_36: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex36 }
-  #       L6_INH_36: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex36 }
-  #       L23_EXC_36: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex36 }
-  #       L4_EXC_36: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex36 }
-  #       L5_EXC_36: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex36 }
-  #       L6_EXC_36: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex36 }
-
-
-  #       L1_INH_37: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex37 }
-  #       L23_INH_37: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex37 }
-  #       L4_INH_37: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex37 }
-  #       L5_INH_37: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex37 }
-  #       L6_INH_37: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex37 }
-  #       L23_EXC_37: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex37 }
-  #       L4_EXC_37: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex37 }
-  #       L5_EXC_37: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex37 }
-  #       L6_EXC_37: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex37 }
-
-
-  #       L1_INH_38: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex38 }
-  #       L23_INH_38: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex38 }
-  #       L4_INH_38: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex38 }
-  #       L5_INH_38: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex38 }
-  #       L6_INH_38: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex38 }
-  #       L23_EXC_38: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex38 }
-  #       L4_EXC_38: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex38 }
-  #       L5_EXC_38: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex38 }
-  #       L6_EXC_38: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex38 }
-
-
-  #       L1_INH_39: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex39 }
-  #       L23_INH_39: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex39 }
-  #       L4_INH_39: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex39 }
-  #       L5_INH_39: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex39 }
-  #       L6_INH_39: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex39 }
-  #       L23_EXC_39: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex39 }
-  #       L4_EXC_39: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex39 }
-  #       L5_EXC_39: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex39 }
-  #       L6_EXC_39: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex39 }
-
-
-  #       L1_INH_40: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex40 }
-  #       L23_INH_40: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex40 }
-  #       L4_INH_40: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex40 }
-  #       L5_INH_40: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex40 }
-  #       L6_INH_40: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex40 }
-  #       L23_EXC_40: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex40 }
-  #       L4_EXC_40: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex40 }
-  #       L5_EXC_40: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex40 }
-  #       L6_EXC_40: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex40 }
-
-
-  #       L1_INH_41: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex41 }
-  #       L23_INH_41: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex41 }
-  #       L4_INH_41: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex41 }
-  #       L5_INH_41: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex41 }
-  #       L6_INH_41: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex41 }
-  #       L23_EXC_41: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex41 }
-  #       L4_EXC_41: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex41 }
-  #       L5_EXC_41: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex41 }
-  #       L6_EXC_41: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex41 }
-
-
-  #       L1_INH_42: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex42 }
-  #       L23_INH_42: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex42 }
-  #       L4_INH_42: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex42 }
-  #       L5_INH_42: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex42 }
-  #       L6_INH_42: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex42 }
-  #       L23_EXC_42: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex42 }
-  #       L4_EXC_42: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex42 }
-  #       L5_EXC_42: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex42 }
-  #       L6_EXC_42: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex42 }
-
-
-  #       L1_INH_43: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex43 }
-  #       L23_INH_43: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex43 }
-  #       L4_INH_43: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex43 }
-  #       L5_INH_43: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex43 }
-  #       L6_INH_43: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex43 }
-  #       L23_EXC_43: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex43 }
-  #       L4_EXC_43: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex43 }
-  #       L5_EXC_43: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex43 }
-  #       L6_EXC_43: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex43 }
-
-
-  #       L1_INH_44: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex44 }
-  #       L23_INH_44: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex44 }
-  #       L4_INH_44: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex44 }
-  #       L5_INH_44: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex44 }
-  #       L6_INH_44: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex44 }
-  #       L23_EXC_44: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex44 }
-  #       L4_EXC_44: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex44 }
-  #       L5_EXC_44: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex44 }
-  #       L6_EXC_44: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex44 }
-
-
-  #       L1_INH_45: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex45 }
-  #       L23_INH_45: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex45 }
-  #       L4_INH_45: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex45 }
-  #       L5_INH_45: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex45 }
-  #       L6_INH_45: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex45 }
-  #       L23_EXC_45: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex45 }
-  #       L4_EXC_45: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex45 }
-  #       L5_EXC_45: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex45 }
-  #       L6_EXC_45: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex45 }
-
-
-  #       L1_INH_46: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex46 }
-  #       L23_INH_46: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex46 }
-  #       L4_INH_46: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex46 }
-  #       L5_INH_46: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex46 }
-  #       L6_INH_46: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex46 }
-  #       L23_EXC_46: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex46 }
-  #       L4_EXC_46: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex46 }
-  #       L5_EXC_46: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex46 }
-  #       L6_EXC_46: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex46 }
-
-
-  #       L1_INH_47: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex47 }
-  #       L23_INH_47: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex47 }
-  #       L4_INH_47: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex47 }
-  #       L5_INH_47: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex47 }
-  #       L6_INH_47: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex47 }
-  #       L23_EXC_47: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex47 }
-  #       L4_EXC_47: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex47 }
-  #       L5_EXC_47: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex47 }
-  #       L6_EXC_47: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex47 }
-
-
-  #       L1_INH_48: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex48 }
-  #       L23_INH_48: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex48 }
-  #       L4_INH_48: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex48 }
-  #       L5_INH_48: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex48 }
-  #       L6_INH_48: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex48 }
-  #       L23_EXC_48: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex48 }
-  #       L4_EXC_48: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex48 }
-  #       L5_EXC_48: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex48 }
-  #       L6_EXC_48: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex48 }
-
-
-  #       L1_INH_49: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex49 }
-  #       L23_INH_49: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex49 }
-  #       L4_INH_49: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex49 }
-  #       L5_INH_49: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex49 }
-  #       L6_INH_49: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex49 }
-  #       L23_EXC_49: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex49 }
-  #       L4_EXC_49: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex49 }
-  #       L5_EXC_49: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex49 }
-  #       L6_EXC_49: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex49 }
-
-
-  #       L1_INH_50: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex50 }
-  #       L23_INH_50: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex50 }
-  #       L4_INH_50: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex50 }
-  #       L5_INH_50: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex50 }
-  #       L6_INH_50: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex50 }
-  #       L23_EXC_50: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex50 }
-  #       L4_EXC_50: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex50 }
-  #       L5_EXC_50: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex50 }
-  #       L6_EXC_50: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex50 }
-
-
-  #       L1_INH_51: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex51 }
-  #       L23_INH_51: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex51 }
-  #       L4_INH_51: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex51 }
-  #       L5_INH_51: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex51 }
-  #       L6_INH_51: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex51 }
-  #       L23_EXC_51: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex51 }
-  #       L4_EXC_51: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex51 }
-  #       L5_EXC_51: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex51 }
-  #       L6_EXC_51: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex51 }
-
-
-  #       L1_INH_52: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex52 }
-  #       L23_INH_52: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex52 }
-  #       L4_INH_52: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex52 }
-  #       L5_INH_52: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex52 }
-  #       L6_INH_52: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex52 }
-  #       L23_EXC_52: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex52 }
-  #       L4_EXC_52: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex52 }
-  #       L5_EXC_52: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex52 }
-  #       L6_EXC_52: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex52 }
-
-
-  #       L1_INH_53: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex53 }
-  #       L23_INH_53: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex53 }
-  #       L4_INH_53: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex53 }
-  #       L5_INH_53: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex53 }
-  #       L6_INH_53: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex53 }
-  #       L23_EXC_53: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex53 }
-  #       L4_EXC_53: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex53 }
-  #       L5_EXC_53: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex53 }
-  #       L6_EXC_53: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex53 }
-
-
-  #       L1_INH_54: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex54 }
-  #       L23_INH_54: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex54 }
-  #       L4_INH_54: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex54 }
-  #       L5_INH_54: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex54 }
-  #       L6_INH_54: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex54 }
-  #       L23_EXC_54: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex54 }
-  #       L4_EXC_54: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex54 }
-  #       L5_EXC_54: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex54 }
-  #       L6_EXC_54: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex54 }
-
-
-  #       L1_INH_55: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex55 }
-  #       L23_INH_55: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex55 }
-  #       L4_INH_55: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex55 }
-  #       L5_INH_55: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex55 }
-  #       L6_INH_55: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex55 }
-  #       L23_EXC_55: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex55 }
-  #       L4_EXC_55: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex55 }
-  #       L5_EXC_55: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex55 }
-  #       L6_EXC_55: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex55 }
-
-
-  #       L1_INH_56: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex56 }
-  #       L23_INH_56: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex56 }
-  #       L4_INH_56: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex56 }
-  #       L5_INH_56: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex56 }
-  #       L6_INH_56: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex56 }
-  #       L23_EXC_56: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex56 }
-  #       L4_EXC_56: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex56 }
-  #       L5_EXC_56: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex56 }
-  #       L6_EXC_56: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex56 }
-
-
-  #       L1_INH_57: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex57 }
-  #       L23_INH_57: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex57 }
-  #       L4_INH_57: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex57 }
-  #       L5_INH_57: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex57 }
-  #       L6_INH_57: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex57 }
-  #       L23_EXC_57: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex57 }
-  #       L4_EXC_57: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex57 }
-  #       L5_EXC_57: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex57 }
-  #       L6_EXC_57: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex57 }
-
-
-  #       L1_INH_58: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex58 }
-  #       L23_INH_58: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex58 }
-  #       L4_INH_58: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex58 }
-  #       L5_INH_58: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex58 }
-  #       L6_INH_58: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex58 }
-  #       L23_EXC_58: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex58 }
-  #       L4_EXC_58: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex58 }
-  #       L5_EXC_58: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex58 }
-  #       L6_EXC_58: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex58 }
-
-
-  #       L1_INH_59: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex59 }
-  #       L23_INH_59: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex59 }
-  #       L4_INH_59: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex59 }
-  #       L5_INH_59: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex59 }
-  #       L6_INH_59: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex59 }
-  #       L23_EXC_59: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex59 }
-  #       L4_EXC_59: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex59 }
-  #       L5_EXC_59: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex59 }
-  #       L6_EXC_59: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex59 }
-
-
-  #       L1_INH_60: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex60 }
-  #       L23_INH_60: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex60 }
-  #       L4_INH_60: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex60 }
-  #       L5_INH_60: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex60 }
-  #       L6_INH_60: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex60 }
-  #       L23_EXC_60: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex60 }
-  #       L4_EXC_60: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex60 }
-  #       L5_EXC_60: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex60 }
-  #       L6_EXC_60: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex60 }
-
-
-  #       L1_INH_61: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex61 }
-  #       L23_INH_61: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex61 }
-  #       L4_INH_61: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex61 }
-  #       L5_INH_61: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex61 }
-  #       L6_INH_61: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex61 }
-  #       L23_EXC_61: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex61 }
-  #       L4_EXC_61: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex61 }
-  #       L5_EXC_61: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex61 }
-  #       L6_EXC_61: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex61 }
-
-
-  #       L1_INH_62: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex62 }
-  #       L23_INH_62: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex62 }
-  #       L4_INH_62: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex62 }
-  #       L5_INH_62: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex62 }
-  #       L6_INH_62: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex62 }
-  #       L23_EXC_62: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex62 }
-  #       L4_EXC_62: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex62 }
-  #       L5_EXC_62: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex62 }
-  #       L6_EXC_62: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex62 }
-
-
-  #       L1_INH_63: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex63 }
-  #       L23_INH_63: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex63 }
-  #       L4_INH_63: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex63 }
-  #       L5_INH_63: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex63 }
-  #       L6_INH_63: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex63 }
-  #       L23_EXC_63: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex63 }
-  #       L4_EXC_63: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex63 }
-  #       L5_EXC_63: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex63 }
-  #       L6_EXC_63: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex63 }
-
-
-  #       L1_INH_64: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex64 }
-  #       L23_INH_64: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex64 }
-  #       L4_INH_64: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex64 }
-  #       L5_INH_64: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex64 }
-  #       L6_INH_64: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex64 }
-  #       L23_EXC_64: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex64 }
-  #       L4_EXC_64: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex64 }
-  #       L5_EXC_64: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex64 }
-  #       L6_EXC_64: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex64 }
-
-
-  #       L1_INH_65: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex65 }
-  #       L23_INH_65: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex65 }
-  #       L4_INH_65: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex65 }
-  #       L5_INH_65: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex65 }
-  #       L6_INH_65: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex65 }
-  #       L23_EXC_65: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex65 }
-  #       L4_EXC_65: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex65 }
-  #       L5_EXC_65: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex65 }
-  #       L6_EXC_65: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex65 }
-
-
-  #       L1_INH_66: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex66 }
-  #       L23_INH_66: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex66 }
-  #       L4_INH_66: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex66 }
-  #       L5_INH_66: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex66 }
-  #       L6_INH_66: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex66 }
-  #       L23_EXC_66: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex66 }
-  #       L4_EXC_66: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex66 }
-  #       L5_EXC_66: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex66 }
-  #       L6_EXC_66: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex66 }
-
-
-  #       L1_INH_67: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex67 }
-  #       L23_INH_67: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex67 }
-  #       L4_INH_67: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex67 }
-  #       L5_INH_67: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex67 }
-  #       L6_INH_67: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex67 }
-  #       L23_EXC_67: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex67 }
-  #       L4_EXC_67: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex67 }
-  #       L5_EXC_67: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex67 }
-  #       L6_EXC_67: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex67 }
-
-
-  #       L1_INH_68: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex68 }
-  #       L23_INH_68: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex68 }
-  #       L4_INH_68: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex68 }
-  #       L5_INH_68: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex68 }
-  #       L6_INH_68: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex68 }
-  #       L23_EXC_68: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex68 }
-  #       L4_EXC_68: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex68 }
-  #       L5_EXC_68: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex68 }
-  #       L6_EXC_68: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex68 }
-
-
-  #       L1_INH_69: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex69 }
-  #       L23_INH_69: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex69 }
-  #       L4_INH_69: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex69 }
-  #       L5_INH_69: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex69 }
-  #       L6_INH_69: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex69 }
-  #       L23_EXC_69: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex69 }
-  #       L4_EXC_69: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex69 }
-  #       L5_EXC_69: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex69 }
-  #       L6_EXC_69: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex69 }
-
-
-  #       L1_INH_70: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex70 }
-  #       L23_INH_70: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex70 }
-  #       L4_INH_70: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex70 }
-  #       L5_INH_70: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex70 }
-  #       L6_INH_70: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex70 }
-  #       L23_EXC_70: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex70 }
-  #       L4_EXC_70: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex70 }
-  #       L5_EXC_70: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex70 }
-  #       L6_EXC_70: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex70 }
-
-
-  #       L1_INH_71: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex71 }
-  #       L23_INH_71: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex71 }
-  #       L4_INH_71: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex71 }
-  #       L5_INH_71: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex71 }
-  #       L6_INH_71: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex71 }
-  #       L23_EXC_71: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex71 }
-  #       L4_EXC_71: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex71 }
-  #       L5_EXC_71: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex71 }
-  #       L6_EXC_71: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex71 }
-
-
-  #       L1_INH_72: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex72 }
-  #       L23_INH_72: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex72 }
-  #       L4_INH_72: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex72 }
-  #       L5_INH_72: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex72 }
-  #       L6_INH_72: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex72 }
-  #       L23_EXC_72: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex72 }
-  #       L4_EXC_72: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex72 }
-  #       L5_EXC_72: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex72 }
-  #       L6_EXC_72: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex72 }
-
-
-  #       L1_INH_73: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex73 }
-  #       L23_INH_73: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex73 }
-  #       L4_INH_73: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex73 }
-  #       L5_INH_73: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex73 }
-  #       L6_INH_73: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex73 }
-  #       L23_EXC_73: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex73 }
-  #       L4_EXC_73: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex73 }
-  #       L5_EXC_73: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex73 }
-  #       L6_EXC_73: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex73 }
-
-
-  #       L1_INH_74: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex74 }
-  #       L23_INH_74: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex74 }
-  #       L4_INH_74: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex74 }
-  #       L5_INH_74: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex74 }
-  #       L6_INH_74: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex74 }
-  #       L23_EXC_74: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex74 }
-  #       L4_EXC_74: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex74 }
-  #       L5_EXC_74: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex74 }
-  #       L6_EXC_74: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex74 }
-
-
-  #       L1_INH_75: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex75 }
-  #       L23_INH_75: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex75 }
-  #       L4_INH_75: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex75 }
-  #       L5_INH_75: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex75 }
-  #       L6_INH_75: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex75 }
-  #       L23_EXC_75: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex75 }
-  #       L4_EXC_75: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex75 }
-  #       L5_EXC_75: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex75 }
-  #       L6_EXC_75: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex75 }
-
-
-  #       L1_INH_76: { layer: [1], synapse_class: [ INH ], $limit: null, $target: hex76 }
-  #       L23_INH_76: { layer: [2, 3], synapse_class: [ INH ], $limit: null, $target: hex76 }
-  #       L4_INH_76: { layer: [4], synapse_class: [ INH ], $limit: null, $target: hex76 }
-  #       L5_INH_76: { layer: [5], synapse_class: [ INH ], $limit: null, $target: hex76 }
-  #       L6_INH_76: { layer: [6], synapse_class: [ INH ], $limit: null, $target: hex76 }
-  #       L23_EXC_76: { layer: [2, 3], synapse_class: [ EXC ], $limit: null, $target: hex76 }
-  #       L4_EXC_76: { layer: [4], synapse_class: [ EXC ], $limit: null, $target: hex76 }
-  #       L5_EXC_76: { layer: [5], synapse_class: [ EXC ], $limit: null, $target: hex76 }
-  #       L6_EXC_76: { layer: [6], synapse_class: [ EXC ], $limit: null, $target: hex76 }
 
       windows:
         unconn_2nd_half: { bounds: [ 500, 1000 ], window_type: spontaneous }
@@ -1380,20 +4330,20 @@ analysis:
       campaign_short_name: "1st nbS1 conn."
       fr_df_name: "connection_data_from_mgfix_5-FullCircuit-2-BetterMinis-FprScan_10-04-23.parquet"
 
-  # AllCompartments_spikes:
-  #   extraction:
-  #     report: {type: spikes}
-  #     neuron_classes:
-  #       ALL: {}
-  #     node_set: AllCompartments
-  #     windows:
-  #       conn_spont: { bounds: [ 1500, 4500 ], window_type: spontaneous }
+  AllCompartments_spikes:
+    extraction:
+      report: {type: spikes}
+      neuron_classes:
+        ALL: {}
+      node_set: AllCompartments
+      windows:
+        conn_spont: { bounds: [ 1500, 4500 ], window_type: spontaneous }
 
-  #   custom:
-  #     create_flatspace_videos: true
-  #     independent_variables: [ca, desired_connected_proportion_of_invivo_frs, depol_stdev_mean_ratio]
-  #     flatmap: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/data/reference_data_do_not_delete/BB_Rat_SSCX_flatmap_v2.nrrd
-  #     flatspace_videos:
-  #       fsv_0: {window: conn_spont, t_step: 50.0, n_spatial_bins: 20000, temporal_smoothing_sigma: 1.0, delete_images: False, stim_anal: null}
+    custom:
+      create_flatspace_videos: true
+      independent_variables: [ca, desired_connected_proportion_of_invivo_frs, depol_stdev_mean_ratio]
+      flatmap: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/data/reference_data_do_not_delete/BB_Rat_SSCX_flatmap_v2.nrrd
+      flatspace_videos:
+        fsv_0: {window: conn_spont, t_step: 50.0, n_spatial_bins: 20000, temporal_smoothing_sigma: 1.0, delete_images: False, stim_anal: null}
 
         
