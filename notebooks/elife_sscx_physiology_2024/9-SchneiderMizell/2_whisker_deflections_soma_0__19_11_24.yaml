@@ -1,13 +1,107 @@
 version: 4
 simulation_campaign: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/simulations/elife_sscx_physiology_2024/9-SchneiderMizell/2_whisker_deflections_soma/2_whisker_deflections_soma_0__19_11_24/e6efa007-e7fa-42ae-ae3d-53385ec57154/config.json
 cache: 
-  path: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/post_physiology_2023/cortex_etl_output/campaigns/schneider_mizell/2_whisker_deflections_soma/2_whisker_deflections_soma_0__19_11_24/
+  path: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/data/cortexetl_output/elife_sscx_physiology_2024/9-SchneiderMizell/2_whisker_deflections_soma/2_whisker_deflections_soma_0__19_11_24/
   clear: false
-clear_cache: false
+
 analysis:
+  hex0_soma:
+    extraction:
+      report:
+        type: soma
+        name: soma
+      neuron_classes:
+        L23_EXC:
+          query:
+            layer: [2, 3]
+            synapse_class: [EXC]
+        L4_EXC:
+          query:
+            layer: [4]
+            synapse_class: [EXC]
+        L5_EXC:
+          query:
+            layer: [5]
+            synapse_class: [EXC]
+        L6_EXC:
+          query:
+            layer: [6]
+            synapse_class: [EXC]
+
+        L23_PV: 
+          query:
+            layer: [2, 3]
+            mtype: [L23_LBC, L23_NBC, L23_CHC]
+        L4_PV: 
+          query:
+            layer: [4]
+            mtype: [L4_CHC, L4_NBC, L4_LBC]
+        L5_PV: 
+          query:
+            layer: [5]
+            mtype: [L5_CHC, L5_LBC, L5_NBC]
+        L6_PV: 
+          query:
+            layer: [6]
+            mtype: [L6_LBC, L6_CHC, L6_NBC]
+        L23_SST: 
+          query:
+            layer: [2, 3]
+            mtype: [L23_BTC, L23_NGC, L23_SBC, L23_MC, L23_DBC]
+        L4_SST: 
+          query:
+            layer: [4]
+            mtype: [L4_NGC, L4_DBC, L4_SBC, L4_BTC, L4_MC]
+        L5_SST: 
+          query:
+            layer: [5]
+            mtype: [L5_SBC, L5_BTC, L5_DBC, L5_NGC, L5_MC]
+        L6_SST: 
+          query:
+            layer: [6]
+            mtype: [L6_BTC, L6_NGC, L6_MC, L6_SBC, L6_DBC]
+        L23_5HT3aR: 
+          query:
+            layer: [2, 3]
+            mtype: [L23_BP]
+        L4_5HT3aR: 
+          query:
+            layer: [4]
+            mtype: [L4_BP]
+        L5_5HT3aR:
+          query:
+            layer: [5]
+            mtype: [L5_BP]
+        L6_5HT3aR:
+          query:
+            layer: [6]
+            mtype: [L6_BP]
+
+      limit: 1000
+      population: S1nonbarrel_neurons
+      node_set: hex0
+      windows:
+        conn_spont:
+          bounds: [1500, 12000]
+          window_type: spontaneous
+        evoked_SOZ_100ms: 
+          bounds: [ -20, 100 ]
+          initial_offset: 2000
+          n_trials: 20
+          trial_steps_value: 500
+          window_type: evoked_stimulus_onset_zeroed
+    features:
+    - type: multi
+      groupby: [simulation_id, circuit_id]
+      function: blueetl.external.soma.calculate_features.calculate_features_by_simulation_circuit
+
+    custom:
+      independent_variables: [ca, desired_connected_proportion_of_invivo_frs, depol_stdev_mean_ratio, vpm_pct]
+
   hex0_spikes:
     extraction:
-      report: {type: spikes}
+      report: 
+        type: spikes
       limit: null
       neuron_classes:
         L23_EXC:
@@ -30,22 +124,22 @@ analysis:
           query:
             layer: [1]
             synapse_class: [INH]
-        L23_INH:
-          query:
-            layer: [2, 3]
-            synapse_class: [INH]
-        L4_INH:
-          query:
-            layer: [4]
-            synapse_class: [INH]
-        L5_INH:
-          query:
-            layer: [5]
-            synapse_class: [INH]
-        L6_INH:
-          query:
-            layer: [6]
-            synapse_class: [INH]
+        # L23_INH:
+        #   query:
+        #     layer: [2, 3]
+        #     synapse_class: [INH]
+        # L4_INH:
+        #   query:
+        #     layer: [4]
+        #     synapse_class: [INH]
+        # L5_INH:
+        #   query:
+        #     layer: [5]
+        #     synapse_class: [INH]
+        # L6_INH:
+        #   query:
+        #     layer: [6]
+        #     synapse_class: [INH]
         L23_PV: 
           query:
             layer: [2, 3]
@@ -109,7 +203,7 @@ analysis:
           bounds: [500, 1000]
           window_type: spontaneous
         conn_spont:
-          bounds: [1500, 12000]
+          bounds: [1400, 12000]
           window_type: spontaneous
         evoked_SOZ_25ms: 
           bounds: [ 0, 25 ]
