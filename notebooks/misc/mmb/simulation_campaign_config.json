@@ -1,0 +1,9 @@
+format: blueetl
+version: 1
+name: synthetic
+attrs:
+  path_prefix: /gpfs/bbp.cscs.ch/data/scratch/proj134/home/king/BBPP134-917/p_MultiCycle_Support/
+  circuit_config: /gpfs/bbp.cscs.ch/data/scratch/proj134/home/king/BBPP134-917/p_MultiCycle_Support/circuit_config.json
+  __coupled__: coupled
+data:
+- simulation_path: simulation_config.json
