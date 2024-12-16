@@ -24,3 +24,5 @@ cortexetl/__pycache__/*
 */*.pyc
 */*/*.pyc
 */*/*/*.pyc
+
+cortexetl/__pycache__/*
