@@ -102,6 +102,22 @@ analysis:
             synapse_class: [EXC]
           limit: null
         ALL: {limit: null}
+            
+        L23_ALL:
+          query:
+            layer: ["2", "3"]
+        L4_ALL:
+          query:
+            layer: ["4"]
+        L5_ALL:
+          query:
+            layer: ["5"]
+        L6_ALL:
+          query:
+            layer: ["6"]
+            
+          
+        
       windows:
         unconn_2nd_half:
           bounds: [500, 1000]

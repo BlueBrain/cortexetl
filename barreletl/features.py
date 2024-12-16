@@ -83,6 +83,7 @@ def extract_baseline(histogram, offset, duration=10, bin_size=1, mean=False):
         >>> extract_baseline(histogram, 2, duration=2, mean=True)
         2
     """
+
     if offset < duration or offset >= len(histogram) or offset < 0:
         raise ValueError("Invalid offset value")
 
@@ -448,7 +449,7 @@ def calculate_features_by_neuron_class(repo, key, df, params):
     t_start, t_stop = repo.windows.get_bounds(key.window)
 
     # create an array containing multiple arrays of spikes, one for each gid
-    spiketrains = df.groupby([GID])[TIME].apply(np.array).to_numpy()
+    spiketrains = df.groupby(GID)[TIME].apply(np.array).to_numpy()
     functions = {
         f"{prefix}PSTH": partial(get_PSTH, spiketrains, t_start=t_start, t_stop=t_stop),
         f"{prefix}normalized_PSTH": partial(

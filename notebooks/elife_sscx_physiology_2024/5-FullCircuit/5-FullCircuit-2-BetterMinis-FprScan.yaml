@@ -85,7 +85,7 @@ analysis:
 
       plot_multi_sim_analysis: false
       plot_rasters: false
-      create_raster_videos: false
+      create_raster_videos: true
       extract_fr_df: false
       
       independent_variables: ["ca", "desired_connected_proportion_of_invivo_frs", "depol_stdev_mean_ratio"]
@@ -103,7 +103,7 @@ analysis:
 
       fr_analysis_neuron_classes_constant: LAYER_EI_NEURON_CLASSES
       vertical_plot_seperate_groupings: E_AND_I_SEPERATE_GROUPINGS
-      input_conductance_by_neuron_class_parquet: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/reference_data_do_not_delete/input_conductance_by_neuron_class_EI.parquet
+      input_conductance_by_neuron_class_parquet: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/data/reference_data_do_not_delete/input_conductance_by_neuron_class_EI.parquet
 
   hex59_spikes:
     extraction:
@@ -182,8 +182,8 @@ analysis:
     custom:
 
       plot_multi_sim_analysis: true
-      plot_rasters: false
-      create_raster_videos: false
+      plot_rasters: true
+      create_raster_videos: true
       extract_fr_df: false
       
       independent_variables: ["ca", "desired_connected_proportion_of_invivo_frs", "depol_stdev_mean_ratio"]
@@ -198,6 +198,10 @@ analysis:
 
       campaign_short_name: "1st nbS1 conn."
       fr_df_name: "connection_data_from_mgfix_5-FullCircuit-2-BetterMinis-FprScan_10-04-23.parquet"
+      
+      fr_analysis_neuron_classes_constant: LAYER_EI_NEURON_CLASSES
+      vertical_plot_seperate_groupings: E_AND_I_SEPERATE_GROUPINGS
+      input_conductance_by_neuron_class_parquet: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/data/reference_data_do_not_delete/input_conductance_by_neuron_class_EI.parquet
 
   hexes_spikes:
     extraction:

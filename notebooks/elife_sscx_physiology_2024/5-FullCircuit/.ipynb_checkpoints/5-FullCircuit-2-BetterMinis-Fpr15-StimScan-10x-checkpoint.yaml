@@ -148,14 +148,14 @@ analysis:
       evoked_mask_comparison_dataset: ReyesPuerta
       vivo_ratios_df: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/data/reference_data_do_not_delete/vivo_ratios_svoboda_reyes.feather
       vivo_ratios_dataset: reyesp
-      vivo_df: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/reference_data_do_not_delete/rp/dfs/invivo_psth_means_plot_ready.f
+      vivo_df: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/data/reference_data_do_not_delete/rp/dfs/invivo_psth_means_plot_ready.f
       
       theshold_conjunctive_trials_for_spike_pair_analysis: 4
       depol_bc_key: gExc
 
       fr_analysis_neuron_classes_constant: LAYER_EI_NEURON_CLASSES
       vertical_plot_seperate_groupings: E_AND_I_SEPERATE_GROUPINGS
-      input_conductance_by_neuron_class_parquet: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/physiology_2023/reference_data_do_not_delete/input_conductance_by_neuron_class_EI.parquet
+      input_conductance_by_neuron_class_parquet: /gpfs/bbp.cscs.ch/project/proj83/home/isbister/data/reference_data_do_not_delete/input_conductance_by_neuron_class_EI.parquet
 
 
   hexes_spikes:

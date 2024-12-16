@@ -111,6 +111,9 @@ analysis:
         conn_spont:
           bounds: [1500, 6500]
           window_type: spontaneous
+        conn_spont_short:
+          bounds: [2000, 5000]
+          window_type: spontaneous
       node_set: hex0
     features:
     - type: multi
@@ -148,6 +151,7 @@ analysis:
         y_key: depol_stdev_mean_ratio}
       raster_windows:
       - {conn_spont: 3.6}
+      - {conn_spont_short: 3.6}
       fr_comparison_pairs:
       - [unconn_2nd_half, conn_spont]
       - [desired_connected_fr, conn_spont]
