@@ -1,3 +1,7 @@
+> [!WARNING]
+> The Blue Brain Project concluded in December 2024, so development has ceased under the BlueBrain GitHub organization.
+> Future development will take place at: https://github.com/openbraininstitute/cortexetl
+
 # CortexETL
 
 CortexETL is a repository of analyses for characterising and calibrating simulations of in silico cortical models. CortexETL uses [BlueETL](https://bbpgitlab.epfl.ch/nse/blueetl) for data processing and data handling, and uses functionality from BarrelETL [https://bbpgitlab.epfl.ch/circuits/personal/teska/bc-simulation-analysis] for analysis of evoked responses.  
